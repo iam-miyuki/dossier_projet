@@ -1,6 +1,6 @@
 <div style="text-align:center; margin-top:300px;">
 
-  <img src="logo-big.svg" style="display:block; margin:auto; width:300px;">
+  <img src="/img/logo-big.svg.svg" style="display:block; margin:auto; width:300px;">
 
   <div style="margin-top:200px">
     <p>Développé par <strong>Miyuki CHERBAL</strong></p>
@@ -18,34 +18,36 @@
 # Sommaire
 ---
 
-1. Introduction 
-2. Compétences du référentiel couvertes par le projet
-3. Cahier des charges 
-   4.1 Contexte et objectifs
-   4.2 User stories
-   4.3 Contraintes
-   4.4 Le maquettage
-5. Spécifications techniques
+#### 1. Introduction
+#### 2. Compétences du référentiel couvertes par le projet
+   2.1 Développer la partie front-end d’une application web ou web mobile sécurisée
+   2.2 Développer la partie back-end d’une application web ou web mobile sécurisée
+#### 3. Cahier des charges
+   3.1 Contexte et objectifs
+   3.2 User stories
+   3.3 Contraintes
+   3.4 Le maquettage
+#### 4. Spécifications techniques
    5.1 Les technologies 
    5.2 Le versionning
    5.2 Architecture MVC
    5.3 Base de données
    5.4 Sécurité
-6. Présentaion 
+#### 6. Présentaion 
    6.1 Front-end
    6.2 Back-end
    6.3 API
-7. Jeu d’essai
+#### 7. Jeu d’essai
    7.1 
-8. Déploiement
-9. Veille technologique
-10. Recherche anglophone
+#### 8. Déploiement
+#### 9. Veille technologique
+#### 10. Recherche anglophone
    10.1 Contexte de la recherche
    10.2 Extrait anglophone et traduction
-11. Conclusion
+#### 11. Conclusion
    11.1 Bilan global du projet
    11.2 Roadmap
-12. Annexes
+#### 12. Annexes
 
 </div>
 
@@ -81,5 +83,35 @@ Tosho est mon premier projet concret, reflet de mon apprentissage et de mon évo
 
 # 2. Compétences du référentiel couvertes par le projet 
 ---
+
+Pour le développement de la partie front-ent de Tosho, 
+
+## 2.1 Développer la partie front-end d’une application web ou web mobile sécurisée
+
+J'ai travaillé avec **VSCode**, l'IDE que j'utilise depuis le début de la formation et que j'avais configuré au fuir à mesure en suivant la formation, j'ai installé des extention pour pourvoir travailler efficacement.
+
+<img src="/img/extentions.PNG" style="display:block; margin:auto; width:300px;">
+
+
+
+
+**1. Installer et configurer son environnement de travail en fonction du projet web ou web mobile**
+
+**2. Maquetter des interfaces utilisateur web ou web mobile**
+
+**3. Réaliser des interfaces utilisateur statiques web ou web mobile**
+
+**4. Développer la partie dynamique des interfaces utilisateur web ou web mobile**
+
+
+
+
+
+## 2.2 Développer la partie back-end d’une application web ou web mobile sécurisée
+
+**5. Mettre en place une base de données relationnelle**
+**6. Développer des composants d’accès aux données SQL et NoSQL**
+**7. Développer des composants métier coté serveur**
+**8. Documenter le déploiement d’une application dynamique web ou web mobile**
 
 </div>
