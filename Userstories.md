@@ -1,4 +1,4 @@
-# User Stories - Application Tosho!
+# User Stories - Application Tosho
 
 ## Sprint 1 : Gestion des prêts
 
