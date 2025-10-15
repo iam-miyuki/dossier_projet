@@ -138,6 +138,8 @@ Les contrôleurs interagissent avec les entités pour récupérer ou modifier le
 Pour le déploiement, j’ai utilisé **Docker**, ce qui permet de standardiser l’environnement de développement et de production. J’ai rédigé un ``dockerfile`` qui décrit toutes les étapes nécessaires pour construire l’image de l’application : installation des dépendances, configuration, copie des fichiers, etc.
 Toutes les commandes nécessaires à l’exécution du projet avec Docker sont documentées dans le fichier ``README.md``. Cela permet à n’importe quel utilisateur de cloner le dépôt et de lancer l’application en quelques lignes de commande, sans avoir à configurer manuellement l’environnement.
 
+<div style="page-break-after: always;"></div>
+
 ---
 
 
@@ -276,12 +278,66 @@ Ainsi, Tosho se positionne comme une solution moderne et complète, permettant a
 
 ## 3.3 Contraintes
 
-- L’interface doit être simple et intuitive, adaptée à des utilisateurs non techniques, y compris les parents bénévoles et les administrateurs (qui sont eux-mêmes des bénévoles).
+- L’interface doit être **simple** et **intuitive**, adaptée à des utilisateurs non techniques. Les bibliothécaires et **les administrateurs sont des bénévoles**.
 - L’accès aux fonctionnalités doit être restreint selon le rôle de l’utilisateur :
   - **Admin (parent bénévole)** : gère les familles, les livres, les bibliothécaires et l’inventaire.
   - **Bibliothécaire (parent bénévole)** : enregistre les prêts et retours, et participe aux sessions d’inventaire.
 - Les données doivent être fiables et mises à jour en temps réel afin d’éviter les erreurs de double prêt ou de livres manquants.
 
+<div style="page-break-after: always;"></div>
+
+---
+
 # 4. Conception visuelle
 
-### 
+L’identité visuelle de **Tosho** a été pensée pour refléter l’esprit d’une association scolaire : à la fois **ludique**, **conviviale** et **accessible**.
+L’objectif est de proposer une interface simple à comprendre, agréable à utiliser et adaptée aux parents bénévoles.
+
+## 4.1 Palette de couleurs
+
+### Couleurs principales
+
+![Palette de couleur](img/chart.svg)
+
+- ``#1c2176`` : pour le texte, les bordures et les icônes
+- ``#debaff`` : couleur principale de l'interface **bibliothécaire**
+- ``#9bafff`` : couleur principale de l'interface **admin**
+
+### Couleurs des composants
+
+
+## 4.2 Typographie
+Le choix des polices a été fait avec soin pour garantir une lecture claire tout en apportant une touche moderne.
+
+
+
+``"MuseoModerno"`` : pour les titres et le menu
+``"Outfit"`` ; pour les textes courants
+
+## 4.3 Logo & Icônes
+
+### Logo
+
+
+Le logo ***Tosho*** — qui signifie *livre* ou *bibliothéque* en japonais — a été conçu sur Figma. J'ai chosisi la police ``"Climate Crisis"`` pour son style rétro, en harmonie avec le style **pixel art** des icônes.
+
+<img src="/img/logo-big.svg" alt="logo" style="display:block; margin:auto; width:200px;">
+
+### Icônes
+J'ai opté pour les icônes ``"Pixel free icons"`` au style **pixel art** pour apporter une touche **ludique** et **conviviale**. Elles ont également été exportées en SVG depuis Figma.
+
+<div style="display:flex; margin-bottom:50px;">
+<img src="/img/child-book.svg" alt="book" style="display:block; margin:auto; width:100px;">
+<img src="/img/family.svg" alt="family" style="display:block; margin:auto; width:100px;">
+<img src="/img/books.svg" alt="books" style="display:block; margin:auto; width:100px;">
+</div>
+
+### Favicon
+
+
+## 4.4 Wireframes
+
+
+## 4.5 Maquettes
+## 4.6 Responsive
+
