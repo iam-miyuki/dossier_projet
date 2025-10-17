@@ -30,21 +30,18 @@
    - [3.3 Contraintes](#33-contraintes)
 
 4. [Conception visuelle](#4-conception-visuelle)
-   - [4.1 Palette de couleurs]
-   - [4.2 Typographies et styles de texte] 
-   - [4.3 Organisation des écrans / wireframes]
-   - [4.4 Composants UI]
-   - [4.5 Icônes]
-   - [4.6 Responsivité et adaptations mobile/desktop]
+   - [4.1 Charte graphique](#41-charte-graphique)
+   - [4.2 Wireframes](#42-wireframes)
+   - [4.3 Maquettes](#43-maquettes)
 
-5. Conception technique
-   - 5.1 Technologies utilisées
-   - 5.2 Versionning
-   - 5.3 Architecture MVC
-   - 5.4 Base de données
-   - 5.5 Sécurité
+5. [Conception technique](#5-conception-technique)
+   - [5.1 Technologies utilisées](#51-technologies-utilisées)
+   - [5.2 Versionning](#52-versionning)
+   - [5.3 Architecture MVC](#53-architecture-mvc)
+   - [5.4 Base de données](#54-base-de-données)
+   - [5.5 Sécurité](#55-sécurité)
 
-6. [Présentation](#5-présentation)
+6. [Développement](#5-présentation)
    - [5.1 Front-end](#51-front-end)
    - [5.2 Back-end](#52-back-end)
    - [5.3 API](#53-api)
@@ -57,8 +54,8 @@
 9. [Veille technologique](#8-veille-technologique)
 
 10. [Recherche anglophone](#9-recherche-anglophone)
-   - [9.1 Contexte de la recherche](#91-contexte-de-la-recherche)
-   - [9.2 Extrait anglophone et traduction](#92-extrait-anglophone-et-traduction)
+      - [9.1 Contexte de la recherche](#91-contexte-de-la-recherche)
+      - [9.2 Extrait anglophone et traduction](#92-extrait-anglophone-et-traduction)
 
 11. [Conclusion](#10-conclusion)
     - [10.1 Bilan global du projet](#101-bilan-global-du-projet)
@@ -123,7 +120,7 @@ Pour rendre l’interface plus interactive, j’ai utilisé **JavaScript**, nota
 
 J’ai mis en place une base de données relationnelle avec **MySQL**. J’ai commencé par concevoir un modèle de données sur papier afin de définir les différentes entités et les relations entre elles. Ensuite, j’ai créé ces entités dans **Symfony** en utilisant **Doctrine ORM**. Chaque entité correspond à une table dans la base de données. Grâce à **l’interface en ligne de commande (CLI)** de Symfony, j’ai pu générer automatiquement la structure de la base de données, sans avoir à créer manuellement chaque table. Doctrine simplifie également la gestion des relations entre les entités (OneToMany, ManyToOne, etc.).
 
-### Développer des composants d’accès aux données SQL et NoSQL
+### Développer des composants d’accès aux données SQL
 
 Pour accéder aux données stockées dans la base, j’ai utilisé les ``repositories`` fournis par Doctrine. Lorsqu’une requête est envoyée à un contrôleur, celui-ci interagit avec ``Entity Manager`` qui sert d’intermédiaire entre les contrôleurs et les repositories.
 Les repositories permettent de récupérer, filtrer, modifier ou supprimer les données de manière sécurisée. Doctrine gère également les connexions à la base de données et applique automatiquement des protections contre les injections SQL.
@@ -293,7 +290,7 @@ Ainsi, Tosho se positionne comme une solution moderne et complète, permettant a
 L’identité visuelle de **Tosho** a été pensée pour refléter l’esprit d’une association scolaire : à la fois **ludique**, **conviviale** et **accessible**.
 L’objectif est de proposer une interface simple à comprendre, agréable à utiliser et adaptée aux parents bénévoles.
 
-## 4.1 Palette de couleurs
+## 4.1 Charte graphique
 
 ### Couleurs principales
 
@@ -306,15 +303,11 @@ L’objectif est de proposer une interface simple à comprendre, agréable à ut
 ### Couleurs des composants
 
 
-## 4.2 Typographie
+### Typographie
 Le choix des polices a été fait avec soin pour garantir une lecture claire tout en apportant une touche moderne.
 
-
-
-``"MuseoModerno"`` : pour les titres et le menu
-``"Outfit"`` ; pour les textes courants
-
-## 4.3 Logo & Icônes
+- ``"MuseoModerno"`` : pour les titres et le menu
+- ``"Outfit"`` ; pour les textes courants
 
 ### Logo
 
@@ -335,9 +328,140 @@ J'ai opté pour les icônes ``"Pixel free icons"`` au style **pixel art** pour a
 ### Favicon
 
 
-## 4.4 Wireframes
+## 4.2 Wireframes
+
+## 4.2 Wireframes
+
+Les wireframes m'ont permis de **planifier la structure et l’organisation de l’interface** avant de passer à la création des maquettes.  
+Ils servent à visualiser rapidement la disposition des éléments et le parcours utilisateur sans se soucier du design final.
+
+### Version mobile
+- Les sections principales sont **claires et accessibles**, avec un menu compact pour gagner de la place.  
+- Les onglets et boutons sont positionnés pour une navigation **facile avec le pouce**.  
+- Les cartes représentant les livres ou les emprunts sont **empilées verticalement** pour un accès rapide.  
+
+### Version desktop
+- Les éléments sont **bien espacés** et visibles directement sur la barre de navigation.   
+
+<img src="/img/wireframe-desk1.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+<img src="/img/wireframe-desk2.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 
-## 4.5 Maquettes
-## 4.6 Responsive
+## 4.3 Maquettes
+
+Les maquettes m'ont permis de visualiser le rendu attendu et de vérifier que l’interface est adaptée aux utilisateurs.  
+Pour assurer la meilleure expérience utilisateur (**UX**) sur mobile comme sur desktop, j’ai ajusté l’emplacement et la disposition des différents éléments.
+
+### Version mobile
+- Le menu utilise des **icônes** pour gagner de la place.  
+- Les onglets sont adaptés à la **taille de l’écran**.  
+- Les cartes de livres ou d’emprunts sont affichées les unes au-dessus des autres pour faciliter la lecture et rendre la navigation plus fluide.  
+- Un **fond de couleur différent** est utilisé pour distinguer facilement les interfaces selon le rôle de l’utilisateur.
+
+
+
+### Version desktop
+- Des **effets hover** sont ajoutés sur le menu et les cartes pour améliorer l’interactivité et guider l’utilisateur.    
+- Les onglets et sections restent bien visibles et accessibles pour une navigation intuitive.
+
+<img src="/img/maquette-desk.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+# 5. Conception technique
+## 5.1 Technologies utilisées
+
+### Back-end  
+- Language : **PHP 8.2**
+- Framework : **Symfony 6.4**
+
+<img src="/img/v-1.svg" alt="version" style="display:block; width:100%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Le choix de **Symfony 6.4** permet de bénéficier du **Long-Term Support (LTS)** pour garantir la stabilité et la sécurité du projet sur le long terme. Symfony permet de gérer efficacement :
+   - Les entités et la base de données via **Doctrine ORM**
+   - Les formulaires et la validation des données
+   - La sécurité 
+
+Cette organisation rend le back-end **modulaire, sécurisé et facilement maintenable**, tout en offrant une base solide pour faire évoluer l’application Tosho dans le futur.
+
+### Front-end  
+
+- **HTML** : J'ai structuré le code avec des balises sémantiques comme `<header>`, `<nav>`, `<main>` et `<footer>` afin d’assurer une bonne organisation du contenu. Pour rendre l’application **responsive**, j’ai ajouté la balise suivante :  
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+indispensable pour adapter l’affichage aux différentes tailles d’écran.  
+
+- **CSS** : Les fichiers CSS sont séparés par composants pour une meilleure organisation. J’ai également créé un fichier spécifique pour les **variables CSS** (couleurs, tailles, polices) afin d’assurer une **cohérence visuelle** et de pouvoir modifier facilement le style global du site. 
+J’ai utilisé `@media screen` pour adapter le design aux différentes tailles d’écran.
+
+- **Twig** : J’ai utilisé Twig, le moteur de template de Symfony, pour créer des pages dynamiques. Il permet de séparer le code PHP de l’affichage et de réutiliser facilement des éléments comme le `<header>`, le `<footer>` ou les onglets (tabs) sur toutes les pages.
+
+
+## 5.2 Versionning
+
+La sauvegarde et le suivi du code sont assurés par **Git**, avec un dépôt distant sur **GitHub**.  
+
+J’ai organisé le développement avec plusieurs branches :  
+- `dev` : utilisée pour le développement  
+- `docker-deploy` : dédiée au déploiement via **Docker**, contenant les fichiers et configurations de production.  
+
+Cette organisation permet de séparer clairement le travail de développement local des configurations et fichiers liés au déploiement.
+
+
+## 5.3 Architecture MVC
+
+L’application suit le modèle **MVC (Model – View – Controller)** propre à Symfony, qui sépare clairement les responsabilités :  
+
+- **Controller (Contrôleur)** : reçoit les requêtes de l’utilisateur, exécute la logique métier et envoie les données vers la vue correspondante.  
+- **Model (Modèle)** : gère les entités et communique avec la base de données via **Doctrine ORM**, puis renvoie les données au contrôleur.  
+- **View (Vue)** : reçoit les données du contrôleur et génère l’affichage des pages avec **Twig**.
+
+```mermaid
+flowchart TD
+    U[Utilisateur] -->|Envoie requête| C[Contrôleur]
+    C -->|Demande ou modifie données| M[Modèle]
+    M -->|Renvoie données| C
+    C -->|Envoie données à afficher| V[Vue]
+    V -->|Affiche la page| U
+
+    style U fill:#f9f,stroke:#333,stroke-width:1px
+    style C fill:#bbf,stroke:#333,stroke-width:1px
+    style M fill:#bfb,stroke:#333,stroke-width:1px
+    style V fill:#ffb,stroke:#333,stroke-width:1px
+
+```
+
+## 5.4 Base de données (modèle relationnel, entités, relations)
+---
+
+## 5.5 Sécurité
+L’application intègre plusieurs mécanismes de sécurité fournis par Symfony :
+
+- **Gestion des rôles et autorisations** :  
+`ROLE_LIBRARIAN`, `ROLE_ADMIN` définis dans `security.yaml`.  
+- **Authentification et sessions sécurisées**.  
+- **Protection CSRF** sur tous les formulaires sensibles.  
+- **Hachage des mots de passe** avec hacher.  
+- **Filtrage des accès aux routes** selon le rôle utilisateur.
+
+Ces mesures garantissent la confidentialité des données et un contrôle précis des accès.
+
+---
+
+
+
+# 9. Veille technologique
+Tout au long de ma formation, je me suis documenté et informé pour progresser, résoudre des problèmes techniques et me tenir à jour sur les évolutions dans le domaine du développement web.
+
+**La documentation officielle de PHP** a été une ressource que j’ai beaucoup consultée. Celle de **Symfony**, très bien structurée et accompagnée d’exemples concrets, m’a également été d’une grande aide, notamment pour la mise en place des formulaires et la configuration des routes.
+
+Lors de bugs ou de difficultés techniques, j’ai effectué des recherches approfondies sur le web. **Stack Overflow** a été l’une de mes principales ressources : je faisais toujours **attention à la date des réponses** pour m’assurer de leur pertinence avec les versions récentes des outils que j’utilisais.
+
+Côté front-end, le site **MDN Web Docs** a été ma principale ressource, très utile pour approfondir ma compréhension de HTML, CSS et JavaScript.
+Pour la conception visuelle de mon application, j’ai souvent consulté le site **Dribbble**, qui m’a permis de m’inspirer de designs modernes et de me tenir informé des tendances actuelles en UI/UX.
+
+Quand un bug persistait malgré mes recherches, j’utilisais ChatGPT comme solution de dernier recours. Cela m’a permis de gagner du temps et de débloquer des situations complexes, grâce à des explications claires et des exemples de code adaptés à mon problème.
+
+J’ai également regardé de nombreuses vidéos sur YouTube pour approfondir certains sujets, notamment l’utilisation de Git, ainsi que pour enrichir ma culture générale dans le domaine du développement.
+
+Ces ressources m’ont également permis de m’habituer à lire et comprendre **la documentation en anglais**, qui est souvent plus complète et mise à jour.
 
