@@ -1,6 +1,6 @@
 <div style="text-align:center; margin-top:300px;">
 
-  <img src="/img/logo-big.svg" alt="logo" style="display:block; margin:auto; width:300px;">
+  <img src="/img/ui/logo-big.svg" alt="logo" style="display:block; margin:auto; width:300px;">
 
   <div style="margin-top:200px">
     <p>Développé par <strong>Miyuki CHERBAL</strong></p>
@@ -41,7 +41,7 @@
    - [5.4 Base de données](#54-base-de-données)
    - [5.5 Sécurité](#55-sécurité)
 
-6. [Développement](#5-présentation)
+6. [Développement](#5-déveleppement)
    - [5.1 Front-end](#51-front-end)
    - [5.2 Back-end](#52-back-end)
    - [5.3 API](#53-api)
@@ -92,7 +92,7 @@ Tosho est mon premier projet concret, reflet de mon apprentissage et de mon évo
 
 ### Installer et configurer son environnement de travail
 
-Pour ce projet, j’ai utilisé **Visual Studio Code (VSCode)** comme environnement de développement, un IDE que j’utilise depuis le début de ma formation. Je l’ai progressivement configuré selon mes besoins, en installant diverses extensions utiles pour les langages de programmation et leurs frameworks, notamment :
+Pour ce projet, j’ai utilisé **Visual Studio Code (VSCode)** comme environnement de développement, un **IDE** (Integrated Development Environment) que j’utilise depuis le début de ma formation. Je l’ai progressivement configuré selon mes besoins, en installant diverses extensions utiles pour les langages de programmation et leurs frameworks, notamment :
 - **PHP Intelephense** : pour bénéficier de l’autocomplétion, de la détection d’erreurs, et d’une meilleure navigation dans le code PHP.
 
 - **PHP Namespace Resolver** : pour faciliter l’importation et la gestion automatique des namespaces dans les fichiers PHP.
@@ -104,7 +104,7 @@ Le projet est versionné avec **Git** et **GitHub** pour assurer le suivi des mo
 
 ### Maquetter des interfaces utilisateur web ou web mobile
 
-J’ai réalisé les wireframes de mon application pour les formats mobile et desktop en utilisant **Figma**. Cette étape m’a permis de définir l’ergonomie et l’organisation des éléments. Ensuite, j’ai transformé ces wireframes en maquettes, ce qui m’a aidée à mieux anticiper les besoins visuels. Avoir un rendu concret sous les yeux m’aide à me projeter dans le développement et à rester concentrée sur le développement.
+J’ai réalisé les wireframes de mon application pour les formats mobile et desktop en utilisant **Figma**. Cette étape m’a permis de définir l’ergonomie et l’organisation des éléments. Ensuite, j’ai transformé ces wireframes en **maquettes**, ce qui m’a aidée à mieux anticiper les besoins visuels. Avoir un rendu concret sous les yeux m’aide à me projeter dans le développement et à rester concentrée sur le développement.
 
 ### Réaliser des interfaces utilisateur statiques web ou web mobile
 
@@ -112,13 +112,13 @@ J’ai intégré mes maquettes graphiques au fur et à mesure de l’avancement 
 
 ### Développer la partie dynamique des interfaces utilisateur web ou web mobile
 
-Pour rendre l’interface plus interactive, j’ai utilisé **JavaScript**, notamment pour automatiser certaines actions et améliorer l’expérience utilisateur. Par exemple, lors de la saisie d’un code ISBN dans le formulaire d’ajout d’un livre, un appel est automatiquement envoyé à une API externe. Celle-ci retourne les informations liées au livre : titre, auteur, image de couverture, etc. Ces données sont ensuite affichées dynamiquement dans le formulaire, sans rechargement de la page. 
+Pour rendre l’interface plus interactive, j’ai utilisé **JavaScript**, notamment pour automatiser certaines actions et améliorer l’expérience utilisateur. Par exemple, lors de la saisie d’un code ISBN dans le formulaire d’ajout d’un livre, un appel est automatiquement envoyé à une **API** externe. Celle-ci retourne les informations liées au livre : titre, auteur, image de couverture, etc. Ces données sont ensuite affichées dynamiquement dans le formulaire, sans rechargement de la page. 
 
 ## 2.2 Développer la partie back-end d’une application web ou web mobile sécurisée
 
 ### Mettre en place une base de données relationnelle
 
-J’ai mis en place une base de données relationnelle avec **MySQL**. J’ai commencé par concevoir un modèle de données sur papier afin de définir les différentes entités et les relations entre elles. Ensuite, j’ai créé ces entités dans **Symfony** en utilisant **Doctrine ORM**. Chaque entité correspond à une table dans la base de données. Grâce à **l’interface en ligne de commande (CLI)** de Symfony, j’ai pu générer automatiquement la structure de la base de données, sans avoir à créer manuellement chaque table. Doctrine simplifie également la gestion des relations entre les entités (OneToMany, ManyToOne, etc.).
+J’ai mis en place une base de données relationnelle avec **MySQL**. J’ai commencé par concevoir un modèle de données sur papier afin de définir les différentes entités et les relations entre elles. Ensuite, j’ai créé ces entités dans **Symfony** en utilisant **Doctrine ORM**. Chaque entité correspond à une table dans la base de données. Grâce à **CLI** (Command Line Interface) de Symfony, j’ai pu générer automatiquement la structure de la base de données, sans avoir à créer manuellement chaque table. Doctrine simplifie également la gestion des relations entre les entités (OneToMany, ManyToOne, etc.).
 
 ### Développer des composants d’accès aux données SQL
 
@@ -143,7 +143,7 @@ Toutes les commandes nécessaires à l’exécution du projet avec Docker sont d
 # 3. Cahier des charges
 ## 3.1 Contexte et objectifs
 ### Contexte
-Le projet Tosho est inspiré d’une application web actuellement utilisée au sein d’une école japonaise associative qui propose des cours de japonais aux enfants d’origine japonaise résidant dans la région lyonnaise. L’école est entièrement gérée par des parents bénévoles, dont je fais partie, et met à disposition une petite bibliothèque afin d’encourager la lecture en japonais auprès des enfants.
+Le projet **Tosho** est inspiré d’une application web actuellement utilisée au sein d’une école japonaise associative qui propose des cours de japonais aux enfants d’origine japonaise. L’école est entièrement gérée par des parents bénévoles, dont je fais partie, et met à disposition une petite bibliothèque afin d’encourager la lecture en japonais auprès des enfants.
 
 Chaque semaine, les familles adhérentes peuvent emprunter des livres pour leurs enfants. Jusqu’à présent, ces prêts sont gérés via une application web existante, développée il y a plusieurs années par un ancien parent bénévole.
 Le fonctionnement actuel est le suivant :
@@ -167,6 +167,11 @@ Bien que cette application soit fonctionnelle, elle présente plusieurs limitati
 - La recherche de familles n’est possible qu’en alphabet latin, ce qui rend la recherche en japonais (hiragana) impossible.
 
 - L’interface est peu ergonomique, sans mise en page ni design CSS.
+
+<div style="display:flex; margin-top: 50px; margin-bottom:50px; background:#b9faff">
+<img src="/img/ui/tosyo.jpg" alt="book" style="display:block; margin:auto; width:40%;">
+<img src="/img/ui/tosyo2.jpg" alt="family" style="display:block; margin:auto; width:40%;">
+</div>
 
 Ces contraintes rendent la gestion quotidienne de la bibliothèque peu flexible pour les parents bénévoles.
 
@@ -294,13 +299,14 @@ L’objectif est de proposer une interface simple à comprendre, agréable à ut
 
 ### Couleurs principales
 
-![Palette de couleur](img/chart.svg)
+<img src="/img/ui/chart.svg" alt="logo" style="display:block; margin:auto; width:60%; margin-bottom:30px; margin-top:30px;">
 
 - ``#1c2176`` : pour le texte, les bordures et les icônes
 - ``#debaff`` : couleur principale de l'interface **bibliothécaire**
 - ``#9bafff`` : couleur principale de l'interface **admin**
 
 ### Couleurs des composants
+TODO
 
 
 ### Typographie
@@ -314,21 +320,20 @@ Le choix des polices a été fait avec soin pour garantir une lecture claire tou
 
 Le logo ***Tosho*** — qui signifie *livre* ou *bibliothéque* en japonais — a été conçu sur Figma. J'ai chosisi la police ``"Climate Crisis"`` pour son style rétro, en harmonie avec le style **pixel art** des icônes.
 
-<img src="/img/logo-big.svg" alt="logo" style="display:block; margin:auto; width:200px;">
+<img src="/img/ui/logo-big.svg" alt="logo" style="display:block; margin:auto; width:200px;">
 
 ### Icônes
 J'ai opté pour les icônes ``"Pixel free icons"`` au style **pixel art** pour apporter une touche **ludique** et **conviviale**. Elles ont également été exportées en SVG depuis Figma.
 
 <div style="display:flex; margin-bottom:50px;">
-<img src="/img/child-book.svg" alt="book" style="display:block; margin:auto; width:100px;">
-<img src="/img/family.svg" alt="family" style="display:block; margin:auto; width:100px;">
-<img src="/img/books.svg" alt="books" style="display:block; margin:auto; width:100px;">
+<img src="/img/ui/child-book.svg" alt="book" style="display:block; margin:auto; width:100px;">
+<img src="/img/ui/family.svg" alt="family" style="display:block; margin:auto; width:100px;">
+<img src="/img/ui/books.svg" alt="books" style="display:block; margin:auto; width:100px;">
 </div>
 
 ### Favicon
 
-
-## 4.2 Wireframes
+TODO
 
 ## 4.2 Wireframes
 
@@ -338,13 +343,15 @@ Ils servent à visualiser rapidement la disposition des éléments et le parcour
 ### Version mobile
 - Les sections principales sont **claires et accessibles**, avec un menu compact pour gagner de la place.  
 - Les onglets et boutons sont positionnés pour une navigation **facile avec le pouce**.  
-- Les cartes représentant les livres ou les emprunts sont **empilées verticalement** pour un accès rapide.  
+- Les cartes représentant les livres ou les emprunts sont **empilées verticalement** pour un accès rapide. 
+
+<img src="/img/ui/wireframe-mb (2).PNG" style="width:60%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 ### Version desktop
-- Les éléments sont **bien espacés** et visibles directement sur la barre de navigation.   
+- Les éléments sont **bien espacés** et la navigation facile avec les onglets.   
 
-<img src="/img/wireframe-desk1.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
-<img src="/img/wireframe-desk2.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+<img src="/img/ui/wireframe-desk1.PNG" style="width:60%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+<img src="/img/ui/wireframe-desk2.PNG" style="width:60%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 
 ## 4.3 Maquettes
@@ -358,13 +365,13 @@ Pour assurer la meilleure expérience utilisateur (**UX**) sur mobile comme sur 
 - Les cartes de livres ou d’emprunts sont affichées les unes au-dessus des autres pour faciliter la lecture et rendre la navigation plus fluide.  
 - Un **fond de couleur différent** est utilisé pour distinguer facilement les interfaces selon le rôle de l’utilisateur.
 
-
+<img src="/img/ui/maquette-mb.PNG" style="width:60%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 ### Version desktop
 - Des **effets hover** sont ajoutés sur le menu et les cartes pour améliorer l’interactivité et guider l’utilisateur.    
 - Les onglets et sections restent bien visibles et accessibles pour une navigation intuitive.
 
-<img src="/img/maquette-desk.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+<img src="/img/ui/maquette-desk.PNG" style="width:60%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 # 5. Conception technique
 ## 5.1 Technologies utilisées
@@ -373,21 +380,49 @@ Pour assurer la meilleure expérience utilisateur (**UX**) sur mobile comme sur 
 - Language : **PHP 8.2**
 - Framework : **Symfony 6.4**
 
-<img src="/img/v-1.svg" alt="version" style="display:block; width:100%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+<img src="/img/code/v-1.svg" alt="version" style="display:block; width:100%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
-Le choix de **Symfony 6.4** permet de bénéficier du **Long-Term Support (LTS)** pour garantir la stabilité et la sécurité du projet sur le long terme. Symfony permet de gérer efficacement :
-   - Les entités et la base de données via **Doctrine ORM**
-   - Les formulaires et la validation des données
-   - La sécurité 
+Le choix de **Symfony 6.4** permet de bénéficier du **Long-Term Support (LTS)**. Cela signifie qu’elle bénéficie de mises à jour de sécurité et de corrections de bugs pendant plusieurs années, ce qui rend le projet plus stable et durable.
 
-Cette organisation rend le back-end **modulaire, sécurisé et facilement maintenable**, tout en offrant une base solide pour faire évoluer l’application Tosho dans le futur.
+Symfony facilite la **gestion du back-end** grâce à ses nombreux outils intégrés :
+
+- Gestion de la base de données et des entités avec **Doctrine ORM (Object Relational Mapping)**
+
+- création et validation des formulaires,
+
+- gestion de la sécurité et des rôles utilisateurs.
+### Bundles et composants Symfony
+
+Symfony repose sur des **composants** et des **bundles**, qui permettent de structurer et de réutiliser facilement le code dans l’application.
+
+- Les **composants Symfony** sont des **bibliothèques PHP indépendantes** — c'est à dire qu'ils ne dépendent pas de Symfony. Chaque composant remplit une tâche technique précise.
+Exemples :
+
+   - **HttpFoundation** : gère les requêtes et réponses HTTP
+
+   - **Routing** : gère le système de routes
+
+   - **Form** : gère la création et la validation des formulaires
+
+   - **Security** : gère la sécurité et l’authentification
+
+- Les **bundles** sont des **ensembles de composants configurés** pour ajouter une fonctionnalité complète à une application Symfony. Certains bundles sont natifs,— c'est à dire qu'ils sont intégrés dans le framework et prêts à l'emploi.
+Examples :
+
+   - **TwigBundle** : permet de gérer les vues avec Twig,
+
+   - **DoctrineBundle** : gère la base de données via Doctrine ORM
+
+   - **SecurityBundle** : s’occupe de l’authentification et des rôles utilisateurs.
 
 ### Front-end  
 
 - **HTML** : J'ai structuré le code avec des balises sémantiques comme `<header>`, `<nav>`, `<main>` et `<footer>` afin d’assurer une bonne organisation du contenu. Pour rendre l’application **responsive**, j’ai ajouté la balise suivante :  
-```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-```
+
+
+<img src="/img/code/respo.svg" alt="version" style="display:block; width:100%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+
 indispensable pour adapter l’affichage aux différentes tailles d’écran.  
 
 - **CSS** : Les fichiers CSS sont séparés par composants pour une meilleure organisation. J’ai également créé un fichier spécifique pour les **variables CSS** (couleurs, tailles, polices) afin d’assurer une **cohérence visuelle** et de pouvoir modifier facilement le style global du site. 
@@ -420,8 +455,9 @@ flowchart TD
     U[Utilisateur] -->|Envoie requête| C[Contrôleur]
     C -->|Demande ou modifie données| M[Modèle]
     M -->|Renvoie données| C
-    C -->|Envoie données à afficher| V[Vue]
-    V -->|Affiche la page| U
+    C -->|Transmet données à la vue| V[Vue]
+    V -->|Retourne la page rendue| C
+    C -->|Renvoie la réponse| U
 
     style U fill:#f9f,stroke:#333,stroke-width:1px
     style C fill:#bbf,stroke:#333,stroke-width:1px
@@ -430,7 +466,70 @@ flowchart TD
 
 ```
 
-## 5.4 Base de données (modèle relationnel, entités, relations)
+
+## 5.4 Base de données 
+
+### Conception
+
+J’ai d’abord conçu ma base de données sur papier, en définissant les tables et leurs relations afin de répondre aux besoins fonctionnels de l’application.
+Ensuite, j’ai présenté le schéma à mon formateur, puis j’ai ajusté la structure en applicant ses retours afin d’améliorer la cohérence et la logique du modèle.
+Cette étape m’a permis de comprendre le concept de relations entre les tables (OneToMany, ManyToOne, etc.) et de définir précisément les tables ainsi que leurs relations, avant de passer à la modélisation dans Symfony.
+
+### Modélisation et relations
+
+Après avoir conçu le schéma de la base de données sur papier et validé sa cohérence avec mon formateur, j’ai traduit ce modèle en **entités Symfony**.  
+Cette étape permet de transformer les tables et leurs relations en **classes PHP**, avec Doctrine qui gère automatiquement la création des tables et des clés étrangères.
+J’ai créé ces entités grâce à la commande CLI de Symfony :
+
+<img src="/img/code/entite.svg" alt="version" style="display:block; width:100%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+Cette commande permet de définir :
+
+- le nom de l’entité 
+
+- les **propriétés** (les champs de la table)
+
+- les **relations** avec d’autres entités.
+
+Dans **Field type**, on peut définir la relation entre les entités. **Doctrine** s’occupe ensuite d’ajuster les champs pour gérer correctement les relations.
+
+### Entités créées
+
+| Entité          | Description  |
+|-----------------|-----------------------------|
+| `User`          | Contient les informations des utilisateurs et leurs **rôles** pour gérer les droits d’accès (admin, bibliothécaire). |
+| `Family`        | Représente les familles adhérentes à l’association. Stocke les informations de contact et les liens avec `Loan`. |
+| `Book`          | Contient les informations des livres (titre, auteur, statut, code, localisation, etc.) et les relations avec `Loan` et `InventoryItem`. |
+| `Loan`          | Représente un prêt de livre : lien entre un livre et une famille. |
+| `Inventory`     | Représente une session d’inventaire. |
+| `InventoryItem` | Relie un livre à une session d’inventaire et permet de signaler les anomalies (perdu, mal rangé, abîmé). |
+
+
+### Relations principales entre entités
+
+| Entité source      | Type de relation | Entité cible      | Description |
+|-------------------|----------------|-----------------|------------|
+| `Family`          | **OneToMany**       | `Loan`          | Une famille peut avoir plusieurs prêts, mais chaque prêt correspond à une seule famille. |
+| `Loan`            | **ManyToOne**       | `Book`          | Un prêt correspond à un seul livre, mais un livre peut être emprunté plusieurs fois. |
+| `User`            | **OneToMany**       | `Loan`          | Un utilisateur (bibliothécaire) peut gérer plusieurs prêts. |
+| `InventoryItem`   | **ManyToOne**       | `Book`          | Chaque item d’inventaire est lié à un seul livre. |
+| `InventoryItem`   | **ManyToOne**       | `Inventory`     | Chaque item d’inventaire appartient à une seule session d’inventaire. |
+
+
+### Générer la base de données
+
+Une fois les entités créées, Symfony et Doctrine permettent de générer automatiquement la base de données.
+Pour créer la base de données :
+
+<img src="/img/code/doctrine.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Pour créer ou mettre à jour les tables selon les entités :
+
+<img src="/img/code/db.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Ces commandes synchronisent la base de données avec le modèle défini dans le code.
+
+<img src="/img/schema-db.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
 ---
 
 ## 5.5 Sécurité
@@ -441,7 +540,7 @@ L’application intègre plusieurs mécanismes de sécurité fournis par Symfony
 - **Authentification et sessions sécurisées**.  
 - **Protection CSRF** sur tous les formulaires sensibles.  
 - **Hachage des mots de passe** avec hacher.  
-- **Filtrage des accès aux routes** selon le rôle utilisateur.
+- **Filtrage des accès aux routes** selon le rôle utilisateur. ``isGranted``
 
 Ces mesures garantissent la confidentialité des données et un contrôle précis des accès.
 
