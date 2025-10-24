@@ -168,7 +168,7 @@ Bien que cette application soit fonctionnelle, elle présente plusieurs limitati
 
 - L’interface est peu ergonomique, sans mise en page ni design CSS.
 
-<div style="display:flex; margin-top: 50px; margin-bottom:50px; background:#b9faff">
+<div style="display:flex; margin-top: 50px; margin-bottom:50px; background:#fafafa">
 <img src="/img/ui/tosyo.jpg" alt="book" style="display:block; margin:auto; width:40%;">
 <img src="/img/ui/tosyo2.jpg" alt="family" style="display:block; margin:auto; width:40%;">
 </div>
@@ -533,18 +533,68 @@ Ces commandes synchronisent la base de données avec le modèle défini dans le 
 ---
 
 ## 5.5 Sécurité
-L’application intègre plusieurs mécanismes de sécurité fournis par Symfony :
+Symfony intègre un système de sécurité complet et modulaire qui permet de protéger les données, de contrôler les accès et de garantir la fiabilité de Tosho.
 
-- **Gestion des rôles et autorisations** :  
-`ROLE_LIBRARIAN`, `ROLE_ADMIN` définis dans `security.yaml`.  
-- **Authentification et sessions sécurisées**.  
-- **Protection CSRF** sur tous les formulaires sensibles.  
-- **Hachage des mots de passe** avec hacher.  
-- **Filtrage des accès aux routes** selon le rôle utilisateur. ``isGranted``
+### Gestion des rôles et autorisations
 
-Ces mesures garantissent la confidentialité des données et un contrôle précis des accès.
+Les accès sont gérés à travers des rôles utilisateurs définis dans le fichier ``security.yaml``.
+L’application distingue notamment :
+
+- ``ROLE_ADMIN`` : accès complet à l’ensemble des fonctionnalités (gestion des bibliothécaires, inventaires, et livres etc.)
+
+- ``ROLE_LIBRARIAN`` : accès restreint à la gestion des prêts et à la consultation du catalogue.
+
+Ces rôles permettent d’adapter les permissions selon le profil et les responsabilités de chaque utilisateur.
+
+En complément, un fichier ``UserChecker.php`` vérifie, avant la connexion, si le compte utilisateur est toujours actif.
+Si le compte d’un bibliothécaire a été désactivé par un administrateur, le ``UserChecker`` empêche la connexion et bloque l’accès à l’application.
+Cela permet d’éviter qu’un ancien bénévol puisse encore se connecter et renforce ainsi la sécurité du système.
+
+### Authentification et sessions sécurisées
+
+L’authentification est gérée automatiquement par Symfony à l’aide de son composant Security.
+Une fois connecté, l’utilisateur est identifié par une session sécurisée stockée côté serveur.
+Cela évite d’avoir à se reconnecter à chaque requête, tout en garantissant que les informations d’accès restent protégées.
+
+<img src="/img/code/framework.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+*framework.yaml*
+
+### Protection CSRF et sécurité des requêtes
+
+Symfony protège automatiquement les formulaires grâce à un **token CSRF (Cross-Site Request Forgery)**.
+Ce jeton est généré et vérifié à chaque soumission de formulaire pour s’assurer que la requête vient bien d’un utilisateur authentifié du site, et non d’une attaque externe.
+
+Dans mon projet, j’ai créé les formulaires en utilisant ``AbstractType`` et en définissant des ``FormType``. Symfony ajoute automatiquement un ``token CSRF`` à chaque formulaire, ce qui empêche qu’une action soit effectuée par un utilisateur non autorisé. Cela garantit la sécurité des formulaires sans effort supplémentaire.
+
+<img src="/img/code/familyform.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+En complément, Symfony et Doctrine utilisent des **requêtes préparées** pour communiquer avec la base de données.
+Cela signifie que les données saisies par les utilisateurs ne sont jamais injectées directement dans les requêtes SQL, ce qui protège efficacement contre les injections SQL malveillantes.
+
+Par exemple, dans le FamilyRepository :
+<img src="/img/code/familyrepo.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+Ici, l’utilisation de ``createQueryBuilder`` avec ``setParameter`` garantit que les données saisies par l’utilisateur sont sécurisées. Les valeurs ne sont pas injectées directement dans la requête SQL : **la requête est préparée séparément** et ``setParameter`` permet d’y lier les valeurs de manière sécurisée. Cela protège efficacement **contre les injections SQL**.
+
+### Sécurisation des mots de passe
+
+Les mots de passe ne sont jamais stockés en clair dans la base de données.
+Symfony utilise un algorithme de hachage robuste afin de rendre les mots de passe illisibles.
+Lorsqu’un utilisateur se connecte, le mot de passe saisi est haché et comparé à celui enregistré, sans jamais révéler sa valeur réelle.
+
+### Filtrage des accès
+
+L’accès à certaines pages ou fonctionnalités est restreint selon le rôle de l’utilisateur :
+
+Dans le code, la méthode isGranted() est utilisée pour limiter les actions selon le rôle.
+
+Dans les vues Twig, la directive {% if is_granted('ROLE_ADMIN') %} permet d’afficher certains éléments uniquement aux administrateurs.
+
+Ce contrôle fin garantit que chaque utilisateur n’a accès qu’aux informations et fonctionnalités qui le concernent.Grâce à cette combinaison de mécanismes, l’application Tosho offre une sécurité robuste, une gestion claire des permissions, et une protection fiable des données personnelles.
+Cela garantit un environnement de travail sûr pour les bibliothécaires et les administrateurs.
 
 ---
+
 
 
 
@@ -564,3 +614,86 @@ J’ai également regardé de nombreuses vidéos sur YouTube pour approfondir ce
 
 Ces ressources m’ont également permis de m’habituer à lire et comprendre **la documentation en anglais**, qui est souvent plus complète et mise à jour.
 
+---
+
+# 10. Documentation en anglais
+## 10.1 Contexte
+
+Lors de ma période de stage, j'ai eu l'occasion de observer des **revues de code via GitLab**. Cela m'a permis de comprendre l'importance d'écrire un **code propre et lisible** (clean code).  
+
+J'ai reçu des retours sur mon projet Tosho, et mon tuteur m'a parlé de la pratique de **“Early Return”**. Dans mon code initial, j'avais imbriqué plusieurs conditions `if` et `else`, ce qui rendait le code difficile à lire.  
+
+La pratique de **“Early Return”** consiste à **quitter une fonction dès qu'une condition est remplie**, afin de réduire l'imbrication. Après cette explication, je me suis documenté sur ce sujet pour mieux l'appliquer dans mon projet.
+
+## 10.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code
+
+Writing conditional logic is something every developer does—no matter the language. But how you structure those conditions affects how readable, testable, and maintainable your code becomes.
+
+### What Is Early Return or Guard Clause?
+
+Early return means exiting a function as soon as a certain condition is met—usually to handle an edge case or invalid input.
+
+A guard clause is a specific use of early return at the top of the function, to prevent deeper logic from running if key conditions aren’t met.
+
+This avoids unnecessary nesting and keeps your core logic flat and easy to follow.
+
+#### Example 1: Classic if...else (Nested Logic)
+```javascript
+function sendWelcomeEmail(user) {
+    if (user) {
+        console.log(`Sending welcome email to ${user.email}`);
+    } else {
+        return;
+    }
+}
+```
+The real logic is wrapped inside an if block, which can become messy as the function grows.
+#### Example 2: Early Return / Guard Clause
+```javascript
+function sendWelcomeEmail(user) {
+    if (!user) {
+        return;
+    }
+
+    console.log(`Sending welcome email to ${user.email}`);
+}
+```
+This structure handles the invalid case immediately, then continues with the main logic. It’s easier to read and requires less indentation.
+### Benefits of Using Guard Clauses : 
+- Reduces code nesting and cognitive load
+- Keeps the core logic visually prioritized
+- Handles edge cases early and clearly
+- Makes the function easier to modify and extend
+
+This approach works well in any language, because it's a logic structuring choice — not a language feature.
+
+*source : Eddie Goldman / Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code* https://dev.to/eddiegoldman/early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code-1083
+
+## 10.3 'Early Return' contre le 'If-Else' classique : Un modèle universel pour écrire du code propre
+
+Ecrire logique conditionnelle est quelquechose que tous les développeurs font dans n'importe quelle language. Cependant, comment structurer ces conditions impacte comment votre code devient lisible, testable, et maintenable.
+
+### Qu'est ce que l'Early Return (Retour anticipé) ou la Guard Clause (Clause de garde) ?
+
+L'Early return consiste à sortir d'une fonction dès que certain condition est remplie pour traiter un cas particulier ou une entrée invalide.
+
+Une Guard Clause est une utilisation spécifique de l'Early return au début d'une fonction, pour empêcher une logique plus profonde si une condition clé n'est pas remplie.
+
+Cela évite les imbrications non nécessaires et garder votre logique principale simple et facile à suivre.
+
+#### Example 1 : if...else classique (logique imbriquée)
+> idem à la version originale
+
+La logique réele est enveloppé à l'intérieur d'un bloc de ``if``, ce qui peut rapidement alourdir le code quand la fonction devient plus complexe.
+#### Example 2 : Retour anticipé / Clause de garde
+> idem à la version originale
+
+Cette structure gère les cas invalides immediatement, en suite continue avec la logique principale. C'est plus facile à lire et demande moins d'indentation.
+
+### Avantage d'utiliser la Clause de garde :
+- Réduire les code imbriqués et la charge mentale
+- Garder la logique principale priorisé visuellement
+- Gère les cas particuliers plus tôt et plus claire
+- Rendre les fonctions plus facile à modifier et à faire évoluer
+
+Cet approche marche bien dans n'importe quelle language, car c'est une choix de structure logique, et non d'une fonctionnaliré propre à un langage.
