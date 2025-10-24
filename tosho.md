@@ -53,9 +53,10 @@
 
 9. [Veille technologique](#8-veille-technologique)
 
-10. [Recherche anglophone](#9-recherche-anglophone)
-      - [9.1 Contexte de la recherche](#91-contexte-de-la-recherche)
-      - [9.2 Extrait anglophone et traduction](#92-extrait-anglophone-et-traduction)
+10. [Documentation en anglais](#10-documentation-en-anglais)
+      - [10.1 Contexte](#101-contexte)
+      - [10.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code](#102-early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code)
+      - [10.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code propre](#103-retour-anticipé-contre-lif-else-classique--un-modèle-universel-pour-écrire-du-code-propre)
 
 11. [Conclusion](#10-conclusion)
     - [10.1 Bilan global du projet](#101-bilan-global-du-projet)
@@ -669,7 +670,7 @@ This approach works well in any language, because it's a logic structuring choic
 
 *source : Eddie Goldman / Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code* https://dev.to/eddiegoldman/early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code-1083
 
-## 10.3 'Early Return' contre le 'If-Else' classique : Un modèle universel pour écrire du code propre
+## 10.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code propre
 
 Ecrire logique conditionnelle est quelquechose que tous les développeurs font dans n'importe quelle language. Cependant, comment structurer ces conditions impacte comment votre code devient lisible, testable, et maintenable.
 
