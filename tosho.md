@@ -44,7 +44,6 @@
 6. [Développement](#5-déveleppement)
    - [5.1 Front-end](#51-front-end)
    - [5.2 Back-end](#52-back-end)
-   - [5.3 API](#53-api)
 
 7. [Jeu d’essai](#6-jeu-dessai)
    - [6.1 *(à compléter)*](#61-à-compléter)
@@ -283,7 +282,7 @@ Ainsi, Tosho se positionne comme une solution moderne et complète, permettant a
 
 - L’interface doit être **simple** et **intuitive**, adaptée à des utilisateurs non techniques. Les bibliothécaires et **les administrateurs sont des bénévoles**.
 - L’accès aux fonctionnalités doit être restreint selon le rôle de l’utilisateur :
-  - **Admin (parent bénévole)** : gère les familles, les livres, les bibliothécaires et l’inventaire.
+  - **Admin (parent élus)** : gère les familles, les livres, les bibliothécaires et l’inventaire.
   - **Bibliothécaire (parent bénévole)** : enregistre les prêts et retours, et participe aux sessions d’inventaire.
 - Les données doivent être fiables et mises à jour en temps réel afin d’éviter les erreurs de double prêt ou de livres manquants.
 
@@ -389,14 +388,14 @@ Symfony facilite la **gestion du back-end** grâce à ses nombreux outils intég
 
 - Gestion de la base de données et des entités avec **Doctrine ORM (Object Relational Mapping)**
 
-- création et validation des formulaires,
+- Création et validation des formulaires
 
-- gestion de la sécurité et des rôles utilisateurs.
+- Gestion de la sécurité et des rôles utilisateurs
 ### Bundles et composants Symfony
 
 Symfony repose sur des **composants** et des **bundles**, qui permettent de structurer et de réutiliser facilement le code dans l’application.
 
-- Les **composants Symfony** sont des **bibliothèques PHP indépendantes** — c'est à dire qu'ils ne dépendent pas de Symfony. Chaque composant remplit une tâche technique précise.
+- Les **composants Symfony** sont des **bibliothèques PHP indépendantes**. Chaque composant remplit une tâche technique précise.
 Exemples :
 
    - **HttpFoundation** : gère les requêtes et réponses HTTP
@@ -587,12 +586,11 @@ Lorsqu’un utilisateur se connecte, le mot de passe saisi est haché et compar�
 
 L’accès à certaines pages ou fonctionnalités est restreint selon le rôle de l’utilisateur :
 
-Dans le code, la méthode isGranted() est utilisée pour limiter les actions selon le rôle.
+Dans le code, la méthode `isGranted()` est utilisée pour limiter les actions selon le rôle.
 
-Dans les vues Twig, la directive {% if is_granted('ROLE_ADMIN') %} permet d’afficher certains éléments uniquement aux administrateurs.
+Dans les vues Twig, `{% if is_granted('ROLE_ADMIN') %}` permet d’afficher certains éléments uniquement aux administrateurs.
 
-Ce contrôle fin garantit que chaque utilisateur n’a accès qu’aux informations et fonctionnalités qui le concernent.Grâce à cette combinaison de mécanismes, l’application Tosho offre une sécurité robuste, une gestion claire des permissions, et une protection fiable des données personnelles.
-Cela garantit un environnement de travail sûr pour les bibliothécaires et les administrateurs.
+Ce contrôle garantit que chaque utilisateur n’a accès qu’aux informations et fonctionnalités qui le concernent, ainsi l’application Tosho offre une sécurité robuste, une gestion claire des permissions, et une protection fiable des données personnelles.
 
 ---
 
