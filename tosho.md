@@ -41,25 +41,25 @@
    - [5.4 Base de données](#54-base-de-données)
    - [5.5 Sécurité](#55-sécurité)
 
-6. [Développement](#5-déveleppement)
-   - [5.1 Front-end](#51-front-end)
-   - [5.2 Back-end](#52-back-end)
+6. [Développement](#6-déveleppement)
+   - [6.1 Front-end](#61-front-end)
+   - [6.2 Back-end](#62-back-end)
 
-7. [Jeu d’essai](#6-jeu-dessai)
-   - [6.1 *(à compléter)*](#61-à-compléter)
+7. [Jeu d’essai](#7-jeu-dessai)
+   - [7.1 *(à compléter)*](#71-à-compléter)
 
-8. [Déploiement](#7-déploiement)
+8. [Déploiement](#8-déploiement)
 
-9. [Veille technologique](#8-veille-technologique)
+9. [Veille technologique](#9-veille-technologique)
 
 10. [Documentation en anglais](#10-documentation-en-anglais)
       - [10.1 Contexte](#101-contexte)
       - [10.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code](#102-early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code)
       - [10.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code propre](#103-retour-anticipé-contre-lif-else-classique--un-modèle-universel-pour-écrire-du-code-propre)
 
-11. [Conclusion](#10-conclusion)
-    - [10.1 Bilan global du projet](#101-bilan-global-du-projet)
-    - [10.2 Roadmap](#102-roadmap)
+11. [Conclusion](#11-conclusion)
+    - [11.1 Bilan global du projet](#111-bilan-global-du-projet)
+    - [11.2 Roadmap](#112-roadmap)
 
 
 <div style="page-break-after: always;"></div>
@@ -282,7 +282,7 @@ Ainsi, Tosho se positionne comme une solution moderne et complète, permettant a
 
 - L’interface doit être **simple** et **intuitive**, adaptée à des utilisateurs non techniques. Les bibliothécaires et **les administrateurs sont des bénévoles**.
 - L’accès aux fonctionnalités doit être restreint selon le rôle de l’utilisateur :
-  - **Admin (parent élus)** : gère les familles, les livres, les bibliothécaires et l’inventaire.
+  - **Admin (parent bénévole)** : gère les familles, les livres, les bibliothécaires et l’inventaire.
   - **Bibliothécaire (parent bénévole)** : enregistre les prêts et retours, et participe aux sessions d’inventaire.
 - Les données doivent être fiables et mises à jour en temps réel afin d’éviter les erreurs de double prêt ou de livres manquants.
 
@@ -388,14 +388,14 @@ Symfony facilite la **gestion du back-end** grâce à ses nombreux outils intég
 
 - Gestion de la base de données et des entités avec **Doctrine ORM (Object Relational Mapping)**
 
-- Création et validation des formulaires
+- création et validation des formulaires,
 
-- Gestion de la sécurité et des rôles utilisateurs
+- gestion de la sécurité et des rôles utilisateurs.
 ### Bundles et composants Symfony
 
 Symfony repose sur des **composants** et des **bundles**, qui permettent de structurer et de réutiliser facilement le code dans l’application.
 
-- Les **composants Symfony** sont des **bibliothèques PHP indépendantes**. Chaque composant remplit une tâche technique précise.
+- Les **composants Symfony** sont des **bibliothèques PHP indépendantes** — c'est à dire qu'ils ne dépendent pas de Symfony. Chaque composant remplit une tâche technique précise.
 Exemples :
 
    - **HttpFoundation** : gère les requêtes et réponses HTTP
@@ -574,7 +574,7 @@ Cela signifie que les données saisies par les utilisateurs ne sont jamais injec
 
 Par exemple, dans le FamilyRepository :
 <img src="/img/code/familyrepo.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
-Ici, l’utilisation de ``createQueryBuilder`` avec ``setParameter`` garantit que les données saisies par l’utilisateur sont sécurisées. Les valeurs ne sont pas injectées directement dans la requête SQL : **la requête est préparée séparément** et ``setParameter`` permet d’y lier les valeurs de manière sécurisée. Cela protège efficacement **contre les injections SQL**.
+Ici, l’utilisation de `createQueryBuilder` avec ``setParameter`` garantit que les données saisies par l’utilisateur sont sécurisées. Les valeurs ne sont pas injectées directement dans la requête SQL : **la requête est préparée séparément** et ``setParameter`` permet d’y lier les valeurs de manière sécurisée. Cela protège efficacement **contre les injections SQL**.
 
 ### Sécurisation des mots de passe
 
@@ -588,11 +588,44 @@ L’accès à certaines pages ou fonctionnalités est restreint selon le rôle d
 
 Dans le code, la méthode `isGranted()` est utilisée pour limiter les actions selon le rôle.
 
-Dans les vues Twig, `{% if is_granted('ROLE_ADMIN') %}` permet d’afficher certains éléments uniquement aux administrateurs.
+Dans les vues Twig, `{% if is_granted('ROLE_ADMIN') %}` permet d’afficher certains éléments uniquement aux administrateucd cs.
 
-Ce contrôle garantit que chaque utilisateur n’a accès qu’aux informations et fonctionnalités qui le concernent, ainsi l’application Tosho offre une sécurité robuste, une gestion claire des permissions, et une protection fiable des données personnelles.
+Ce contrôle garantit que chaque utilisateur n’a accès qu’aux informations et fonctionnalités qui le concernent.
 
 ---
+
+# 6. Développement
+
+## 6.1 Front-end
+Pour faciliter la saisie d'info sur les livre, j'ai mise en place d'un autocomlession sur la formulaire d'ajout d'un nouveau livre. 
+Lors d'ajout d'un nouveau livre sur le catalogue de bibliothéque, l'utilisatur peut saisir le code ISBN (International Standard Book Number) et cela permet de préremplir les champs de formulaire, cela facilite l'ajout de livre. Comme tous les livres de notre bibliothéque sont des livres en japonais, j'ai besoin que certains informations sur les livres (comme les titres et les autheurs) soit afficher en japonais et en romaji. 
+
+### Utilisation de Stimulus
+Stimulus est un framework JavaScript léger qui permet d'ajouter des comportements interactifs sans transformer tout mon appli Tosho en une “SPA” (Single Page Application).
+
+### API 
+Pour récupérer les informations en japonais, j'ai utilisé un API japonaise gratuite *OpenBD*, et pour les informations en romaji, j'ai utilisé l'API OpenLibrary. j'ai utilisé **Postman** pour vérifier si je récupère bien les infos.
+
+### Difficultés rencontrés
+
+## 6.2 Back-end
+
+
+
+# 7. Jeu d'essai
+## 7.1 Présentation de fonctionnalité
+La fonctionnalité principale de Tosho est de pouvoir gerer les prêts de livre. Lorsque une membre de l'association apporte des livres, le bibliothécaire saisis des informations pour proceder à prêt ou retour de livre.
+
+## 7.2 Sénario 1 : Rendre un livre
+### 7.2.1 Chercher le prêt par livre
+### 7.2.2 Chercher le prêt par nom de famille
+
+## 7.3 Sénario 2 : Prêter un livre
+### 7.3.1 
+### 7.3.2 
+
+# 8. Déploiment
+
 
 
 
