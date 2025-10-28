@@ -598,15 +598,13 @@ Ce contrôle garantit que chaque utilisateur n’a accès qu’aux informations 
 
 ## 6.1 Front-end
 Pour faciliter la saisie d'info sur les livre, j'ai mise en place d'un autocomlession sur la formulaire d'ajout d'un nouveau livre. 
-Lors d'ajout d'un nouveau livre sur le catalogue de bibliothéque, l'utilisatur peut saisir le code ISBN (International Standard Book Number) et cela permet de préremplir les champs de formulaire, cela facilite l'ajout de livre. Comme tous les livres de notre bibliothéque sont des livres en japonais, j'ai besoin que certains informations sur les livres (comme les titres et les autheurs) soit afficher en japonais et en romaji. 
+Lors d'ajout d'un nouveau livre au catalogue de bibliothéque, l'utilisatur peut saisir le code ISBN (International Standard Book Number) et cela permet de préremplir les champs de formulaire, cela facilite l'ajout de livre. Comme tous les livres de notre bibliothéque sont des livres en japonais, j'ai besoin que certains informations sur les livres (comme les titres et les autheurs) soit afficher en japonais et en romaji pour faciliter le travail de bénévols. 
 
 ### Utilisation de Stimulus
-Stimulus est un framework JavaScript léger qui permet d'ajouter des comportements interactifs sans transformer tout mon appli Tosho en une “SPA” (Single Page Application).
+Stimulus est un framework JavaScript léger qui permet d'ajouter des comportements interactifs sans transformer tout mon appli en une “SPA” (Single Page Application).
 
 ### API 
 Pour récupérer les informations en japonais, j'ai utilisé un API japonaise gratuite *OpenBD*, et pour les informations en romaji, j'ai utilisé l'API OpenLibrary. j'ai utilisé **Postman** pour vérifier si je récupère bien les infos.
-
-### Difficultés rencontrés
 
 ## 6.2 Back-end
 
