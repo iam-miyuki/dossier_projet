@@ -49,6 +49,10 @@
    - [7.1 *(à compléter)*](#71-à-compléter)
 
 8. [Déploiement](#8-déploiement)
+   - [8.1 Choix de l’environnement et mise en place de Docker](#81-choix-de-lenvironnement-et-mise-en-place-de-docker)
+   - [8.2 Configuration de Dockerfile et docker-compose](#82-configuration-de-dockerfile-et-docker-compose)
+   - [8.3 Mise en production](#83-mise-en-production)
+   - [8.4 Rédaction de README](#84-rédaction-dun-readmemd)
 
 9. [Veille technologique](#9-veille-technologique)
 
@@ -68,7 +72,7 @@
 
 # 1. Introduction
 
-Tosho est une application web conçue pour faciliter la gestion des prêts de livres au sein d’une école japonaise. En japonais, *Tosho* signifie *« bibliothèque »* ou *« livre »*.
+**Tosho** est une application web conçue pour faciliter la gestion des prêts de livres au sein d’une école japonaise. En japonais, **Tosho** signifie *« bibliothèque »* ou *« livre »*.
 
 L'origine de ce projet remonte directement à mon expérience personnelle. Ma fille, née en France, apprend le japonais dans une école destinée aux enfants d’origine japonaise. Cette école est gérée entièrement par des parents bénévoles, dont je fais partie. Nous y disposons d’une petite bibliothèque et nous prêtons régulièrement les livres aux familles afin que les enfants se familiarisent avec la lecture en japonais.
 
@@ -597,36 +601,67 @@ Ce contrôle garantit que chaque utilisateur n’a accès qu’aux informations 
 # 6. Développement
 
 ## 6.1 Front-end
-Pour faciliter la saisie d'info sur les livre, j'ai mise en place d'un autocomlession sur la formulaire d'ajout d'un nouveau livre. 
-Lors d'ajout d'un nouveau livre au catalogue de bibliothéque, l'utilisatur peut saisir le code ISBN (International Standard Book Number) et cela permet de préremplir les champs de formulaire, cela facilite l'ajout de livre. Comme tous les livres de notre bibliothéque sont des livres en japonais, j'ai besoin que certains informations sur les livres (comme les titres et les autheurs) soit afficher en japonais et en romaji pour faciliter le travail de bénévols. 
+Pour simplifier la saisie des informations sur les livres, j’ai mis en place une fonctionnalité d’autocomplétion dans le formulaire d’ajout d’un nouveau livre.
 
-### Utilisation de Stimulus
-Stimulus est un framework JavaScript léger qui permet d'ajouter des comportements interactifs sans transformer tout mon appli en une “SPA” (Single Page Application).
+Lorsqu’un utilisateur ajoute un livre au catalogue de la bibliothèque, il peut saisir le code ISBN (International Standard Book Number). Le formulaire se préremplit alors automatiquement avec les informations correspondantes, ce qui facilite l’ajout d’un nouveau livre.
 
-### API 
-Pour récupérer les informations en japonais, j'ai utilisé un API japonaise gratuite *OpenBD*, et pour les informations en romaji, j'ai utilisé l'API OpenLibrary. j'ai utilisé **Postman** pour vérifier si je récupère bien les infos.
+Étant donné que tous les livres de notre bibliothèque sont en japonais, certaines informations (comme le titre et les auteurs) doivent être affichées en japonais ainsi qu’en romaji (transcription en alphabet latin pour faciliter la lecture).
+
+#### Stimulus
+Stimulus est un framework JavaScript léger qui permet d'ajouter des comportements interactifs sans transformer tout mon appli en une SPA (Single Page Application). 
+
+#### API 
+Pour récupérer les informations en japonais, j’ai utilisé l’API japonaise gratuite ***OpenBD***. Pour obtenir les informations en romaji, j’ai utilisé l’API ***OpenLibrary***. J’ai également utilisé **Postman** pour tester les requêtes et m’assurer que les données étaient correctement récupérées.
+
 
 ## 6.2 Back-end
-
+Quand un bibliothécaire saisit un code de livre (différent de code d'ISBN), j'affiche les infos sur ce livre et la disponibilité de ce livre. Pour ce la j'ai défini un status pour chaque livre. Quand un livre a un statut 'disponible', le bibliothécaire peut passer en pret de ce livre, lorsque le livre a un status 'emprunté', le bibliothécaire peut rendre ce livre. J'ai mise en place des Enums pour gérer les status de livre et le status de pret.
 
 
 # 7. Jeu d'essai
-## 7.1 Présentation de fonctionnalité
+## 7.1 Scénario 1 : Rendre et prêter un livre
 La fonctionnalité principale de Tosho est de pouvoir gerer les prêts de livre. Lorsque une membre de l'association apporte des livres, le bibliothécaire saisis des informations pour proceder à prêt ou retour de livre.
 
-## 7.2 Sénario 1 : Rendre un livre
-### 7.2.1 Chercher le prêt par livre
-### 7.2.2 Chercher le prêt par nom de famille
-
-## 7.3 Sénario 2 : Prêter un livre
-### 7.3.1 
-### 7.3.2 
-
-# 8. Déploiment
+## 7.2 Scénario 2 : Ajout d'un livre au calalogue par autocomlétion
 
 
+# 8. Déploiement
+## 8.1 Choix de l’environnement et mise en place de Docker
+
+La majeure partie du développement de mon projet s’est déroulée dans un environnement **Windows** avec **XAMPP** comme serveur local. Cependant, au fur et à mesure de l’avancement, j’ai constaté que cette configuration manquait de performance : le chargement des pages était particulièrement lent, ce qui ralentissait considérablement le développement.
+
+Durant ma période de stage, j’ai eu l’occasion d’assister à la mise en production d’un projet au sein d’une entreprise. Cette expérience m’a motivé à faire évoluer mon propre projet vers un environnement **Ubuntu** et à utiliser **Docker** pour exécuter mon application dans des conteneurs. Cette nouvelle configuration s’est révélée beaucoup plus rapide, stable et proche d’un environnement de production réel.
+
+L’utilisation de Docker présente plusieurs avantages :
+
+- Isoler l’application dans un environnement reproductible et indépendant du système d’exploitation.
+
+- Faciliter le déploiement et la maintenance du projet.
+
+- Reproduire plus facilement l'environnement de production sur n'importe quelle machine.
+
+Le passage de **Windows + XAMPP** à **Ubuntu + Docker** a permis d’obtenir un environnement de développement plus rapide, plus fiable et plus proche d’une configuration de production.
+
+## 8.2 Configuration de Dockerfile et docker-compose
 
 
+## 8.3 Mise en production
+Une fois l’environnement conteneurisé et testé localement, la mise en production consiste à déployer les mêmes conteneurs sur un serveur distant.
+Pour cela, j’ai loué un serveur VPS chez RackNerd et acheté un nom de domaine afin de rendre mon application accessible en ligne.
+
+J’ai également configuré les variables d’environnement (fichiers .env) pour gérer les paramètres sensibles sans les inclure dans le code source.
+
+## 8.4 Rédaction d'un README
+Pour faciliter la prise en main de mon projet, j’ai rédigé un fichier `README.md` pour documenter le projet.
+Ce fichier contient :
+
+- Une présentation générale du projet
+
+- Les prérequis nécessaires à l’installation
+
+- Les étapes pour exécuter le projet avec Docker
+
+Pour faciliter les commandes, j'ai également mise en place d'un fichier `Makefile` qui facilite des lignes de commande à executer.
 
 # 9. Veille technologique
 Tout au long de ma formation, je me suis documenté et informé pour progresser, résoudre des problèmes techniques et me tenir à jour sur les évolutions dans le domaine du développement web.
@@ -727,3 +762,35 @@ Cette structure gère les cas invalides immediatement, en suite continue avec la
 - Rendre les fonctions plus facile à modifier et à faire évoluer
 
 Cet approche marche bien dans n'importe quelle language, car c'est une choix de structure logique, et non d'une fonctionnaliré propre à un langage.
+
+---
+# 11. Conclusion
+
+## 11.1 Bilan global
+
+Ce projet m’a permis de mettre en pratique mes compétences en développement web et d’apprendre à résoudre les problèmes rencontrés au cours du déveleppement.
+Dans ce domaine, il est essentiel de continuer à apprendre, de se tenir à jour et de s’adapter en permanence aux nouvelles technologies.
+
+La période de stage en entreprise m’a également beaucoup apporté : elle m’a permis de découvrir la gestion de projets réels et d’adopter de bonnes pratiques professionnelles, notamment en matière d’utilisation de Git et de respect des principes de clean code. 
+
+Enfin, ce projet m’a donné une vision complète du cycle de développement — de la conception à la mise en ligne — et m’a permis de renforcer à la fois mes compétences techniques et mon autonomie.
+
+## 11.2 Roadmap
+
+### Projet professionnel
+
+La responsable actuelle du service IT de l’association quittera son poste l’an prochain, et je me suis engagé à reprendre cette fonction.
+Je prévois donc de proposer officiellement cette application à l’association afin qu’elle soit utilisée pour la gestion réelle de la bibliothèque.
+
+Un autre projet est également prévu : la refonte du site vitrine de l’association, actuellement développé avec Vue.js. 
+
+### Évolutions futures de projet Tosho 
+
+Plusieurs pistes d’évolution sont envisagées pour faire progresser l’application :
+- Interface multilingue (français / japonais)
+- Mise en place d’un planning pour les parents bibliothécaires
+- Envoi d’e-mails automatiques de rappel pour les retours en retard 
+- Système de réservation de livres en ligne
+
+
+
