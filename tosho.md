@@ -305,11 +305,18 @@ L’objectif est de proposer une interface simple à comprendre, agréable à ut
 
 <img src="/img/ui/chart.svg" alt="logo" style="display:block; margin:auto; width:60%; margin-bottom:30px; margin-top:30px;">
 
-- ``#1c2176`` : pour le texte, les bordures et les icônes
-- ``#debaff`` : couleur principale de l'interface **bibliothécaire**
-- ``#9bafff`` : couleur principale de l'interface **admin**
+- ``#1C2176`` : pour le texte, les bordures et les icônes
+- ``#A9B9FA`` : couleur principale de l'interface **bibliothécaire**
+- ``#9BAFFF`` : couleur principale de l'interface **admin**
 
-### Couleurs des composants
+Une bonne visibilité des choix de couleurs est vérifiée à l’aide du site https://coolors.co/contrast-checker/
+
+<img src="/img/ui/contrast.PNG" alt="logo" style="display:block; margin:auto; width:60%; margin-bottom:30px; margin-top:30px;">
+
+<img src="/img/ui/contrast1.PNG" alt="logo" style="display:block; margin:auto; width:60%; margin-bottom:30px; margin-top:30px;">
+
+
+### Composants
 TODO
 
 
@@ -369,7 +376,7 @@ Pour assurer la meilleure expérience utilisateur (**UX**) sur mobile comme sur 
 - Les cartes de livres ou d’emprunts sont affichées les unes au-dessus des autres pour faciliter la lecture et rendre la navigation plus fluide.  
 - Un **fond de couleur différent** est utilisé pour distinguer facilement les interfaces selon le rôle de l’utilisateur.
 
-<img src="/img/ui/maquette-mb.PNG" style="width:60%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+<img src="/img/ui/maquette-mb2.PNG" style="width:60%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 ### Version desktop
 - Des **effets hover** sont ajoutés sur le menu et les cartes pour améliorer l’interactivité et guider l’utilisateur.    
