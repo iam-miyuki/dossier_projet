@@ -54,16 +54,18 @@
    - [8.3 Mise en production](#83-mise-en-production)
    - [8.4 Rédaction de README](#84-rédaction-dun-readmemd)
 
-9. [Veille technologique](#9-veille-technologique)
+9. [Difficultés rencontrées]
 
-10. [Documentation en anglais](#10-documentation-en-anglais)
-      - [10.1 Contexte](#101-contexte)
-      - [10.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code](#102-early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code)
-      - [10.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code propre](#103-retour-anticipé-contre-lif-else-classique--un-modèle-universel-pour-écrire-du-code-propre)
+10. [Veille technologique](#10-veille-technologique)
 
-11. [Conclusion](#11-conclusion)
-    - [11.1 Bilan global du projet](#111-bilan-global-du-projet)
-    - [11.2 Roadmap](#112-roadmap)
+11. [Documentation en anglais](#11-documentation-en-anglais)
+      - [10.1 Contexte](#111-contexte)
+      - [10.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code](#112-early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code)
+      - [10.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code propre](#113-retour-anticipé-contre-lif-else-classique--un-modèle-universel-pour-écrire-du-code-propre)
+
+12. [Conclusion](#12-conclusion)
+    - [12.1 Bilan global du projet](#121-bilan-global-du-projet)
+    - [12.2 Roadmap](#122-roadmap)
 
 
 <div style="page-break-after: always;"></div>
@@ -670,7 +672,9 @@ Ce fichier contient :
 
 Pour faciliter les commandes, j'ai également mise en place d'un fichier `Makefile` qui facilite des lignes de commande à executer.
 
-# 9. Veille technologique
+# 11. Difficultés rencontrées
+
+# 10. Veille technologique
 Tout au long de ma formation, je me suis documenté et informé pour progresser, résoudre des problèmes techniques et me tenir à jour sur les évolutions dans le domaine du développement web.
 
 **La documentation officielle de PHP** a été une ressource que j’ai beaucoup consultée. Celle de **Symfony**, très bien structurée et accompagnée d’exemples concrets, m’a également été d’une grande aide, notamment pour la mise en place des formulaires et la configuration des routes.
@@ -688,8 +692,8 @@ Ces ressources m’ont également permis de m’habituer à lire et comprendre *
 
 ---
 
-# 10. Documentation en anglais
-## 10.1 Contexte
+# 11. Documentation en anglais
+## 11.1 Contexte
 
 Lors de ma période de stage, j'ai eu l'occasion de observer des **revues de code via GitLab**. Cela m'a permis de comprendre l'importance d'écrire un **code propre et lisible** (clean code).  
 
@@ -697,7 +701,7 @@ J'ai reçu des retours sur mon projet Tosho, et mon tuteur m'a parlé de la prat
 
 La pratique de **“Early Return”** consiste à **quitter une fonction dès qu'une condition est remplie**, afin de réduire l'imbrication. Après cette explication, je me suis documenté sur ce sujet pour mieux l'appliquer dans mon projet.
 
-## 10.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code
+## 11.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code
 
 Writing conditional logic is something every developer does—no matter the language. But how you structure those conditions affects how readable, testable, and maintainable your code becomes.
 
@@ -741,7 +745,7 @@ This approach works well in any language, because it's a logic structuring choic
 
 *source : Eddie Goldman / Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code* https://dev.to/eddiegoldman/early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code-1083
 
-## 10.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code propre
+## 11.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code propre
 
 Ecrire logique conditionnelle est quelquechose que tous les développeurs font dans n'importe quelle language. Cependant, comment structurer ces conditions impacte comment votre code devient lisible, testable, et maintenable.
 
@@ -771,9 +775,9 @@ Cette structure gère les cas invalides immediatement, en suite continue avec la
 Cet approche marche bien dans n'importe quelle language, car c'est une choix de structure logique, et non d'une fonctionnaliré propre à un langage.
 
 ---
-# 11. Conclusion
+# 12. Conclusion
 
-## 11.1 Bilan global
+## 12.1 Bilan global
 
 Ce projet m’a permis de mettre en pratique mes compétences en développement web et d’apprendre à résoudre les problèmes rencontrés au cours du déveleppement.
 Dans ce domaine, il est essentiel de continuer à apprendre, de se tenir à jour et de s’adapter en permanence aux nouvelles technologies.
@@ -782,7 +786,7 @@ La période de stage en entreprise m’a également beaucoup apporté : elle m�
 
 Enfin, ce projet m’a donné une vision complète du cycle de développement — de la conception à la mise en ligne — et m’a permis de renforcer à la fois mes compétences techniques et mon autonomie.
 
-## 11.2 Roadmap
+## 12.2 Roadmap
 
 ### Projet professionnel
 
