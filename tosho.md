@@ -541,7 +541,7 @@ Pour créer ou mettre à jour les tables selon les entités :
 
 Ces commandes synchronisent la base de données avec le modèle défini dans le code.
 
-<img src="/img/schema-db.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+<img src="/img/tosho-db.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 ---
 
@@ -558,6 +558,8 @@ L’application distingue notamment :
 - ``ROLE_LIBRARIAN`` : accès restreint à la gestion des prêts et à la consultation du catalogue.
 
 Ces rôles permettent d’adapter les permissions selon le profil et les responsabilités de chaque utilisateur.
+
+Une fois que l'utilisateur s'est connecté, avec ``AuthenticationSuccessHandler``, dirige vers la page d'accueil selon le rôle.
 
 En complément, un fichier ``UserChecker.php`` vérifie, avant la connexion, si le compte utilisateur est toujours actif.
 Si le compte d’un bibliothécaire a été désactivé par un administrateur, le ``UserChecker`` empêche la connexion et bloque l’accès à l’application.
@@ -625,6 +627,12 @@ Pour récupérer les informations en japonais, j’ai utilisé l’API japonaise
 
 ## 6.2 Back-end
 Quand un bibliothécaire saisit un code de livre (différent de code d'ISBN), j'affiche les infos sur ce livre et la disponibilité de ce livre. Pour ce la j'ai défini un status pour chaque livre. Quand un livre a un statut 'disponible', le bibliothécaire peut passer en pret de ce livre, lorsque le livre a un status 'emprunté', le bibliothécaire peut rendre ce livre. J'ai mise en place des Enums pour gérer les status de livre et le status de pret.
+
+### ParamConverter
+
+Permet de récupérer directement $family au lieu de faire une requête comme 
+
+``$family = $familyRepository->find($familyId);`` 
 
 
 # 7. Jeu d'essai
