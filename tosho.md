@@ -45,23 +45,22 @@
    - [6.1 Front-end](#61-front-end)
    - [6.2 Back-end](#62-back-end)
 
-7. [Jeu d’essai](#7-jeu-dessai)
-   - [7.1 *(à compléter)*](#71-à-compléter)
+7. [Tests et Jeux d'essai](#7-tests--jeu-dessai)
 
 8. [Déploiement](#8-déploiement)
    - [8.1 Choix de l’environnement et mise en place de Docker](#81-choix-de-lenvironnement-et-mise-en-place-de-docker)
    - [8.2 Configuration de Dockerfile et docker-compose](#82-configuration-de-dockerfile-et-docker-compose)
    - [8.3 Mise en production](#83-mise-en-production)
-   - [8.4 Rédaction de README](#84-rédaction-dun-readmemd)
+   - [8.4 Rédaction de README](#84-rédaction-de-readme)
 
-9. [Difficultés rencontrées]
+9. [Difficultés rencontrées](#9-difficultés-rencontrées)
 
 10. [Veille technologique](#10-veille-technologique)
 
 11. [Documentation en anglais](#11-documentation-en-anglais)
-      - [10.1 Contexte](#111-contexte)
-      - [10.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code](#112-early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code)
-      - [10.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code propre](#113-retour-anticipé-contre-lif-else-classique--un-modèle-universel-pour-écrire-du-code-propre)
+      - [11.1 Contexte](#111-contexte)
+      - [11.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code](#112-early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code)
+      - [11.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code plus propre](#113-retour-anticipé-contre-lif-else-classique--un-modèle-universel-pour-écrire-du-code-plus-propre)
 
 12. [Conclusion](#12-conclusion)
     - [12.1 Bilan global du projet](#121-bilan-global-du-projet)
@@ -450,10 +449,10 @@ La sauvegarde et le suivi du code sont assurés par **Git**, avec un dépôt dis
 
 J’ai organisé le développement avec plusieurs branches :  
 - `dev` : utilisée pour le développement  
+- `cybercite` : utilisée pendant la période de stage depuis l'ordinateur fourni par l'entreprise
 - `docker-deploy` : dédiée au déploiement via **Docker**, contenant les fichiers et configurations de production.  
 
 Cette organisation permet de séparer clairement le travail de développement local des configurations et fichiers liés au déploiement.
-
 
 ## 5.3 Architecture MVC
 
@@ -561,6 +560,8 @@ Ces rôles permettent d’adapter les permissions selon le profil et les respons
 
 Une fois que l'utilisateur s'est connecté, avec ``AuthenticationSuccessHandler``, dirige vers la page d'accueil selon le rôle.
 
+<img src="/img/code/handler.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
 En complément, un fichier ``UserChecker.php`` vérifie, avant la connexion, si le compte utilisateur est toujours actif.
 Si le compte d’un bibliothécaire a été désactivé par un administrateur, le ``UserChecker`` empêche la connexion et bloque l’accès à l’application.
 Cela permet d’éviter qu’un ancien bénévol puisse encore se connecter et renforce ainsi la sécurité du système.
@@ -612,35 +613,127 @@ Ce contrôle garantit que chaque utilisateur n’a accès qu’aux informations 
 # 6. Développement
 
 ## 6.1 Front-end
-Pour simplifier la saisie des informations sur les livres, j’ai mis en place une fonctionnalité d’autocomplétion dans le formulaire d’ajout d’un nouveau livre.
 
-Lorsqu’un utilisateur ajoute un livre au catalogue de la bibliothèque, il peut saisir le code ISBN (International Standard Book Number). Le formulaire se préremplit alors automatiquement avec les informations correspondantes, ce qui facilite l’ajout d’un nouveau livre.
+### Interaction front-end : saisie automatique via ISBN
 
-Étant donné que tous les livres de notre bibliothèque sont en japonais, certaines informations (comme le titre et les auteurs) doivent être affichées en japonais ainsi qu’en romaji (transcription en alphabet latin pour faciliter la lecture).
+L’objectif de cette fonctionnalité est de simplifier l’ajout d’un nouveau livre dans le catalogue.
+Lorsqu’un utilisateur saisit le code ISBN (International Standard Book Number), le formulaire se préremplit automatiquement avec les informations correspondantes (titre, auteur, etc.). Cela permet de gagner du temps et d’éviter les erreurs de saisie.
 
-#### Stimulus
-Stimulus est un framework JavaScript léger qui permet d'ajouter des comportements interactifs sans transformer tout mon appli en une SPA (Single Page Application). 
 
-#### API 
-Pour récupérer les informations en japonais, j’ai utilisé l’API japonaise gratuite ***OpenBD***. Pour obtenir les informations en romaji, j’ai utilisé l’API ***OpenLibrary***. J’ai également utilisé **Postman** pour tester les requêtes et m’assurer que les données étaient correctement récupérées.
+#### Installation de ``StimulusBundle``
+**Stimulus** est un framework JavaScript léger qui permet d'ajouter des comportements interactifs sans transformer tout mon appli en **SPA** (Single Page Application).
+
+Sur les conseils de mon formateur, je me suis documenté sur le ``StimulusBundle`` de Symfony, qui facilite son intégration dans une application web Symfony.
+J’ai ensuite installé le bundle via ``Composer``, ce qui a généré un fichier ``hello_controller.js`` dans le dossier assets, que j’ai ensuite renommé en ``isbn_controller.js``.
+
+#### API : OpenBD et OpenLibrary
+Tous les livres de la bibliothèque sont en japonais. L’affichage de certaines informations, comme le titre et les auteurs, doit donc être disponible à la fois en japonais et en romaji (transcription en alphabet latin) afin de faciliter la lecture pour tous les utilisateurs.
+
+Pour récupérer les informations en japonais, j’ai utilisé l’API gratuite ***OpenBD***. Cette API japonaise permet d’obtenir les données des livres publiés au Japon via ISBN.
+
+Avant de l’intégrer, j’ai testé la réponse de l’API via **Postman** :
+
+<img src="/img/openbd.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Voici la partie du contrôleur Stimulus dédiée à la récupération des données en japonais :
+
+<img src="/img/code/stimulus2.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Pour obtenir les informations en romaji ainsi que l’URL de la couverture du livre, j’ai utilisé l’API **OpenLibrary**.
+J’ai également vérifié les données accessibles via **Postman** :
+
+<img src="/img/openlibrary.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Une fois les tests validés, j’ai implémenté la fonction correspondante dans le même contrôleur :
+
+<img src="/img/code/openlibraryjs.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Ce contrôleur est ensuite lié au formulaire d’ajout de livre à l’aide des attributs ``data-controller`` et ``data-action`` dans le fichier ``Twig``, ce qui permet de déclencher automatiquement la méthode JavaScript.
+
+<img src="/img/code/stimulus.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Ainsi, la méthode est déclenchée automatiquement lorsqu’un utilisateur saisit un ISBN et valide la recherche.
 
 
 ## 6.2 Back-end
-Quand un bibliothécaire saisit un code de livre (différent de code d'ISBN), j'affiche les infos sur ce livre et la disponibilité de ce livre. Pour ce la j'ai défini un status pour chaque livre. Quand un livre a un statut 'disponible', le bibliothécaire peut passer en pret de ce livre, lorsque le livre a un status 'emprunté', le bibliothécaire peut rendre ce livre. J'ai mise en place des Enums pour gérer les status de livre et le status de pret.
+
+### Logique métier de la fonctionnalité « prêt de livres »
+
+Pour la gestion du prêt de livres, les règles suivantes sont appliquées :
+
+- Un livre ne peut être prêté que s’il est disponible.
+
+- Lorsqu’un livre est prêté, son **statut** passe à « emprunté » ; lorsqu’il est retourné, il redevient « disponible ».
+
+- **Chaque prêt est lié au livre et à la famille** emprunteuse, et le statut du prêt est mis à jour en conséquence.
+
+Ces règles garantissent que les informations sur les livres et les prêts restent cohérentes dans l’application. 
+
+### Mettre en place des Enum
+
+Pour gérer les statuts des livres et des prêts, j’ai mis en place des **Enums**.
+
+``BookStatusEnum`` : ``available``, ``borrowed``
+
+``LoanStatusEnum`` : ``inProgress``, ``returned``,``overdue``
+
+L’utilisation des Enums permet de minimiser les fautes de frappe lors de l’implémentation et d’assurer la cohérence des statuts dans toute l’application.
+
+### LoanController
+
+Le ``LoanController`` gère la logique principale des prêts.
+
+Sur la route ``'loan'``, si la requête est de type **POST**, le contrôleur détermine l’action à effectuer selon les données envoyées par l’utilisateur :
+
+- Si ``family_name`` ou ``keyword`` est fourni, on utilise les méthodes personnalisées ``findAllByName()`` ou ``findAllWithFilterQuery()`` pour récupérer les résultats. 
+
+- Une fois qu’une famille ou un livre est sélectionné, l’utilisateur est redirigé vers la route ``'show-book'`` ou ``'loan-by-family'`` avec l’ID correspondant. (**Read**)
+
+- Si ``book_code`` est fourni, on cherche le livre correspondant avec la méthode personnalisée ``findOneByCode()``. Si le livre existe, l’utilisateur est redirigé vers la route ``'show-book'`` avec l’ID du livre.
+
+Cette organisation permet de gérer toutes les recherches et redirections depuis la même route, tout en gardant le code clair et maintenable.
+
+### Méthodes de recherche dans le Repository
+
+Dans l’exemple ci-dessous, la méthode ``findAllWithFilterQuery()`` effectue une recherche sur plusieurs champs (title, author, jpTitle, jpAuthor).
+L’opérateur ``LIKE`` permet de récupérer tous les livres dont le titre ou l’auteur contient le mot-clé saisi par l’utilisateur :
+
+<img src="img/code/repository.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Cette approche permet d’effectuer une recherche partielle et souple sur les titres et auteurs, aussi bien en français qu’en japonais.
 
 ### ParamConverter
 
-Permet de récupérer directement $family au lieu de faire une requête comme 
+Le ParamConverter de Symfony permet de récupérer directement une entité depuis l’URL.
 
-``$family = $familyRepository->find($familyId);`` 
+Par exemple, pour la route ``'/loan/book/{id}'``, Symfony injecte automatiquement l’objet Book correspondant, ce qui évite d’écrire :
+
+```php
+$book = $bookRepository->find($id);
+```
 
 
-# 7. Jeu d'essai
-## 7.1 Scénario 1 : Rendre et prêter un livre
-La fonctionnalité principale de Tosho est de pouvoir gerer les prêts de livre. Lorsque une membre de l'association apporte des livres, le bibliothécaire saisis des informations pour proceder à prêt ou retour de livre.
+### Prêter un livre à une famille 
 
-## 7.2 Scénario 2 : Ajout d'un livre au calalogue par autocomlétion
+Sur la route ``'loan-by-family'``, lorsque l’utilisateur saisit le code du livre à prêter, une vérification du statut est effectuée.
 
+Si le livre est disponible, son statut passe à « emprunté » (**Update**) et un nouveau prêt est enregistré en base de données (**Create**) grâce à l’``EntityManager``.
+
+<img src="img/code/loancontroller2.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Si le livre est déjà emprunté, un message d’erreur s’affiche.
+
+### Retour d'un livre
+
+La méthode ``returnBook`` gère le retour d'un livre : 
+
+<img src="img/code/loanreturn.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Lors du retour d'un livre, seuls les statuts du livre et du prêt sont mis à jour (**Update**) afin de conserver l’historique des emprunts. Aucune donnée n’est supprimée (pas de **Delete** ici).
+
+---
+
+# 7. Tests & Jeu d'essai
 
 # 8. Déploiement
 ## 8.1 Choix de l’environnement et mise en place de Docker
@@ -657,8 +750,8 @@ L’utilisation de Docker présente plusieurs avantages :
 
 - Reproduire plus facilement l'environnement de production sur n'importe quelle machine.
 
-Le passage de **Windows + XAMPP** à **Ubuntu + Docker** a permis d’obtenir un environnement de développement plus rapide, plus fiable et plus proche d’une configuration de production.
-
+Le passage de **Windows + XAMPP** à **Ubuntu + Docker** a permis d’obtenir un environnement de développement plus rapide, plus fiable et plus proche d’une configuration de prouction.
+ 
 ## 8.2 Configuration de Dockerfile et docker-compose
 
 
@@ -668,7 +761,7 @@ Pour cela, j’ai loué un serveur VPS chez RackNerd et acheté un nom de domain
 
 J’ai également configuré les variables d’environnement (fichiers .env) pour gérer les paramètres sensibles sans les inclure dans le code source.
 
-## 8.4 Rédaction d'un README
+## 8.4 Rédaction de README
 Pour faciliter la prise en main de mon projet, j’ai rédigé un fichier `README.md` pour documenter le projet.
 Ce fichier contient :
 
@@ -680,7 +773,45 @@ Ce fichier contient :
 
 Pour faciliter les commandes, j'ai également mise en place d'un fichier `Makefile` qui facilite des lignes de commande à executer.
 
-# 11. Difficultés rencontrées
+---
+
+# 9. Difficultés rencontrées
+
+### Utilisation de ``$this->getUser()``
+
+Lors du développement de la fonctionnalité de changement de mot de passe, j’ai rencontré une difficulté avec la méthode ``$this->getUser()``.
+Cette méthode permet normalement de récupérer l’utilisateur actuellement connecté dans un contrôleur Symfony.
+
+Cependant, lors de son utilisation, une erreur de typage est apparue : Symfony ne reconnaissait pas automatiquement que l’objet retourné était une instance de ma classe ``User``.
+
+Après quelques recherches sur Internet, j’ai trouvé la solution sur *Stack Overflow*.
+
+Il suffisait d’ajouter une annotation de typage explicite avant l’utilisation de la variable :
+
+<img src="img/code/getuser.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Lors de ma période de stage, la bonne pratique consistant à typer les variables et les retours de méthode m’a également été expliquée, ce qui m’a aidé à mieux comprendre la logique derrière cette correction.
+
+### Activation / Désactivation du compte bibliothécaire
+
+Lors de l’ajout de la fonctionnalité permettant d’activer ou de désactiver le compte d’un bibliothécaire, j’ai rencontré une difficulté liée à **l’interaction entre le front-end et le back-end en temps réel**.
+
+Dans l’interface d’admin, chaque bibliothécaire dispose d’un bouton permettant de changer son statut de compte ('activé' ou 'désactivé').
+L’objectif était que ce changement soit visible immédiatement sans recharger la page.
+
+La solution mise en place consistait à envoyer une **requête asynchrone (fetch) vers le contrôleur Symfony**, qui modifie ensuite le statut de l’utilisateur dans la base de données et renvoie une réponse **JSON**.
+
+<img src="img/code/asynchrone.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Le front-end met à jour l’affichage du bouton en fonction du nouveau statut.
+
+<img src="img/code/librarien.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Une fois la mise à jour effectuée côté serveur, la réponse est utilisée pour mettre à jour l’affichage du bouton en temps réel.
+
+### repository requete complexe
+
+
 
 # 10. Veille technologique
 Tout au long de ma formation, je me suis documenté et informé pour progresser, résoudre des problèmes techniques et me tenir à jour sur les évolutions dans le domaine du développement web.
@@ -707,7 +838,19 @@ Lors de ma période de stage, j'ai eu l'occasion de observer des **revues de cod
 
 J'ai reçu des retours sur mon projet Tosho, et mon tuteur m'a parlé de la pratique de **“Early Return”**. Dans mon code initial, j'avais imbriqué plusieurs conditions `if` et `else`, ce qui rendait le code difficile à lire.  
 
+``LoanController`` avant :
+
+<img src="/img/code/loancontro.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+``LoanController`` après :
+
+<img src="/img/code/loancontro2.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+
+
 La pratique de **“Early Return”** consiste à **quitter une fonction dès qu'une condition est remplie**, afin de réduire l'imbrication. Après cette explication, je me suis documenté sur ce sujet pour mieux l'appliquer dans mon projet.
+
+
 
 ## 11.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code
 
@@ -753,7 +896,7 @@ This approach works well in any language, because it's a logic structuring choic
 
 *source : Eddie Goldman / Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code* https://dev.to/eddiegoldman/early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code-1083
 
-## 11.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code propre
+## 11.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code plus propre
 
 Ecrire logique conditionnelle est quelquechose que tous les développeurs font dans n'importe quelle language. Cependant, comment structurer ces conditions impacte comment votre code devient lisible, testable, et maintenable.
 
@@ -796,20 +939,28 @@ Enfin, ce projet m’a donné une vision complète du cycle de développement �
 
 ## 12.2 Roadmap
 
-### Projet professionnel
-
-La responsable actuelle du service IT de l’association quittera son poste l’an prochain, et je me suis engagé à reprendre cette fonction.
-Je prévois donc de proposer officiellement cette application à l’association afin qu’elle soit utilisée pour la gestion réelle de la bibliothèque.
-
-Un autre projet est également prévu : la refonte du site vitrine de l’association, actuellement développé avec Vue.js. 
-
 ### Évolutions futures de projet Tosho 
+
+La responsable actuelle du service IT de l’association japonaise quittera son poste, et je me suis engagé à reprendre cette fonction.
+Je prévois donc de proposer officiellement cette application à l’association afin qu’elle soit utilisée pour la gestion réelle de la bibliothèque.
 
 Plusieurs pistes d’évolution sont envisagées pour faire progresser l’application :
 - Interface multilingue (français / japonais)
 - Mise en place d’un planning pour les parents bibliothécaires
 - Envoi d’e-mails automatiques de rappel pour les retours en retard 
 - Système de réservation de livres en ligne
+
+
+### Projet professionnel
+
+Après la validation du titre DWWM, j’envisage de poursuivre mes études en alternance.
+Je souhaite approfondir mes compétences en langages de programmation, en frameworks modernes et découvrir davantage le domaine du DevOps.
+La recherche d’une entreprise d’accueil est actuellement en cours.
+
+Au sein de l’association, une refonte du site vitrine est prévue. Le site actuel a été développé avec Vue.js. Une fois que j'airai repris le poste de responsable IT, je prévois de réaliser ce projet en autonomie.
+
+
+
 
 
 
