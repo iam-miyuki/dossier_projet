@@ -306,6 +306,8 @@ L’objectif est de proposer une interface simple à comprendre, agréable à ut
 
 <img src="/img/ui/chart.svg" alt="logo" style="display:block; margin:auto; width:60%; margin-bottom:30px; margin-top:30px;">
 
+TODO changer charte couleur
+
 - ``#1C2176`` : pour le texte, les bordures et les icônes
 - ``#A9B9FA`` : couleur principale de l'interface **bibliothécaire**
 - ``#9BAFFF`` : couleur principale de l'interface **admin**
@@ -796,20 +798,21 @@ Lors de ma période de stage, la bonne pratique consistant à typer les variable
 
 Lors de l’ajout de la fonctionnalité permettant d’activer ou de désactiver le compte d’un bibliothécaire, j’ai rencontré une difficulté liée à **l’interaction entre le front-end et le back-end en temps réel**.
 
-Dans l’interface d’admin, chaque bibliothécaire dispose d’un bouton permettant de changer son statut de compte ('activé' ou 'désactivé').
-L’objectif était que ce changement soit visible immédiatement sans recharger la page.
-
-La solution mise en place consistait à envoyer une **requête asynchrone (fetch) vers le contrôleur Symfony**, qui modifie ensuite le statut de l’utilisateur dans la base de données et renvoie une réponse **JSON**.
+Dans l’interface d’admin, chaque bibliothécaire dispose d’un bouton permettant de changer son statut de compte (*Activé* ou *Désactivé*).
+L’objectif était que le changement s’affiche tout de suite à l’écran, sans recharger la page, et qu’il soit bien enregistré dans la base de données.
 
 <img src="img/code/asynchrone.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
-Le front-end met à jour l’affichage du bouton en fonction du nouveau statut.
+La solution mise en place consistait à envoyer une **requête asynchrone (fetch) vers le contrôleur Symfony**, qui modifie ensuite le statut de l’utilisateur dans la base de données et renvoie une réponse **JSON**.
 
 <img src="img/code/librarien.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Le front-end met à jour l’affichage du bouton en fonction du nouveau statut.
 
 Une fois la mise à jour effectuée côté serveur, la réponse est utilisée pour mettre à jour l’affichage du bouton en temps réel.
 
 ### repository requete complexe
+
 
 
 
