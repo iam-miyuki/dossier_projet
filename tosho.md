@@ -45,7 +45,7 @@
    - [6.1 Front-end](#61-front-end)
    - [6.2 Back-end](#62-back-end)
 
-7. [Tests et Jeux d'essai](#7-tests--jeu-dessai)
+7. [Jeux d'essai](#7-jeu-dessai)
 
 8. [Déploiement](#8-déploiement)
    - [8.1 Choix de l’environnement et mise en place de Docker](#81-choix-de-lenvironnement-et-mise-en-place-de-docker)
@@ -306,22 +306,15 @@ L’objectif est de proposer une interface simple à comprendre, agréable à ut
 
 <img src="/img/ui/chart.svg" alt="logo" style="display:block; margin:auto; width:60%; margin-bottom:30px; margin-top:30px;">
 
-TODO changer charte couleur
-
 - ``#1C2176`` : pour le texte, les bordures et les icônes
-- ``#A9B9FA`` : couleur principale de l'interface **bibliothécaire**
-- ``#9BAFFF`` : couleur principale de l'interface **admin**
+- ``#CA91FF`` : couleur principale de l'interface **bibliothécaire**
+- ``#A9B9FA`` : couleur principale de l'interface **admin**
 
 Une bonne visibilité des choix de couleurs est vérifiée à l’aide du site https://coolors.co/contrast-checker/
 
 <img src="/img/ui/contrast.PNG" alt="logo" style="display:block; margin:auto; width:60%; margin-bottom:30px; margin-top:30px;">
 
 <img src="/img/ui/contrast1.PNG" alt="logo" style="display:block; margin:auto; width:60%; margin-bottom:30px; margin-top:30px;">
-
-
-### Composants
-TODO
-
 
 ### Typographie
 Le choix des polices a été fait avec soin pour garantir une lecture claire tout en apportant une touche moderne.
@@ -337,7 +330,10 @@ Le logo ***Tosho*** — qui signifie *livre* ou *bibliothéque* en japonais — 
 <img src="/img/ui/logo-big.svg" alt="logo" style="display:block; margin:auto; width:200px;">
 
 ### Icônes
-J'ai opté pour les icônes ``"Pixel free icons"`` au style **pixel art** pour apporter une touche **ludique** et **conviviale**. Elles ont également été exportées en SVG depuis Figma.
+
+J'ai choisi les icônes **"Pixel Free Icons"** au style **pixel art** afin d’apporter une touche **ludique** et **conviviale** à l’application.  
+Elles ont été exportées au format **SVG** depuis Figma.  
+À partir de ces icônes, j'ai généré un favicon en utilisant l’outil **RealFaviconGenerator.net** pour optimiser la compatibilité sur différents navigateurs et appareils.
 
 <div style="display:flex; margin-bottom:50px;">
 <img src="/img/ui/child-book.svg" alt="book" style="display:block; margin:auto; width:100px;">
@@ -345,9 +341,6 @@ J'ai opté pour les icônes ``"Pixel free icons"`` au style **pixel art** pour a
 <img src="/img/ui/books.svg" alt="books" style="display:block; margin:auto; width:100px;">
 </div>
 
-### Favicon
-
-TODO
 
 ## 4.2 Wireframes
 
@@ -693,6 +686,8 @@ Sur la route ``'loan'``, si la requête est de type **POST**, le contrôleur dé
 
 - Si ``book_code`` est fourni, on cherche le livre correspondant avec la méthode personnalisée ``findOneByCode()``. Si le livre existe, l’utilisateur est redirigé vers la route ``'show-book'`` avec l’ID du livre.
 
+<img src="img/code/loanController.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
 Cette organisation permet de gérer toutes les recherches et redirections depuis la même route, tout en gardant le code clair et maintenable.
 
 ### Méthodes de recherche dans le Repository
@@ -735,7 +730,11 @@ Lors du retour d'un livre, seuls les statuts du livre et du prêt sont mis à jo
 
 ---
 
-# 7. Tests & Jeu d'essai
+# 7. Jeu d'essai
+
+## 7.1 Prêter et rendre un livre
+## 7.2 Inventaire (Coté bibliothécaire)
+## 7.3 Inventaire (Coté admin)
 
 # 8. Déploiement
 ## 8.1 Choix de l’environnement et mise en place de Docker
@@ -772,6 +771,8 @@ Ce fichier contient :
 - Les prérequis nécessaires à l’installation
 
 - Les étapes pour exécuter le projet avec Docker
+
+- Les commandes utiles 
 
 Pour faciliter les commandes, j'ai également mise en place d'un fichier `Makefile` qui facilite des lignes de commande à executer.
 
@@ -811,9 +812,47 @@ Le front-end met à jour l’affichage du bouton en fonction du nouveau statut.
 
 Une fois la mise à jour effectuée côté serveur, la réponse est utilisée pour mettre à jour l’affichage du bouton en temps réel.
 
-### repository requete complexe
+### Requête d'une fonctionnalité d'inventaire (côte bibliothécaire)
+Lors du développement de la fonctionnalité d’inventaire côté bibliothécaire, j’ai rencontré une difficulté liée à la récupération des livres déjà vérifiés dans une session d’inventaire en cours.
+
+#### Contexte fonctionnel
+
+1. Un utilisateur (bibliothécaire) commence une session d’inventaire → il entre dans une session ouverte.
+
+2. Il ajoute les livres physiquement vérifiés dans cette session en saisissant le code du livre.
+
+L’objectif est le suivant :
+
+Lorsqu’un bibliothécaire saisit un code de livre, le système doit **vérifier si ce livre a déjà été ajouté à la session actuelle**.
+
+- Si le livre est déjà présent dans la session → on affiche le formulaire de modification de l’InventoryItem correspondant.
+
+- Sinon, on affiche le formulaire d’ajout d’un nouvel InventoryItem.
 
 
+#### Difficulté rencontré
+
+Pour cela, j’ai besoin de récupérer un InventoryItem à partir de l’inventaire actuel ($inventory) et le livre en question ($currentBook).
+
+J’ai donc créé une méthode personnalisée dans le InventoryItemRepository :
+
+
+```php
+public function findOneByInventoryAndBook(Inventory $inventory, Book $book): ?InventoryItem
+{
+    $qb = $this->createQueryBuilder('ii');
+    $qb
+        ->andWhere('ii.inventory = :inventory')
+        ->andWhere('ii.book = :book')
+        ->setParameter('inventory', $inventory)
+        ->setParameter('book', $book);
+
+    return $qb->getQuery()->getOneOrNullResult();
+}
+
+```
+
+ensuite, si $item existe, je fais redirection vers une route edit-item, le cas contraire, vers uen route 'add-item'.
 
 
 # 10. Veille technologique
@@ -948,6 +987,8 @@ La responsable actuelle du service IT de l’association japonaise quittera son 
 Je prévois donc de proposer officiellement cette application à l’association afin qu’elle soit utilisée pour la gestion réelle de la bibliothèque.
 
 Plusieurs pistes d’évolution sont envisagées pour faire progresser l’application :
+
+- Recherche interactive avec **AJAX** : affichage automatique des suggestions lors de la saisie 
 - Interface multilingue (français / japonais)
 - Mise en place d’un planning pour les parents bibliothécaires
 - Envoi d’e-mails automatiques de rappel pour les retours en retard 
