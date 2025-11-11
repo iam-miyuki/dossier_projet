@@ -28,6 +28,7 @@
    - [3.1 Contexte et objectifs](#31-contexte-et-objectifs)
    - [3.2 User stories](#32-user-stories)
    - [3.3 Contraintes](#33-contraintes)
+   - [3.4 Arborescence](#34-arborescence)
 
 4. [Conception visuelle](#4-conception-visuelle)
    - [4.1 Charte graphique](#41-charte-graphique)
@@ -59,7 +60,7 @@
 
 11. [Documentation en anglais](#11-documentation-en-anglais)
       - [11.1 Contexte](#111-contexte)
-      - [11.2 Early Return vs. Classic If-Else: A Universal Pattern for Writing Cleaner Code](#112-early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code)
+      - [11.2 Early Return vs. Classic If-Else: A Universal  attern for Writing Cleaner Code](#112-early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code)
       - [11.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code plus propre](#113-retour-anticipé-contre-lif-else-classique--un-modèle-universel-pour-écrire-du-code-plus-propre)
 
 12. [Conclusion](#12-conclusion)
@@ -290,6 +291,74 @@ Ainsi, Tosho se positionne comme une solution moderne et complète, permettant a
   - **Admin (parent bénévole)** : gère les familles, les livres, les bibliothécaires et l’inventaire.
   - **Bibliothécaire (parent bénévole)** : enregistre les prêts et retours, et participe aux sessions d’inventaire.
 - Les données doivent être fiables et mises à jour en temps réel afin d’éviter les erreurs de double prêt ou de livres manquants.
+## 3.4 Arborescence de l’application Tosho
+
+### 1. Pages publiques
+- `/` → Page d'accueil
+- `/privacy` → Politique de confidentialité
+- `/mentions` → Mentions légales
+- `/cookies` → Gestion des cookies
+
+### 2. Authentification
+- `/login` → Connexion
+- `/logout` → Déconnexion
+- `/reset-password` → Demande de réinitialisation
+- `/reset-password/check-email` → Vérification email
+- `/reset-password/reset/{token}` → Réinitialisation du mot de passe
+
+---
+
+### 3. Espace Administrateur
+- `/admin/` → Home admin
+- **Gestion des livres**
+  - `/admin/book/` → Gestion des livres
+  - `/admin/book/{id}` → Détails d’un livre
+  - `/admin/book/edit/{id}` → Modifier un livre
+  - `/admin/book/delete/{id}` → Supprimer un livre
+- **Gestion des familles**
+  - `/admin/family/` → Gestion des familles
+  - `/admin/family/{id}` → Détails d’une famille
+  - `/admin/family/edit/{id}` → Modifier une famille
+  - `/admin/family/delete/{id}` → Supprimer une famille
+- **Gestion des bibliothécaires**
+  - `/admin/librarien/` → Gestion des bibliothécaires
+  - `/admin/librarien/{id}` → Détails
+  - `/admin/librarien/delete/{id}` → Supprimer un bibliothécaire
+  - `/admin/librarien/change-status/{id}` → Activer / désactiver
+- **Gestion des inventaires**
+  - `/admin/inventory/` → Gestion des sessions
+  - `/admin/inventory/{id}` → Détails d’une session
+  - `/admin/inventory/items/{id}/{page}` → Gestion des inventaires
+    (livres à vérifier / déjà vérifiés / restant à vérifier)
+  - `/admin/inventory/edit/{id}` → Modifier une session
+  - `/admin/inventory/delete/{id}` → Supprimer une session
+  - `/admin/inventory/edit-item/{id}` → Modifier le statut d’un livre dans une session d’inventaire
+- `/admin/switch` → Passer à l’interface bibliothécaire
+
+---
+
+### 4. Espace Bibliothécaire
+- `/home/` → Home bibliothécaire
+- **Prêts et retours**
+  - `/loan/` → Prêts et retours
+    - `/loan/book/{id}` → Détails d’un livre
+    - `/loan/loan-book/{id}` → Prêter un livre à une famille déjà sélectionnée
+    - `/loan/loan-book/{id}/{family}` → Prêter un livre en choisissant une famille
+    - `/loan/family/{id}` → Voir les prêts d’une famille
+    - `/loan/return/{id}` → Retour d’un livre
+    - `/loan/overdue` → Livres en retard
+- **Inventaire (côté bibliothécaires)**
+  - `/inventory/` → Liste des sessions d'inventaire ouvertes
+  - `/inventory/{id}` → Détails d’une session
+  - `/inventory/{id}/add/{book}` → Ajouter un livre à la session
+  - `/inventory/{id}/edit/{item}` → Modifier le statut d’un livre dans une session d’inventaire
+  - `/inventory/{id}/{page}` → Liste des livres ajoutés  
+    (livres à vérifier / déjà vérifiés / restant à vérifier)
+- **Compte utilisateur**
+  - `/account/` → Mon compte
+  - `/account/edit` → Modifier mon compte
+  - `/account/change` → Changer mon mot de passe
+
 
 <div style="page-break-after: always;"></div>
 
@@ -510,6 +579,22 @@ Dans **Field type**, on peut définir la relation entre les entités. **Doctrine
 | `Inventory`     | Représente une session d’inventaire. |
 | `InventoryItem` | Relie un livre à une session d’inventaire et permet de signaler les anomalies (perdu, mal rangé, abîmé). |
 
+Un inventoryItem correspond à un livre précis dans une session d’inventaire.
+Chaque inventoryItem contient :
+
+le livre (Book)
+
+la session d’inventaire (Inventory)
+
+son statut : par exemple « vérifié », « abîmé », « manquant »
+
+une note éventuelle pour préciser le problème
+
+la date de création et de modification
+
+la ou les personnes qui ont validé ou contrôlé ce livre dans la session
+
+En clair, chaque ligne d’inventaire = un livre vérifié dans une session spécifique, avec son état et les informations associées.
 
 ### Relations principales entre entités
 
