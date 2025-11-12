@@ -291,7 +291,7 @@ Ainsi, Tosho se positionne comme une solution moderne et complète, permettant a
   - **Admin (parent bénévole)** : gère les familles, les livres, les bibliothécaires et l’inventaire.
   - **Bibliothécaire (parent bénévole)** : enregistre les prêts et retours, et participe aux sessions d’inventaire.
 - Les données doivent être fiables et mises à jour en temps réel afin d’éviter les erreurs de double prêt ou de livres manquants.
-## 3.4 Arborescence de l’application Tosho
+## 3.4 Arborescence
 
 ### 1. Pages publiques
 - `/` → Page d'accueil
@@ -311,22 +311,22 @@ Ainsi, Tosho se positionne comme une solution moderne et complète, permettant a
 ### 3. Espace Administrateur
 - `/admin/` → Home admin
 - **Gestion des livres**
-  - `/admin/book/` → Gestion des livres
+  - `/admin/book/` → Chercher ou ajouter 
   - `/admin/book/{id}` → Détails d’un livre
   - `/admin/book/edit/{id}` → Modifier un livre
   - `/admin/book/delete/{id}` → Supprimer un livre
 - **Gestion des familles**
-  - `/admin/family/` → Gestion des familles
+  - `/admin/family/` → Chercher ou ajouter 
   - `/admin/family/{id}` → Détails d’une famille
   - `/admin/family/edit/{id}` → Modifier une famille
   - `/admin/family/delete/{id}` → Supprimer une famille
 - **Gestion des bibliothécaires**
-  - `/admin/librarien/` → Gestion des bibliothécaires
+  - `/admin/librarien/` → Chercher ou ajouter 
   - `/admin/librarien/{id}` → Détails
   - `/admin/librarien/delete/{id}` → Supprimer un bibliothécaire
   - `/admin/librarien/change-status/{id}` → Activer / désactiver
 - **Gestion des inventaires**
-  - `/admin/inventory/` → Gestion des sessions
+  - `/admin/inventory/` → Chercher ou ajouter 
   - `/admin/inventory/{id}` → Détails d’une session
   - `/admin/inventory/items/{id}/{page}` → Gestion des inventaires
     (livres à vérifier / déjà vérifiés / restant à vérifier)

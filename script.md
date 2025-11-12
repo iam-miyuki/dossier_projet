@@ -27,77 +27,101 @@ Objectif et MVP
 
 L’objectif principal de Tosho est de permettre aux parents bibliothécaires de gérer facilement les prêts et les retours de livres, et de disposer d’une interface administrateur.
 
-Le MVP, c’est-à-dire le produit minimum viable, se concentre sur la fonctionnalité essentielle :
+Le MVP se concentre sur les fonctionnalités essentielles :
 
-Enregistrer un prêt ou un retour
-
-Rechercher les prêts par livre ou par famille
+Enregistrer un prêt et un retour et également rechercher les prêts par livre ou par famille.
 
 Ces fonctionnalités sont indispensables pour que l’application remplisse sa mission principale.
 
-En parallèle, l’interface admin est un objectif important, car elle permet de gérer l’ensemble des livres, des familles et des bénévoles. Même si elle n’est pas strictement nécessaire pour le MVP, elle donne tout le sens à la modernisation de l’application et permet aux bénévoles de travailler de manière autonome.
-
-Les utilisateurs
+En parallèle, la création d’une interface administrateur était un objectif important, car elle apporte tout le sens à la refonte du l'application. Elle permet aux bénévoles de travailler de manière autonome sans dépendre d’un intervation de dévéloppeur initial.
 
 Il y a deux types d’utilisateurs :
 
-– Les administrateurs, qui gèrent les familles, les bibliothécaires, les livres et les inventaires. Les personnes qui ne sont pas admin, ne peuvent pas créer de compte lui-même. 
-– Et les bibliothécaires, qui enregistrent les prêts et les retours, et participent à l’inventaire une fois par an.
+– Les administrateurs, qui gèrent les familles, les livres, les sessions d'inventaire et les bibliothécaires. Les comptes ne peuvent pas être créés librement : seul un administrateur peut créer un compte bibliothécaire.
+– Et les bibliothécaires, qui enregistrent les prêts et les retours, et participent à l’inventaire annuel des livres.
 
-
-Chaque rôle a accès à des fonctionnalités spécifiques, ce qui garantit que les actions importantes soient effectuées par les bonnes personnes.
+Chaque rôle a accès à des fonctionnalités spécifiques, ce qui garantit la sécurité et le bon fonctionnement de la bibliothéque.
 
 Fonctionnalités principales
 
-Pour répondre aux besoins de ces utilisateurs, j’ai développé plusieurs fonctionnalités principales :
+Pour les bibliothécaires, il y a deux fonctionnalités principales.
 
-Prêts et retours de livres, avec un suivi précis pour éviter les erreurs de double prêt,
+Premièrement, la gestion des prêts et retours de livres.
+Chaque livre possède un code unique créé par l’association.
+Grâce à ce code, les bénévoles peuvent rechercher un livre, vérifier son statut, puis enregistrer un prêt ou un retour.
+Il est aussi possible de rechercher un livre par mot-clé, ou une famille par son nom, afin de lui prêter ou rendre un livre.
 
-Inventaire, pour vérifier les livres présents et signaler ceux qui sont perdus ou abîmés,
+Deuxièmement, la gestion de l’inventaire.
+Les livres de l’association sont répartis dans quatre lieux différents.
+Lors de l’inventaire annuel, les administrateurs créent une session d’inventaire pour chaque lieu.
+Les bibliothécaires vérifient alors la présence des livres et peuvent signaler des problèmes, par example un livre abîmé, mal rangé, ou sans étiquette.
 
-Gestion des livres, familles et bénévoles, avec possibilité d’ajouter, modifier ou supprimer des données selon le rôle de l’utilisateur.
-1. Prêts et retours
-Chaque livre a un code unique créé par l’association.
-Avec ce code, les bénévoles peuvent rechercher un livre dans l’application, puis enregistrer un prêt ou un retour.
+Pour les admins
 
-Il est aussi possible de chercher un livre par mot-clé, ou de chercher une famille par son nom pour lui ajouter un emprunt ou retirer un livre rendu.
+Les admins disposent de quatre grandes fonctionnalités :
 
-2. Inventaire
-Une fois par an, l’association fait un inventaire de la bibliothèque. Les livres sont rangés dans quatre endroits différents, donc les admins peuvent créer une session d’inventaire pour chaque lieu.
+Gestion des livres — ils peuvent ajouter, consulter, modifier ou supprimer les livres.
 
-Les bibliothécaires vérifient la présence des livres et peuvent signaler des problèmes : livre abîmé, pas au bon endroits ou sans étiquette.
+Gestion des familles — avec les mêmes actions de création, modification ou suppression.
 
-Les admins peuvent suivre l’avancement, voir les livres vérifiés ou signalés, et ensuite mettre à jour l’état de l’inventaire une fois les problèmes réglés.
+Gestion des sessions d’inventaire — ils peuvent créer une session en définissant la date et le lieu, et suivre son état : ouverte, à venir, fermée ou terminée.
+Une fois la session ouverte, ils peuvent consulter l’avancement, voir les livres vérifiés ou signalés par les bibliothécaires, et mettre à jour le statut de livre signalé après avoir réglé le problem.
 
-3. CRUD des livres et familles
-Actuellement quand on veut ajouter un livre dans la collection, il faut contacter le développeur initial.
-Avec Tosho, les admins peuvent tout gérer eux-mêmes :
-– ajouter, consulter, modifier ou supprimer les livres et les comptes familles.
+Gestion des bibliothécaires — seuls les administrateurs peuvent créer des comptes.
+Lorsqu’un nouveau bibliothécaire est ajouté, il reçoit un email automatique l’informant de la création de son compte et de son mot de passe provisoire.
+Il pourra ensuite se connecter et modifier son mot de passe.
 
-Cette partie était très importante pour rendre le projet autonome et pratique.
+Enfin, pour superviser la gestion de la bibliothèque, un bouton de bascule permet à l’administrateur de passer directement à l’interface bibliothécaire, afin de tester ou de suivre les opérations.
+
+Contraintes principales
+
+L’application devait répondre à plusieurs contraintes :
+
+L’interface devait rester simple et intuitive, adaptée à des bénévoles non techniques.
+
+L’accès aux fonctionnalités est restreint selon le rôle :
+les administrateurs a accès à toutes les fonctionnalités, et les bibliothécaires que les prêts des livres et l'inventaire.
+
+Enfin, les données doivent être fiables et mises à jour en temps réel, pour éviter les erreurs de double prêt ou les livres manquants.
 
 #### **Organisation**
 
-Pour la conception, j'ai commencé par écrire toutes les fonctionnalités que je veux développer, et ensuite j'ai écris un cahier des charges et userstories en markdown. Une fois que j'ai clarifié les besoins, j'ai créé des wireframes et maquettes sur Figma.
+Pour la conception de Tosho, j’ai commencé par lister toutes les fonctionnalités que je voulais développer.
+À partir de là, j’ai rédigé un cahier des charges et mes user stories en Markdown, ce qui m’a permis de bien clarifier les besoins avant de passer à la partie visuelle.
+
+Une fois cette base posée, j’ai créé les wireframes et les maquettes sur Figma, pour anticiper la structure de l’application et imaginer le parcours utilisateur.
 
 #### **Charte graphique**
 
-> J’ai choisi un design conviviale et ludique pour que les utilisateurs non techniques puisse se sentir familiale. 
-L’identité visuelle de Tosho a été pensée pour refléter l’esprit convivial de l’association et le côté ludique de l’école.
+J’ai choisi un design à la fois convivial et ludique, pour que les utilisateurs non techniques — qui sont tous des parents bénévoles — se sentent rapidement à l’aise avec l’outil.
 
-Les couleurs permettent de différencier facilement les interfaces selon le rôle de l’utilisateur.
+L’identité visuelle de Tosho reflète l’esprit chaleureux de l’association et le côté ludique de l’école japonaise.
+Les couleurs principales permettent de différencier les interfaces selon le rôle :
 
-Le site est entièrement responsive, pour que les bénévoles puissent l’utiliser facilement sur mobile comme sur desktop.
+une teinte violette pour les bibliothécaires,
 
-L’interface est intuitive, avec des icônes ludiques, afin de rendre la navigation simple et agréable pour tous.
+une teinte bleue pour les administrateurs.
+
+L’interface est simple, intuitive et responsive, afin que les parents bénévoles puissent l’utiliser facilement sur mobile comme sur ordinateur.
+J’ai également ajouté des icônes au style pixel art, pour donner un aspect ludique et familier, tout en gardant une cohérence graphique avec le logo.
+
 #### **Arborescence**
 
-> Les principales pages :
->
-> * Accueil : choix entre “Admin” ou “Bibliothécaire”
-> * Page de prêt et retour
-> * Recherche de livre ou de famille
-> * Gestion des livres et utilisateurs
+L’arborescence du site a été pensée pour rester logique et fluide, avec deux espaces bien distincts :
+
+l’espace administrateur,
+
+et l’espace bibliothécaire.
+
+Une fois être connecté à son compte, selon les rôles, les utilisaters atterissent au page d'accueil spécifique:
+
+Les bibliothécaires peuvent enregistrer les prêts et les retours, rechercher un prêt par livre ou par famille, et participer à l’inventaire annuel.
+
+Les administrateurs, eux, ont accès à la gestion complète : les livres, les familles, les sessions d’inventaire, et les bibliothécaires, 
+
+J’ai aussi intégré toutes les pages nécessaires à l’authentification : connexion, réinitialisation de mot de passe, et déconnexion.
+
+Enfin, le site comprend aussi les pages légales classiques, comme les mentions légales, la politique de confidentialité et la gestion des cookies.
 
 #### **Stack technique**
 
@@ -123,12 +147,6 @@ inventoryItem : livre ajouté dans une session de l'inventaire
 
 ### **4. Démo (6 à 10 min)**
 
-> Je vais maintenant vous montrer Tosho.
-> Sur la page d’accueil, je choisis “bibliothécaire”.
-> Je recherche une **famille**, puis un **livre**, et j’enregistre un **prêt**.
-> Quand le livre est rendu, je clique sur “retourner le livre”.
-> Les informations se mettent à jour automatiquement.
-> Le site fonctionne aussi sur téléphone, avec la même clarté.
 
 ---
 
@@ -182,5 +200,3 @@ openlibrary pour récupérer les titres et l'auteur en romaji. romaji cest un al
 > Je suis très content d’avoir créé une application utile, pour une vraie école.
 > Tosho aide les bénévoles à gagner du temps et à mieux gérer la bibliothèque.
 > C’est un projet dont je suis fier.
-
-
