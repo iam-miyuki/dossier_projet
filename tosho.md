@@ -50,9 +50,9 @@
 
 8. [Déploiement](#8-déploiement)
    - [8.1 Choix de l’environnement et mise en place de Docker](#81-choix-de-lenvironnement-et-mise-en-place-de-docker)
-   - [8.2 Configuration de Dockerfile et docker-compose](#82-configuration-de-dockerfile-et-docker-compose)
+   - [8.2 Configuration de Docker](#82-configuration-de-docker)
    - [8.3 Mise en production](#83-mise-en-production)
-   - [8.4 Rédaction de README](#84-rédaction-de-readme)
+   - [8.4 Documentation et prise en main](#84-documentation-et-prise-en-main)
 
 9. [Difficultés rencontrées](#9-difficultés-rencontrées)
 
@@ -455,6 +455,7 @@ Pour assurer la meilleure expérience utilisateur (**UX**) sur mobile comme sur 
 ### Back-end  
 - Language : **PHP 8.2**
 - Framework : **Symfony 6.4**
+- SGBD : **MySQL**
 
 <img src="/img/code/v-1.svg" alt="version" style="display:block; width:100%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
@@ -462,7 +463,7 @@ Le choix de **Symfony 6.4** permet de bénéficier du **Long-Term Support (LTS)*
 
 Symfony facilite la **gestion du back-end** grâce à ses nombreux outils intégrés :
 
-- Gestion de la base de données et des entités avec **Doctrine ORM (Object Relational Mapping)**
+- Gestion de la base de données relationnel et des entités avec **Doctrine ORM (Object Relational Mapping)**
 
 - création et validation des formulaires,
 
@@ -543,7 +544,7 @@ flowchart TD
 ```
 
 
-## 5.4 Base de données 
+## 5.4 Base de données relationnels
 
 ### Conception
 
@@ -596,7 +597,7 @@ la ou les personnes qui ont validé ou contrôlé ce livre dans la session
 
 En clair, chaque ligne d’inventaire = un livre vérifié dans une session spécifique, avec son état et les informations associées.
 
-### Relations principales entre entités
+### Cardinalité
 
 | Entité source      | Type de relation | Entité cible      | Description |
 |-------------------|----------------|-----------------|------------|
@@ -607,7 +608,7 @@ En clair, chaque ligne d’inventaire = un livre vérifié dans une session spé
 | `InventoryItem`   | **ManyToOne**       | `Inventory`     | Chaque item d’inventaire appartient à une seule session d’inventaire. |
 
 
-### Générer la base de données
+### Générer la base de données relationnel
 
 Une fois les entités créées, Symfony et Doctrine permettent de générer automatiquement la base de données.
 Pour créer la base de données :
@@ -620,7 +621,7 @@ Pour créer ou mettre à jour les tables selon les entités :
 
 Ces commandes synchronisent la base de données avec le modèle défini dans le code.
 
-<img src="/img/tosho-db.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+<img src="/img/toshomdc.png" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 ---
 
@@ -693,6 +694,49 @@ Ce contrôle garantit que chaque utilisateur n’a accès qu’aux informations 
 # 6. Développement
 
 ## 6.1 Front-end
+
+### Mise en place des onglets
+
+## 6.1 Front-end
+
+### Mise en place des onglets
+
+Pour améliorer la fluidité de la navigation, j’ai mis en place un **système d’onglets** permettant de basculer facilement entre plusieurs fonctionnalités, sans recharger la page entière.
+
+Sur l’interface administrateur, chaque module (livres, familles, inventaires, etc.) dispose de deux formulaires distincts :
+
+- **Formulaire de recherche**  
+- **Formulaire d’ajout**
+
+De même, sur l’interface bibliothécaire, la page **Prêts & Retours** propose deux modes de recherche :
+
+- **Par famille**  
+- **Par livre**
+
+La page **Inventaire** utilise également ce principe :
+
+- **Onglet suivi de l’inventaire**  
+- **Onglet ajout d’un livre à la session**
+
+Pour rendre cette navigation fluide, j’ai utilisé des **onglets dynamiques** avec Twig et CSS.
+
+L’extrait suivant montre la structure principale de ce système d’onglet :
+
+
+
+<img src="/img/code/onglet.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Lorsque l’utilisateur clique sur un onglet, une **classe CSS ``active``** est appliquée à l’élément sélectionné, ce qui affiche automatiquement le contenu correspondant (le formulaire de recherche par famille ou par livre).
+Un effet **hover** a également été ajouté.
+
+<img src="/img/code/css.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Côté **contrôleur**, le paramètre **``tab``** est récupéré dans la requête pour déterminer quel contenu afficher :
+
+<img src="/img/code/tab.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Cela permet d’afficher dynamiquement le bon onglet après une recherche ou un rafraîchissement de page.
+
 
 ### Interaction front-end : saisie automatique via ISBN
 
@@ -815,51 +859,120 @@ Lors du retour d'un livre, seuls les statuts du livre et du prêt sont mis à jo
 
 ---
 
-# 7. Jeu d'essai
+# 7. Jeu d'essai - Prêter et rendre un livre
 
-## 7.1 Prêter et rendre un livre
-## 7.2 Inventaire (Coté bibliothécaire)
-## 7.3 Inventaire (Coté admin)
+Pour tester le bon fonctionnement du module de prêt, j’ai simulé plusieurs scénarios.
+
+Depuis la page **Prêts & Retours**, le bibliothécaire peut rechercher des prêts :
+
+- **Par famille** : recherche d’une famille par son nom, depuis l’onglet “Par famille”.
+
+- **Par livre** : recherche d’un livre par son code ou un mot-clé, depuis l’onglet “Par livre”.
+
+## Prêter depuis l’onglet “Par famille”
+Dans l’onglet Recherche par famille, une fois la famille sélectionnée, **la liste des prêts en cours** s’affiche.
+Lorsqu’un bibliothécaire souhaite prêter un nouveau livre à la famille acuelle, il saisit le code du livre dans le champ prévu, puis clique sur **“Prêter”**.
+
+**Au niveau de la base de données :**
+
+- le statut du livre passe à **emprunté (``BookStatusEnum::borrowed``)**
+
+- **un nouveau prêt est créé avec l’ID du livre et celui de la famille**
+
+- le statut du prêt est défini sur **"en cours" (``LoanStatusEnum::inProgress``)**.
+
+- **la date de retour prévu est enregistrée automatiquement**.
+
+**Si le code saisi correspond à un livre déjà prêté** à une autre famille, un **message d’erreur** est affiché.
+
+**Au niveau de l’affichage :**
+
+Le prêt est automatiquement ajouté à la liste des prêts de cette famille.
+L’interface redirige ensuite vers la page de la famille, où **la liste actualisée des prêts s’affiche**.
+
+## Rendre depuis l’onglet “Par famille”
+
+Pour enregistrer un retour, le bibliothécaire clique sur **“Rendre”** dans la liste des prêts en cours.
+
+**Au niveau de la base de données :**
+
+- le statut du livre repasse à **"disponible" (``BookStatusEnum::available``)**
+
+- le statut du prêt devient **"rendu" (``LoanStatusEnum::returned``)**
+
+- la date de retour est enregistrée automatiquement.
+
+**Au niveau de l’affichage :**
+
+Les prêts ayant le statut **"rendu"** ne sont plus affichés dans la liste active de la famille, afin de faciliter la gestion des prêts.
+
+## Prêter depuis l’onglet “Par livre”
+
+Dans cet onglet, le bibliothécaire peut rechercher un livre par code ou mot-clé.
+Une fois le livre trouvé, sa fiche d'information s’affiche avec son statut actuel.
+
+**Si le livre est disponible**, un bouton **“Prêter ce livre”** apparaît.
+Le bibliothécaire choisit alors la famille à qui le livre sera prêté.
+Une fois la famille sélectionnée, le prêt est enregistré et l’utilisateur est redirigé automatiquement vers la page de la famille, où **la liste des prêts est mise à jour**.
+
+## Rendre depuis l’onglet “Par livre”
+
+**Si le livre est actuellement prêté**, un bouton **“Rendre”** est visible dans l’en-tête de la fiche du livre.
+En cliquant dessus, le bibliothécaire enregistre le retour du livre et l’utilisateur est automatiquement redirigé vers la page de la famille concernée avec **la liste des prêts mise à jour**.
 
 # 8. Déploiement
 ## 8.1 Choix de l’environnement et mise en place de Docker
 
-La majeure partie du développement de mon projet s’est déroulée dans un environnement **Windows** avec **XAMPP** comme serveur local. Cependant, au fur et à mesure de l’avancement, j’ai constaté que cette configuration manquait de performance : le chargement des pages était particulièrement lent, ce qui ralentissait considérablement le développement.
+La majeure partie du développement de mon projet s’est déroulée dans un environnement **Windows** avec **XAMPP** comme serveur local. Cependant, au fil de l’avancement, j’ai constaté que cette configuration manquait de performance : le chargement des pages était particulièrement **lent** et XAMPP **manquait de stabilité**.
 
-Durant ma période de stage, j’ai eu l’occasion d’assister à la mise en production d’un projet au sein d’une entreprise. Cette expérience m’a motivé à faire évoluer mon propre projet vers un environnement **Ubuntu** et à utiliser **Docker** pour exécuter mon application dans des conteneurs. Cette nouvelle configuration s’est révélée beaucoup plus rapide, stable et proche d’un environnement de production réel.
+Durant mon stage, j’ai travaillé dans un environnement **Linux**, et j’ai eu l’occasion d’assister à la mise en production d’un projet avec **Docker**.
+Cette expérience m’a motivé à faire évoluer mon propre projet vers un environnement **Ubuntu**, en utilisant **Docker** pour exécuter mon application dans des conteneurs.
 
-L’utilisation de Docker présente plusieurs avantages :
+Cette nouvelle configuration s’est révélée beaucoup plus rapide, stable et proche d’un environnement de production réel.
 
-- Isoler l’application dans un environnement reproductible et indépendant du système d’exploitation.
+**L’utilisation de Docker présente plusieurs avantages :**
 
-- Faciliter le déploiement et la maintenance du projet.
+- **Reproductibilité** : tous les développeurs ont le même environnement, indépendant du système hôte.
 
-- Reproduire plus facilement l'environnement de production sur n'importe quelle machine.
-
-Le passage de **Windows + XAMPP** à **Ubuntu + Docker** a permis d’obtenir un environnement de développement plus rapide, plus fiable et plus proche d’une configuration de prouction.
- 
-## 8.2 Configuration de Dockerfile et docker-compose
+- **Facilité de déploiement et de maintenance**.
 
 
+Le passage de **Windows + XAMPP** à **Ubuntu + Docker** a permis d’obtenir un environnement de développement plus fiable, performant et plus proche d’une configuration de production.
+
+## 8.2 Configuration de Docker
+
+Pour **Docker**, j’ai configuré :
+
+**``docker-compose.yml``** : définit les services et conteneurs (PHP, MySQL, Nginx…), ainsi que le réseau pour qu’ils puissent communiquer entre eux. Chaque conteneur est réutilisable et peut être reconstruit facilement avec ```docker compose up --build```
+
+**``Dockerfile``** : script exécuté lors de la création du conteneur. Il installe les dépendances, Composer, Symfony CLI, définit le répertoire de travail, copie les fichiers du projet et expose le port.
+
+Cette configuration permet de lancer l’application sur n’importe quelle machine avec Docker.
 ## 8.3 Mise en production
-Une fois l’environnement conteneurisé et testé localement, la mise en production consiste à déployer les mêmes conteneurs sur un serveur distant.
-Pour cela, j’ai loué un serveur VPS chez RackNerd et acheté un nom de domaine afin de rendre mon application accessible en ligne.
+Une fois l’environnement Dockerisé testé localement, j’ai déployé l’application sur un **VPS Ubuntu** loué chez RackNerd et associé à un nom de domaine.
 
-J’ai également configuré les variables d’environnement (fichiers .env) pour gérer les paramètres sensibles sans les inclure dans le code source.
+J’ai installé **Nginx** comme serveur web pour :
 
-## 8.4 Rédaction de README
-Pour faciliter la prise en main de mon projet, j’ai rédigé un fichier `README.md` pour documenter le projet.
-Ce fichier contient :
+- **Recevoir les requêtes HTTP et HTTPS**
 
-- Une présentation générale du projet
+- **Rediriger les requêtes vers les conteneurs Docker qui exécutent l’application Symfony**
 
-- Les prérequis nécessaires à l’installation
+- Gérer le **HTTPS avec certificat SSL et redirection automatique vers HTTPS**
 
-- Les étapes pour exécuter le projet avec Docker
+Les variables d’environnement sont configurées dans un fichier **``.env``**, ce qui permet de stocker les informations sensibles (identifiants de base de données, clés API…) hors du code source. Ce fichier est **exclu du dépôt Git** via **``.gitignore``** pour garantir la sécurité.
+## 8.4 Documentation et prise en main
 
-- Les commandes utiles 
+Pour faciliter la prise en main du projet, j’ai rédigé un **``README.md``** qui contient :
 
-Pour faciliter les commandes, j'ai également mise en place d'un fichier `Makefile` qui facilite des lignes de commande à executer.
+- Présentation du projet
+
+- Pré-requis pour l’installation
+
+- Étapes pour **exécuter le projet avec Docker**
+
+- **Commandes utiles**
+
+Pour simplifier l’utilisation de Docker, j’ai ajouté un **``Makefile``**, qui permet de transformer des commandes longues et répétitives en **commandes simples à exécuter**.
 
 ---
 
@@ -897,47 +1010,32 @@ Le front-end met à jour l’affichage du bouton en fonction du nouveau statut.
 
 Une fois la mise à jour effectuée côté serveur, la réponse est utilisée pour mettre à jour l’affichage du bouton en temps réel.
 
-### Requête d'une fonctionnalité d'inventaire (côte bibliothécaire)
-Lors du développement de la fonctionnalité d’inventaire côté bibliothécaire, j’ai rencontré une difficulté liée à la récupération des livres déjà vérifiés dans une session d’inventaire en cours.
+
 
 #### Contexte fonctionnel
 
-1. Un utilisateur (bibliothécaire) commence une session d’inventaire → il entre dans une session ouverte.
+Un administrateur peut consulter l’avancement d’une session d’inventaire en cours. Il doit pouvoir visualiser la liste des livres vérifiés ainsi que ceux signalés( mal rangé, livre non trouvé, etc.).
 
-2. Il ajoute les livres physiquement vérifiés dans cette session en saisissant le code du livre.
+Difficulté rencontrée : lazy loading
 
-L’objectif est le suivant :
+Lorsque l’inventaire est récupéré via le **ParamConverter**, les informations des livres associés aux ``inventoryItems`` ne sont pas automatiquement chargées. 
 
-Lorsqu’un bibliothécaire saisit un code de livre, le système doit **vérifier si ce livre a déjà été ajouté à la session actuelle**.
+<img src="img/code/lazy.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
-- Si le livre est déjà présent dans la session → on affiche le formulaire de modification de l’InventoryItem correspondant.
+Par défaut, Doctrine utilise le lazy loading, ce qui signifie que les relations ne sont chargées que lorsqu’elles sont explicitement utilisées. Ainsi, si l’on accède aux inventoryItems dans Twig sans les avoir préchargés, leur collection reste vide. Ici,
+en faisant ``dd($inventory);``, le résultat montre que inventoryItems est vide : 
 
-- Sinon, on affiche le formulaire d’ajout d’un nouvel InventoryItem.
+<img src="img/code/lazylazy.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
+Solution technique
 
-#### Difficulté rencontré
+Pour résoudre ce problème, j’ai créé une requête personnalisée dans le InventoryRepository afin de récupérer l’inventaire avec tous ses items et les livres associés en une seule requête :
 
-Pour cela, j’ai besoin de récupérer un InventoryItem à partir de l’inventaire actuel ($inventory) et le livre en question ($currentBook).
+<img src="img/code/findWithItems.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
-J’ai donc créé une méthode personnalisée dans le InventoryItemRepository :
+Après cette modification, inventoryItems contient bien tous les éléments et les livres associés :
 
-
-```php
-public function findOneByInventoryAndBook(Inventory $inventory, Book $book): ?InventoryItem
-{
-    $qb = $this->createQueryBuilder('ii');
-    $qb
-        ->andWhere('ii.inventory = :inventory')
-        ->andWhere('ii.book = :book')
-        ->setParameter('inventory', $inventory)
-        ->setParameter('book', $book);
-
-    return $qb->getQuery()->getOneOrNullResult();
-}
-
-```
-
-ensuite, si $item existe, je fais redirection vers une route edit-item, le cas contraire, vers uen route 'add-item'.
+<img src="img/code/lazi.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 
 # 10. Veille technologique
