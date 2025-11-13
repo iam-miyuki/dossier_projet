@@ -76,7 +76,7 @@
 
 **Tosho** est une application web conçue pour faciliter la gestion des prêts de livres au sein d’une école japonaise. En japonais, **Tosho** signifie *« bibliothèque »* ou *« livre »*.
 
-L'origine de ce projet remonte directement à mon expérience personnelle. Ma fille, née en France, apprend le japonais dans une école destinée aux enfants d’origine japonaise. Cette école est gérée entièrement par des parents bénévoles, dont je fais partie. Nous y disposons d’une petite bibliothèque et nous prêtons régulièrement les livres aux familles afin que les enfants se familiarisent avec la lecture en japonais.
+Ce projet vient de mon expérience personnelle. Ma fille apprend le japonais dans une école associative pour les enfants d’origine japonaise. Cette école est entièrement gérée par des parents bénévoles, dont je fais partie. Nous avons une petite bibliothèque et nous prêtons régulièrement des livres aux familles afin que les enfants se familiarisent avec la lecture en japonais.
 
 L’application actuellement utilisée pour les prêts de livres manque d’ergonomie et de fonctionnalités essentielles. L’interface administrateur n’est accessible que par le développeur initial, un ancien parent bénévole, et bien qu’elle reste fonctionnelle, elle présente une interface brute sans mise en forme CSS.
 
@@ -185,7 +185,7 @@ C’est dans ce contexte qu’a été conçu Tosho, une nouvelle application web
 
 ### Objectifs
 
-Le projet Tosho a pour objectif principal de faciliter et moderniser la gestion des prêts de livres au sein de l’école japonaise associative, tout en offrant aux parents bénévoles un outil simple, efficace et autonome.
+Le projet Tosho a pour objectif principal de faciliter et moderniser la gestion de la bibliothéque, tout en offrant aux parents bénévoles un outil simple, efficace et autonome.
 
 Plus précisément, le projet vise à :
 
@@ -439,7 +439,6 @@ Pour assurer la meilleure expérience utilisateur (**UX**) sur mobile comme sur 
 - Le menu utilise des **icônes** pour gagner de la place.  
 - Les onglets sont adaptés à la **taille de l’écran**.  
 - Les cartes de livres ou d’emprunts sont affichées les unes au-dessus des autres pour faciliter la lecture et rendre la navigation plus fluide.  
-- Un **fond de couleur différent** est utilisé pour distinguer facilement les interfaces selon le rôle de l’utilisateur.
 
 <img src="/img/ui/maquette-mb2.PNG" style="width:60%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
@@ -452,6 +451,21 @@ Pour assurer la meilleure expérience utilisateur (**UX**) sur mobile comme sur 
 # 5. Conception technique
 ## 5.1 Technologies utilisées
 
+### Front-end  
+
+- **HTML** : J'ai structuré le code avec des balises sémantiques comme `<header>`, `<nav>`, `<main>` et `<footer>` afin d’assurer une bonne organisation du contenu. Pour rendre l’application **responsive**, j’ai ajouté la balise suivante :  
+
+<img src="/img/code/respo.svg" alt="version" style="display:block; width:100%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+indispensable pour adapter l’affichage aux différentes tailles d’écran.  
+
+- **CSS** : Les fichiers CSS sont séparés par composants pour une meilleure organisation. J’ai également créé un fichier spécifique pour les **variables CSS** (couleurs, tailles, polices) afin d’assurer une **cohérence visuelle** et de pouvoir modifier facilement le style global du site. 
+J’ai utilisé `@media screen` pour adapter le design aux différentes tailles d’écran.
+
+- **Twig** : J’ai utilisé Twig, le moteur de template de Symfony, pour créer des pages dynamiques. Il permet de séparer le code PHP de l’affichage et de réutiliser facilement des éléments comme le `<header>`, le `<footer>` ou les onglets (tabs) sur toutes les pages.
+
+- **JavaScript** : J’ai utilisé JavaScript pour ajouter des interactions dynamiques à l’application, notamment la saisie automatique (préremplissage) du formulaire d'ajoute des livres, ainsi que l’activation et la désactivation des comptes en temps réel, sans recharger la page.
+
 ### Back-end  
 - Language : **PHP 8.2**
 - Framework : **Symfony 6.4**
@@ -463,7 +477,7 @@ Le choix de **Symfony 6.4** permet de bénéficier du **Long-Term Support (LTS)*
 
 Symfony facilite la **gestion du back-end** grâce à ses nombreux outils intégrés :
 
-- Gestion de la base de données relationnel et des entités avec **Doctrine ORM (Object Relational Mapping)**
+- Gestion de la base de données relationnelle et des entités avec **Doctrine ORM (Object Relational Mapping)**
 
 - création et validation des formulaires,
 
@@ -472,7 +486,7 @@ Symfony facilite la **gestion du back-end** grâce à ses nombreux outils intég
 
 Symfony repose sur des **composants** et des **bundles**, qui permettent de structurer et de réutiliser facilement le code dans l’application.
 
-- Les **composants Symfony** sont des **bibliothèques PHP indépendantes** — c'est à dire qu'ils ne dépendent pas de Symfony. Chaque composant remplit une tâche technique précise.
+- Les **composants Symfony** sont des **bibliothèques PHP indépendantes**. Chaque composant remplit une tâche technique précise.
 Exemples :
 
    - **HttpFoundation** : gère les requêtes et réponses HTTP
@@ -483,30 +497,16 @@ Exemples :
 
    - **Security** : gère la sécurité et l’authentification
 
-- Les **bundles** sont des **ensembles de composants configurés** pour ajouter une fonctionnalité complète à une application Symfony. Certains bundles sont natifs,— c'est à dire qu'ils sont intégrés dans le framework et prêts à l'emploi.
-Examples :
+- Les **bundles** sont des ensembles de composants configurés pour ajouter une fonctionnalité complète à une application Symfony. Certains bundles sont intégrés dans le framework et prêts à l'emploi.
+Exemples :
 
-   - **TwigBundle** : permet de gérer les vues avec Twig,
+  - **TwigBundle** : permet de gérer les vues avec Twig,
 
-   - **DoctrineBundle** : gère la base de données via Doctrine ORM
+  - **DoctrineBundle** : gère la base de données via Doctrine ORM,
 
-   - **SecurityBundle** : s’occupe de l’authentification et des rôles utilisateurs.
+  - **SecurityBundle** : s’occupe de l’authentification et des rôles utilisateurs,
 
-### Front-end  
-
-- **HTML** : J'ai structuré le code avec des balises sémantiques comme `<header>`, `<nav>`, `<main>` et `<footer>` afin d’assurer une bonne organisation du contenu. Pour rendre l’application **responsive**, j’ai ajouté la balise suivante :  
-
-
-<img src="/img/code/respo.svg" alt="version" style="display:block; width:100%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
-
-
-indispensable pour adapter l’affichage aux différentes tailles d’écran.  
-
-- **CSS** : Les fichiers CSS sont séparés par composants pour une meilleure organisation. J’ai également créé un fichier spécifique pour les **variables CSS** (couleurs, tailles, polices) afin d’assurer une **cohérence visuelle** et de pouvoir modifier facilement le style global du site. 
-J’ai utilisé `@media screen` pour adapter le design aux différentes tailles d’écran.
-
-- **Twig** : J’ai utilisé Twig, le moteur de template de Symfony, pour créer des pages dynamiques. Il permet de séparer le code PHP de l’affichage et de réutiliser facilement des éléments comme le `<header>`, le `<footer>` ou les onglets (tabs) sur toutes les pages.
-
+  - **SymfonyCastsResetPasswordBundle** : facilite la mise en place de la fonctionnalité de réinitialisation de mot de passe des utilisateurs.
 
 ## 5.2 Versionning
 
@@ -544,7 +544,7 @@ flowchart TD
 ```
 
 
-## 5.4 Base de données relationnels
+## 5.4 Base de données relationnelle
 
 ### Conception
 
@@ -578,26 +578,26 @@ Dans **Field type**, on peut définir la relation entre les entités. **Doctrine
 | `Book`          | Contient les informations des livres (titre, auteur, statut, code, localisation, etc.) et les relations avec `Loan` et `InventoryItem`. |
 | `Loan`          | Représente un prêt de livre : lien entre un livre et une famille. |
 | `Inventory`     | Représente une session d’inventaire. |
-| `InventoryItem` | Relie un livre à une session d’inventaire et permet de signaler les anomalies (perdu, mal rangé, abîmé). |
+| `InventoryItem` | Relie un livre à une session d’inventaire et permet de signaler les anomalies (perdu, mal rangé, non trouvé, autre). |
 
 Un inventoryItem correspond à un livre précis dans une session d’inventaire.
 Chaque inventoryItem contient :
 
-le livre (Book)
+- le livre (``Book``)
 
-la session d’inventaire (Inventory)
+- la session d’inventaire (``Inventory``)
 
-son statut : par exemple « vérifié », « abîmé », « manquant »
+- son statut : par exemple « vérifié », « mal rangé », « non trouvé »
 
-une note éventuelle pour préciser le problème
+- une note éventuelle pour préciser le problème
 
-la date de création et de modification
+- la date de création et de modification
 
-la ou les personnes qui ont validé ou contrôlé ce livre dans la session
+- la ou les personnes qui ont validé ou contrôlé ce livre dans la session
 
-En clair, chaque ligne d’inventaire = un livre vérifié dans une session spécifique, avec son état et les informations associées.
+En clair, chaque ligne d’inventoryItem = un livre vérifié dans une session, avec son état et les informations associées.
 
-### Cardinalité
+### Cardinalités
 
 | Entité source      | Type de relation | Entité cible      | Description |
 |-------------------|----------------|-----------------|------------|
@@ -608,7 +608,7 @@ En clair, chaque ligne d’inventaire = un livre vérifié dans une session spé
 | `InventoryItem`   | **ManyToOne**       | `Inventory`     | Chaque item d’inventaire appartient à une seule session d’inventaire. |
 
 
-### Générer la base de données relationnel
+### Générer la base de données relationnelle
 
 Une fois les entités créées, Symfony et Doctrine permettent de générer automatiquement la base de données.
 Pour créer la base de données :
@@ -697,11 +697,7 @@ Ce contrôle garantit que chaque utilisateur n’a accès qu’aux informations 
 
 ### Mise en place des onglets
 
-## 6.1 Front-end
-
-### Mise en place des onglets
-
-Pour améliorer la fluidité de la navigation, j’ai mis en place un **système d’onglets** permettant de basculer facilement entre plusieurs fonctionnalités, sans recharger la page entière.
+Pour améliorer la fluidité de la navigation, j’ai mis en place un **système d’onglets** permettant de basculer facilement entre deux fonctionnalités, sans recharger la page entière.
 
 Sur l’interface administrateur, chaque module (livres, familles, inventaires, etc.) dispose de deux formulaires distincts :
 
@@ -721,8 +717,6 @@ La page **Inventaire** utilise également ce principe :
 Pour rendre cette navigation fluide, j’ai utilisé des **onglets dynamiques** avec Twig et CSS.
 
 L’extrait suivant montre la structure principale de ce système d’onglet :
-
-
 
 <img src="/img/code/onglet.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
@@ -1012,12 +1006,12 @@ Une fois la mise à jour effectuée côté serveur, la réponse est utilisée po
 
 
 
-#### Contexte fonctionnel
+### Lazy loading
 
-Un administrateur peut consulter l’avancement d’une session d’inventaire en cours. Il doit pouvoir visualiser la liste des livres vérifiés ainsi que ceux signalés( mal rangé, livre non trouvé, etc.).
+**Contexte**
+Dans la page de gestion des inventaires, les administrateurs peuvent consulter l’avancement d’une session d’inventaire en cours. Ils doivent pouvoir visualiser la liste des livres vérifiés ainsi que ceux signalés( mal rangé, livre non trouvé, etc.).
 
-Difficulté rencontrée : lazy loading
-
+**Difficulté**
 Lorsque l’inventaire est récupéré via le **ParamConverter**, les informations des livres associés aux ``inventoryItems`` ne sont pas automatiquement chargées. 
 
 <img src="img/code/lazy.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
@@ -1027,7 +1021,7 @@ en faisant ``dd($inventory);``, le résultat montre que inventoryItems est vide 
 
 <img src="img/code/lazylazy.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
-Solution technique
+**Solution**
 
 Pour résoudre ce problème, j’ai créé une requête personnalisée dans le InventoryRepository afin de récupérer l’inventaire avec tous ses items et les livres associés en une seule requête :
 
@@ -1155,12 +1149,23 @@ Cet approche marche bien dans n'importe quelle language, car c'est une choix de 
 
 ## 12.1 Bilan global
 
-Ce projet m’a permis de mettre en pratique mes compétences en développement web et d’apprendre à résoudre les problèmes rencontrés au cours du déveleppement.
+Ce projet m’a permis de mettre en pratique mes compétences en développement web et d’apprendre à résoudre les problèmes rencontrés au cours du développement.
 Dans ce domaine, il est essentiel de continuer à apprendre, de se tenir à jour et de s’adapter en permanence aux nouvelles technologies.
 
-La période de stage en entreprise m’a également beaucoup apporté : elle m’a permis de découvrir la gestion de projets réels et d’adopter de bonnes pratiques professionnelles, notamment en matière d’utilisation de Git et de respect des principes de clean code. 
+La période de stage en entreprise m’a également beaucoup apporté : elle m’a permis de découvrir la gestion de projets réels et d’adopter de bonnes pratiques professionnelles, notamment en matière d’utilisation de Git et GitLab, ainsi que de respect des principes du clean code.
+J’ai également participé à plusieurs tâches techniques variées, telles que :
 
-Enfin, ce projet m’a donné une vision complète du cycle de développement — de la conception à la mise en ligne — et m’a permis de renforcer à la fois mes compétences techniques et mon autonomie.
+- la création d'un composant de **pagination avec React**,
+
+- l’envoi de données issues d’un **fichier CSV vers une API**
+
+- la personnalisation d’un **template Keycloak** (avec lecture de documentation en anglais)
+
+- la création d’un **middleware avec Laravel**
+
+- le développement d’un **composant React** permettant de trier et de modifier l’ordre d’affichage d’un tableau
+
+Enfin, ce parcours de formation m’a offert une vision complète du cycle de développement web, de la conception à la mise en ligne, et m’a permis de renforcer à la fois mes compétences techniques et mon autonomie.
 
 ## 12.2 Roadmap
 
@@ -1180,11 +1185,11 @@ Plusieurs pistes d’évolution sont envisagées pour faire progresser l’appli
 
 ### Projet professionnel
 
-Après la validation du titre DWWM, j’envisage de poursuivre mes études en alternance.
+Après cette formation, j’envisage de poursuivre mes études en alternance.
 Je souhaite approfondir mes compétences en langages de programmation, en frameworks modernes et découvrir davantage le domaine du DevOps.
 La recherche d’une entreprise d’accueil est actuellement en cours.
 
-Au sein de l’association, une refonte du site vitrine est prévue. Le site actuel a été développé avec Vue.js. Une fois que j'airai repris le poste de responsable IT, je prévois de réaliser ce projet en autonomie.
+Au sein de l’association, une refonte du site vitrine est prévue. Le site actuel a été développé avec Vue.js. Une fois que j'aurai repris le poste de responsable IT, je prévois de réaliser ce projet en autonomie.
 
 
 

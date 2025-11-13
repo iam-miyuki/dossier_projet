@@ -1,202 +1,219 @@
-### **1. Introduction (30 sec)**
+1. Introduction (30 sec)
 
->Bonjour, je m’appelle Miyuki CHERBAL.
+Bonjour, je m’appelle Miyuki CHERBAL.
 Avant cette formation, j’étais femme au foyer.
-Avant de venir en France, j’étais photographe scolaire au Japon, et j’ai fait mes études en histoire de l’art là-bas.
-J’ai choisi cette formation parce que j’avais envie de comprendre le domaine du web, de savoir comment fonctionne un site internet et comment le développer.
+Au Japon, j’étais photographe scolaire et j’ai fait des études en histoire de l’art.
+J’ai choisi cette formation parce que je voulais comprendre comment fonctionne le web et apprendre à développer un site internet.
 Aujourd’hui, je vais vous présenter mon projet : Tosho.
 
----
+2. Présentation du projet (1 min)
 
-### **2. Présentation du projet (1 min)**
+“Tosho” signifie “bibliothèque” ou “livre” en japonais.
+C’est une application web que j’ai créée pour une association japonaise dont je fais partie. Cette association, dirigée par des parents bénévoles, propose des cours de japonais pour les enfants expatriés et ceux d’origine japonaise. Elle possède une petite bibliothèque et les parents gères les prêts des livres et la gestion de collection.
+Actuellement, nous utilisons une application de gestion de bibliothéque développée il y a plusieurs années par un ancien parent bénévole. Elle fonctionne, mais elle a plusieurs limites. Par exemple, pour ajouter un nouveau livre, il faut contacter le développeur initial car il n’y a pas d’accès administrateur. L’interface est très simple, pas de css, et peu intuitive.
 
->Tosho veut dire “bibliothèque” ou “livre” en japonais.
-C’est une application web que j’ai créée pour une association japonaise dont je fais partie. Cet association est dirigée par des parents bénévoles.
-Elle propose des cours de japonais pour des enfants d’origine japonaise, et possède une petite bibliothèque.
-Aujourd’hui, pour gérer les prêts de livres, nous utilisons une application web qui a été développée par un ancien parent bénévole il y a plusieurs années.
-Cette application fonctionne, mais elle a plusieurs limites.
-Par exemple, pour ajouter un nouveau livre dans le catalogue des livres, il faut contacter le développeur initial, parce qu'il n’y a pas d’accès administrateur.
-L’interface est aussi très simple, sans CSS, donc pas très intuitive.
-Comme je suis parent bibliothécaire de l'association, j’ai eu l’idée de refaire complètement l’application, pour améliorer la gestion, la rendre plus moderne et plus autonome.
+Dans l'association, je suis parent bibliothécaire, j’ai eu l’idée de refaire l’application pour faciliter la gestion, la rendre plus moderne et permettre aux bénévoles de travailler de manière autonome.
 
----
+3. Conception du projet (10 min)
 
-### **3. Conception du projet (10 min)**
+L’objectif principal de Tosho est de permettre aux bibliothécaires de gérer facilement les prêts et les retours de livres, et d’avoir une interface administrateur.
 
-Objectif et MVP
-
-L’objectif principal de Tosho est de permettre aux parents bibliothécaires de gérer facilement les prêts et les retours de livres, et de disposer d’une interface administrateur.
-
-Le MVP se concentre sur les fonctionnalités essentielles :
-
-Enregistrer un prêt et un retour et également rechercher les prêts par livre ou par famille.
-
-Ces fonctionnalités sont indispensables pour que l’application remplisse sa mission principale.
-
-En parallèle, la création d’une interface administrateur était un objectif important, car elle apporte tout le sens à la refonte du l'application. Elle permet aux bénévoles de travailler de manière autonome sans dépendre d’un intervation de dévéloppeur initial.
+Le MVP se concentre sur les fonctionnalités essentielles : enregistrer un prêt et un retour, et rechercher les prêts par livre ou par famille.
 
 Il y a deux types d’utilisateurs :
 
-– Les administrateurs, qui gèrent les familles, les livres, les sessions d'inventaire et les bibliothécaires. Les comptes ne peuvent pas être créés librement : seul un administrateur peut créer un compte bibliothécaire.
-– Et les bibliothécaires, qui enregistrent les prêts et les retours, et participent à l’inventaire annuel des livres.
+Administrateurs : gèrent les familles, les livres, les sessions d’inventaire et les bibliothécaires. Ils sont les seuls à pouvoir créer des comptes.
 
-Chaque rôle a accès à des fonctionnalités spécifiques, ce qui garantit la sécurité et le bon fonctionnement de la bibliothéque.
+Bibliothécaires : enregistrent les prêts et les retours, participent à l’inventaire annuel.
+
+Chaque rôle a accès à des fonctionnalités spécifiques, ce qui garantit la sécurité et le bon fonctionnement de la bibliothèque.
 
 Fonctionnalités principales
 
-Pour les bibliothécaires, il y a deux fonctionnalités principales.
+Pour les bibliothécaires :
 
-Premièrement, la gestion des prêts et retours de livres.
-Chaque livre possède un code unique créé par l’association.
-Grâce à ce code, les bénévoles peuvent rechercher un livre, vérifier son statut, puis enregistrer un prêt ou un retour.
-Il est aussi possible de rechercher un livre par mot-clé, ou une famille par son nom, afin de lui prêter ou rendre un livre.
+Gestion des prêts et retours : chaque livre a un code unique, on peut chercher un livre par code ou par mot-clé, et une famille par son nom.
 
-Deuxièmement, la gestion de l’inventaire.
-Les livres de l’association sont répartis dans quatre lieux différents.
-Lors de l’inventaire annuel, les administrateurs créent une session d’inventaire pour chaque lieu.
-Les bibliothécaires vérifient alors la présence des livres et peuvent signaler des problèmes, par example un livre abîmé, mal rangé, ou sans étiquette.
+Gestion de l’inventaire : les livres sont répartis dans plusieurs lieux. Lors de l’inventaire annuel, les bibliothécaires vérifient la présence des livres et signalent les problèmes (livres abîmés, mal rangés, etc.).
 
-Pour les admins
+Pour les administrateurs :
 
-Les admins disposent de quatre grandes fonctionnalités :
+Gestion des livres et des familles : ajouter, modifier, supprimer.
 
-Gestion des livres — ils peuvent ajouter, consulter, modifier ou supprimer les livres.
+Gestion des inventaires : créer une session, suivre son avancement, mettre à jour les problèmes signalés.
 
-Gestion des familles — avec les mêmes actions de création, modification ou suppression.
+Gestion des bibliothécaires : créer un compte et envoyer un mail automatique avec un mot de passe provisoire.
 
-Gestion des sessions d’inventaire — ils peuvent créer une session en définissant la date et le lieu, et suivre son état : ouverte, à venir, fermée ou terminée.
-Une fois la session ouverte, ils peuvent consulter l’avancement, voir les livres vérifiés ou signalés par les bibliothécaires, et mettre à jour le statut de livre signalé après avoir réglé le problem.
+Supervision : possibilité de basculer sur l’interface bibliothécaire pour tester ou suivre les opérations.
 
-Gestion des bibliothécaires — seuls les administrateurs peuvent créer des comptes.
-Lorsqu’un nouveau bibliothécaire est ajouté, il reçoit un email automatique l’informant de la création de son compte et de son mot de passe provisoire.
-Il pourra ensuite se connecter et modifier son mot de passe.
+Contraintes
 
-Enfin, pour superviser la gestion de la bibliothèque, un bouton de bascule permet à l’administrateur de passer directement à l’interface bibliothécaire, afin de tester ou de suivre les opérations.
+Interface simple et intuitive pour des bénévoles non techniques.
 
-Contraintes principales
+Accès aux fonctionnalités limité selon le rôle.
 
-L’application devait répondre à plusieurs contraintes :
+Données fiables et mises à jour en temps réel pour éviter les erreurs.
 
-L’interface devait rester simple et intuitive, adaptée à des bénévoles non techniques.
+Organisation
 
-L’accès aux fonctionnalités est restreint selon le rôle :
-les administrateurs a accès à toutes les fonctionnalités, et les bibliothécaires que les prêts des livres et l'inventaire.
+J’ai commencé par lister toutes les fonctionnalités et rédiger un cahier des charges avec des user stories.
+Ensuite, j’ai créé les wireframes et maquettes sur Figma pour visualiser le parcours utilisateur.
 
-Enfin, les données doivent être fiables et mises à jour en temps réel, pour éviter les erreurs de double prêt ou les livres manquants.
+L’identité visuelle de Tosho a été pensée pour refléter l’esprit de l’association scolaire. à la fois ludique, conviviale et accessible.
+L’objectif est de proposer une interface simple à comprendre, agréable à utiliser, et adaptée aux parents bénévoles.
 
-#### **Organisation**
+J’ai choisi trois couleurs principales :
 
-Pour la conception de Tosho, j’ai commencé par lister toutes les fonctionnalités que je voulais développer.
-À partir de là, j’ai rédigé un cahier des charges et mes user stories en Markdown, ce qui m’a permis de bien clarifier les besoins avant de passer à la partie visuelle.
+Le bleu foncé pour le texte, les bordures et les icônes.
 
-Une fois cette base posée, j’ai créé les wireframes et les maquettes sur Figma, pour anticiper la structure de l’application et imaginer le parcours utilisateur.
+Le violet clair pour l’interface des bibliothécaires.
 
-#### **Charte graphique**
+Le bleu clair pour l’interface des administrateurs.
 
-J’ai choisi un design à la fois convivial et ludique, pour que les utilisateurs non techniques — qui sont tous des parents bénévoles — se sentent rapidement à l’aise avec l’outil.
+Ces couleurs ont été vérifiées pour garantir une bonne visibilité et un contraste suffisant, afin que tout soit facile à lire et agréable pour les utilisateurs.
 
-L’identité visuelle de Tosho reflète l’esprit chaleureux de l’association et le côté ludique de l’école japonaise.
-Les couleurs principales permettent de différencier les interfaces selon le rôle :
+L’interface est responsive, avec des icônes style pixel art pour garder un aspect ludique et familier.
 
-une teinte violette pour les bibliothécaires,
+Arborescence
 
-une teinte bleue pour les administrateurs.
+L’arborescence du site a été pensée pour être simple et logique.
 
-L’interface est simple, intuitive et responsive, afin que les parents bénévoles puissent l’utiliser facilement sur mobile comme sur ordinateur.
-J’ai également ajouté des icônes au style pixel art, pour donner un aspect ludique et familier, tout en gardant une cohérence graphique avec le logo.
+Depuis la page d’accueil, on accède à la connexion et aux pages statiques, comme les mentions légales ou la politique de cookies.
 
-#### **Arborescence**
+Après la connexion, l’utilisateur est redirigé vers son espace selon son rôle.
 
-L’arborescence du site a été pensée pour rester logique et fluide, avec deux espaces bien distincts :
+Côté bibliothécaire, on retrouve les pages pour les prêts et retours, l’inventaire et le compte personnel. Sur la page d’accueil, une notification signale les retours en retard.
 
-l’espace administrateur,
+Côté administrateur, on a un accès complet à la gestion des livres, des familles, des bibliothécaires et des sessions d’inventaire.
+Seul l’administrateur peut créer les comptes bibliothécaires.
+L'admin a aussi l'accès au espace bibliothécaire.
 
-et l’espace bibliothécaire.
+Stack technique
 
-Une fois être connecté à son compte, selon les rôles, les utilisaters atterissent au page d'accueil spécifique:
+Pour la partie technique, j’ai utilisé plusieurs technologies.
 
-Les bibliothécaires peuvent enregistrer les prêts et les retours, rechercher un prêt par livre ou par famille, et participer à l’inventaire annuel.
+Côté front-end, j’ai utilisé du HTML avec des balises sémantique pour structurer les pages proprement, et du CSS organisé par composants, avec des variables pour les couleurs et les polices.
+Les media queries permettent à l’application de s’adapter aux différentes tailles d’écran.
 
-Les administrateurs, eux, ont accès à la gestion complète : les livres, les familles, les sessions d’inventaire, et les bibliothécaires, 
+J’ai utilisé Twig, le moteur de templates de Symfony, pour séparer le code PHP de la partie visuelle, et réutiliser facilement les éléments communs comme le header ou le footer.
 
-J’ai aussi intégré toutes les pages nécessaires à l’authentification : connexion, réinitialisation de mot de passe, et déconnexion.
+En JavaScript, j’ai ajouté des interactions dynamiques, par exemple la preremplissage automatique d’un formulaire d'ajoute de livre à partir de son ISBN, grâce à Stimulus.
 
-Enfin, le site comprend aussi les pages légales classiques, comme les mentions légales, la politique de confidentialité et la gestion des cookies.
-
-#### **Stack technique**
-
-> Tosho utilise :
->
-> * **Symfony 6.4** pour le back-end
-> * **Twig**, **CSS** et **JavaScript** pour le front
-> * **MySQL** pour gestion de base de donné relationnel
-
-#### **MCD**
-
-> Les principales tables :
->
-> * `book` : livres
-> * `family` : familles
-> * `loan` : emprunts
-> * `user` : admins et bibliothécaires
-inventory : session de l'inventaire
-inventoryItem : livre ajouté dans une session de l'inventaire
->   Chaque emprunt relie un **livre** et une **famille**.
-
----
-
-### **4. Démo (6 à 10 min)**
+Et enfin, côté back-end, l’application tourne avec PHP 8.2, Symfony 6.4 et MySQL.
+Symfony gère la base de données, les formulaires, la sécurité et les rôles utilisateurs, ce qui facilite beaucoup le développement et la maintenance.
 
 
----
+L’application suit le modèle MVC (Model – View – Controller)propre à Symfony, qui sépare clairement les responsabilités :  
+- **Controller (Contrôleur)** : reçoit les requêtes de l’utilisateur, exécute la logique métier et envoie les données vers la vue correspondante.  
+- **Model (Modèle)** : gère les entités et communique avec la base de données via **Doctrine ORM**, puis renvoie les données au contrôleur.  
+- **View (Vue)** : reçoit les données du contrôleur et génère l’affichage des pages avec **Twig**.
 
-### **5. Front-end (5 min)**
+MCD
+Pour la conception de la base de données, j’ai d’abord tout dessiné sur papier, pour bien visualiser les tables et leurs relations. 
 
-> Pour faciliter la navigation, j'ai mis en place des onglets pour chaque page de fonctionnalité. par example, pour les prêts et les retours des livres, pour que l'accès aux champs de recherche soit claire et pratique, j'ai mis un onglet pour recherche par famill, un autre onglet pour la recherche par livre. 
+MPD
+Une fois le schéma et la cardinalité validés par mon formateur, je l’ai ensuite traduit en entités Symfony, donc en classes PHP gérées par Doctrine.
 
-Pour faciliter l'ajout de livres dans le catalogue, j'ai mis en place d'une foncitonnalité de préremplir le formulaire d'ajout d'un livre. l'utilisateur saisi un code isbn, avec l'api, on récupére les infos sur les livres et préremplir le formulaire. j'ai utilisé deux api différents pour récupérer les donnés différents.
-openlibrary pour récupérer les titres et l'auteur en romaji. romaji cest un alphabet latin pour faciliter la lecture en japonais. et l'url de couverture. deuxième api est openBd, c'est un api japonais, pour récupérer les titres et les auteurs en japonais. cette fonctionnalité est développé avec framework js Stimulus. cette fonctionnalité a augmenté la qualité de l'experience user.
+Chaque entité correspond à une table de la base de données, avec ses propriétés pour les champs et ses relations avec les autres entités.
 
-> * responsive avec des `media queries` est aussi pensé. sur l'ecran mobile, les composants sont adapté correctement.
+Cette étape m’a permis d’obtenir une structure claire, cohérente et facile à maintenir pour la suite du développement.
 
----
+Sécurité
 
-### **6. Back-end (5 min)**
+Pour protéger l’application, j’ai mis en place une gestion des accès basée sur les rôles et autorisations.
 
-> Pour le back, j’ai utilisé le modèle **MVC** de Symfony.
-> Exemple : quand on fait un prêt.
->
-> * Le contrôleur reçoit les données du formulaire.
-> * Il crée un nouvel objet **Loan**.
-> * Doctrine enregistre dans la base MySQL.
-> * La page affiche le prêt.
->   C’est un exemple simple de **CRUD** : créer, lire, modifier, supprimer.
+Il y a deux rôles principaux :
 
----
+ROLE_ADMIN qui a un accès complet à toutes les fonctionnalités,
 
-### **7. Test (2-3 min)**
+et ROLE_LIBRARIAN qui a un accès restreint, limité aux prêts, retours et inventaire.
 
----
+Selon le rôle, l’utilisateur est redirigé automatiquement vers son espace grâce à l’AuthenticationSuccessHandler.
+Avant chaque connexion, le fichier UserChecker.php vérifie que le compte est bien actif. Si un bibliothécaire a été désactivé, il ne peut plus se connecter.
 
-### **8. Roadmap (1 min)**
+Ensuite, j’ai mis en place un filtrage des accès pour contrôler ce que chaque utilisateur peut faire.
+Côté back-end, j’utilise la méthode isGranted() pour vérifier les permissions sur certaines actions.
+Côté front-end, dans Twig, je peux afficher ou masquer des éléments selon le rôle avec {% if is_granted('ROLE_ADMIN') %}.
 
-> Pour la suite, j’aimerais ajouter :
->
-> * une vraie **connexion sécurisée** avec rôles
-> * un **historique des prêts** pour chaque famille
-> * une **recherche avancée**
-> * et peut-être un **QR code** pour enregistrer les livres plus vite.
+En résumé, chaque utilisateur voit et peut faire uniquement ce qui correspond à son rôle, ce qui sécurise l’application tout en restant simple à utiliser.
 
----
+Pour sécuriser les données dans Tosho, j’ai utilisé plusieurs mécanismes intégrés à Symfony.
 
-### **9. Conclusion (3 min)**
+Toutes les requêtes vers la base passent par Doctrine avec des requêtes préparées. Ça signifie que les données des utilisateurs ne sont jamais insérées directement dans le SQL, ce qui protège contre les injections.
 
-> J’ai rencontré des difficultés, surtout avec les **relations entre tables** et le **contrôleur**.
-> J’ai trouvé des solutions grâce à la **documentation Symfony** et **Stack Overflow**.
-> Par exemple, pour un problème de jointure, j’ai trouvé une réponse en anglais et je l’ai adaptée à mon projet.
->
-> Ce projet m’a appris à **organiser mon travail**, à **structurer mon code**, et à **comprendre Symfony**.
->
-> Je suis très content d’avoir créé une application utile, pour une vraie école.
-> Tosho aide les bénévoles à gagner du temps et à mieux gérer la bibliothèque.
-> C’est un projet dont je suis fier.
+Les formulaires sont aussi protégés par des tokens CSRF : chaque formulaire contient un jeton unique vérifié à l’envoi. Ça permet de s’assurer que seules les actions venant d’utilisateurs authentifiés sont acceptées et empêche les attaques externes.
+
+Comme j’ai utilisé les classes AbstractType et FormType pour créer les formulaires, cette protection est automatique.
+
+En résumé, grâce aux requêtes préparées et aux tokens CSRF, les données restent fiables et sécurisées, et Symfony prend bien en charge cette partie sécurité.
+
+5. Front-end (5 min)
+
+Système d’onglets pour basculer entre les fonctionnalités sans recharger la page.
+
+Formulaires de recherche et d’ajout pour chaque module.
+
+Saisie automatique via ISBN avec OpenBD et OpenLibrary, gérée par Stimulus.
+
+Interface fluide, intuitive et rapide pour les bénévoles.
+
+6. Back-end (5 min)
+
+Gestion des statuts de livres et prêts avec des Enums pour éviter les erreurs.
+
+LoanController centralise les recherches et enregistrements de prêts/retours.
+
+Recherches performantes avec LIKE, en français et japonais.
+
+ParamConverter pour récupérer directement les entités depuis l’URL.
+
+Historique conservé : pas de suppression des données pour garder une traçabilité complète.
+
+7. Deploiement
+
+Au début, j’ai développé Tosho sur Windows avec XAMPP, mais au fil du temps, j’ai remarqué que le chargement des pages était souvent très lent et que XAMPP manquait de stabilité.
+
+Pendant mon stage, j’ai travaillé dans un environnement Linux et j’ai pu voir comment se fait le déploiement avec Docker. Cela m’a donné envie de migrer mon projet sur Ubuntu avec Docker.
+
+Pour Docker, j’ai configuré deux fichiers principaux : docker-compose.yml et Dockerfile.
+
+Le docker-compose.yml définit tous les services dont mon application a besoin : PHP, MySQL, Nginx… et leur réseau pour communiquer entre eux. L’avantage, c’est que chaque conteneur est indépendant et peut être reconstruit facilement avec la commande docker compose up --build.
+
+Le Dockerfile est un script qui s’exécute quand on crée le conteneur. Il installe toutes les dépendances, Composer, Symfony CLI, définit le répertoire de travail, copie les fichiers du projet et expose le port pour que l’application soit accessible.
+
+Grâce à ces deux fichiers, je peux lancer l’application sur n’importe quelle machine avec Docker, et l’environnement reste toujours identique, stable et prêt pour la production.
+
+Pour la mise en production, j’ai utilisé un VPS Ubuntu avec Nginx. Il reçoit les requêtes HTTP et HTTPS, les redirige vers Docker, et gère le SSL pour sécuriser le site. Les informations sensibles sont stockées dans un fichier .env, exclu du dépôt Git pour garantir la sécurité.
+
+Enfin, pour faciliter la prise en main, j’ai rédigé un README.md avec les étapes pour lancer le projet et les commandes utiles, et ajouté un Makefile pour simplifier l’exécution des commandes répétitives.
+
+8. Roadmap (1 min)
+
+Pour la suite :
+
+Connexion sécurisée avec rôles
+
+Historique des prêts par famille
+
+Recherche avancée
+
+QR code pour enregistrer les livres plus rapidement
+
+9. Conclusion (3 min)
+
+Ce projet m’a permis de mettre en pratique mes compétences en développement web et d’apprendre à résoudre des problèmes techniques.
+Pendant mon stage, j’ai découvert le développement professionnel avec des tâches variées : pagination React, import CSV, Keycloak, middleware Laravel, tri dans React…
+
+Pour l’avenir de Tosho :
+
+Gestion complète de la bibliothèque
+
+Interface multilingue, planning des bénévoles, alertes pour retours en retard, réservation en ligne.
+
+Sur le plan professionnel :
+
+Je souhaite continuer mes études en alternance pour approfondir mes compétences en programmation et découvrir le DevOps.
+
+Je compte aussi reprendre le rôle de responsable IT de l’association pour la refonte du site vitrine.
+
+En résumé, ce projet m’a permis de renforcer mes compétences, gagner en autonomie et préparer mes prochaines étapes professionnelles.
