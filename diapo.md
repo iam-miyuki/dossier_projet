@@ -207,12 +207,33 @@ _mermaid: true
 
 ## Front-end
 
+### Mise en place des onglets
+<div style="display: flex; justify-content: space-around; align-items: flex-start; gap: 5px;">
+<img src="img/code-diapo/onglets-twig.svg" width="40%"/>
+*loan/index.html.tiwg*
+<img src="img/code-diapo/css-tab.svg" width="40%"/>
+*_tabs.css*
+<img src="img/code-diapo/tab-controller.svg" width="40%"/>
+*LoanController.php*
 
+</div>
 
 ---
 
 # Développement
+
+## Front-end
+
+### Stimulus
+
+
+---
+
+
+# Développement
 ## Back-end
+
+### 
 
 ---
 
@@ -248,11 +269,28 @@ _mermaid: true
 
 # Conclusion
 
+- **Mise en pratique des compétences web**  
+  HTML, CSS, JS, PHP, Symfony, intégration fidèle aux maquettes
+
+- **Résolution de problèmes techniques**  
+  Débogage, optimisation, interactions dynamiques
+
+- **Vision complète du cycle de développement**  
+  Analyse des besoins → conception → développement → tests → optimisation
 ---
 
 # Roadmap
 
+- **Perspectives et projet pro**  
+  - Tosho utilisé en conditions réelles par l’association
+  - Refonte de site de l'asso en VueJs
+  - Alternance
 
+- **Évolutions futures**  
+  - Recherche interactive AJAX  
+  - Interface multilingue FR / JP  
+  - Planning parents-bibliothécaires  
+  - Réservation en ligne
 
 
 
