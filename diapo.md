@@ -98,22 +98,8 @@ _mermaid: true
 
 # Outils utilisés
 
-<table style="width:100%; text-align:center;">
-  <tr>
-    <td><img src="img/logos/devicon_git.svg" width="80px" /><br>Git</td>
-    <td><img src="img/logos/mdi_github.svg" width="80px" /><br>GitHub</td>
-    <td><img src="img/logos/devicon_vscode.svg" width="80px" /><br>VS Code</td>
-    <td><img src="img/logos/logos_xampp.svg" width="80px" /><br>XAMPP</td>
-    <td><img src="img/logos/logos_ubuntu.svg" width="80px" /><br>WSL Ubuntu</td>
-  </tr>
-  <tr>
-    <td><img src="img/logos/skill-icons_docker.svg" width="80px" /><br>Docker</td>
-    <td><img src="img/logos/skill-icons_postman.svg" width="80px" /><br>Postman</td>
-    <td><img src="img/logos/devicon_dbeaver.svg" width="80px" /><br>DBeaver</td>
-    <td><img src="img/logos/codicon_terminal-git-bash.svg" width="80px" /><br>Git Bash</td>
-    <td></td>
-  </tr>
-</table>
+<img src="img/outils.png" width="45%" />
+
 
 ---
 
@@ -136,70 +122,112 @@ _mermaid: true
 <img src="img/ui/logo-big.svg" width="32%" style="object-fit: contain;" />
 
 ## Icônes
-<div style="display: flex; justify-content: space-around; align-items: flex-start; gap: 20px;">
-  <img src="img/ui/child-book.svg" width="10%" style="object-fit: contain;" />
-  <img src="img/ui/books.svg" width="10%" style="object-fit: contain;" />
-  <img src="img/ui/family.svg" width="10%" style="object-fit: contain;" />
-  <img src="img/ui/home.svg" width="10%" style="object-fit: contain;" />
-  
-</div>
+<img src="img/ui/icons.png" width="32%" style="object-fit: contain;" />
 
 ### Identité visuelle ludique conviviale et accessible pour des parents bénévoles non techniques
 
 ---
 
 # Arborescence
-
-<img src="img/sitemap.PNG" width="80%"/>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 ---
 # Arborescence
-<img src="img/arbbib.PNG" width="100%"/>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 ---
 # Arborescence
-<img src="img/admin1.PNG" width="100%"/>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 ---
 # Arborescence
-<img src="img/admin2.PNG" width="100%"/>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 ---
 
 # Stack technique
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-## Front-end
-<table style="width:100%; text-align:center;">
-<tr>
-    <td><img src="img/logos/logos_html-5.svg" width="80px" /><br>HTML</td>
-    <td><img src="img/logos/logos_css-3.svg" width="80px" /><br>CSS</td>
-    <td><img src="img/logos/material-icon-theme_twig.svg" width="80px" /><br>Twig</td>
-    <td><img src="img/logos/logos_javascript.svg" width="80px" /><br>JavaScript</td>
-</tr>
-</table>
 
-## Back-end
-<table style="width:100%; text-align:center;">
-<tr>
-    <td><img src="img/logos/devicon_php.svg" width="80px" /><br>PHP 8.2</td>
-    <td><img src="img/logos/devicon_symfony.svg" width="80px" /><br>Symfony 6.4</td>
-    <td><img src="img/logos/logos_mysql.svg" width="80px" /><br>MySQL</td>
-</tr>
-</table>
 
 ---
 
 # Architechture MVC
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
-<img src="img/markdown-image-86221.png" width="80%"/>
 
 ---
 
 # Modèle de donnés
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-<img src="img/toshomdc.png" width="80%"/>
+
 
 ---
 
@@ -208,15 +236,15 @@ _mermaid: true
 ## Front-end
 
 ### Mise en place des onglets
-<div style="display: flex; justify-content: space-around; align-items: flex-start; gap: 5px;">
-<img src="img/code-diapo/onglets-twig.svg" width="40%"/>
-*loan/index.html.tiwg*
-<img src="img/code-diapo/css-tab.svg" width="40%"/>
-*_tabs.css*
-<img src="img/code-diapo/tab-controller.svg" width="40%"/>
-*LoanController.php*
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-</div>
 
 ---
 
@@ -225,6 +253,14 @@ _mermaid: true
 ## Front-end
 
 ### Stimulus
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
 ---
@@ -232,18 +268,32 @@ _mermaid: true
 
 # Développement
 ## Back-end
-
-### 
+<br><br>
+<br><br>
+<br><br>
+<br>
+<br><br>
+<br> 
 
 ---
 
 # Sécurité
 ## Gestion d'accès
+<br>
+<br><br>
+<br><br>
+<br><br>
+<br>
+<br>
+<br>
 
 ---
 # Sécurité
 ## Protection des donnés
-
+<br><br>
+<br><br>
+<br>
+<br>
 ---
 
 
@@ -253,13 +303,29 @@ _mermaid: true
 
 ---
 # Déploiement
-## Mise en production & Documentation
+## Mise en production & Documentation<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
 
 ---
 
 # Difficultés rencontrés
 
-## Problème de récupération des donnés dû à Lazy Roading
+## Problème de récupération des données dû au Lazy Loading
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 
 ---
 
