@@ -58,6 +58,7 @@ Organisation
 
 J’ai commencé par lister toutes les fonctionnalités et rédiger un cahier des charges avec des user stories.
 Ensuite, j’ai créé les wireframes et maquettes sur Figma pour visualiser le parcours utilisateur.
+- **Objectif** : clarifier les besoins avant le développement
 
 L’identité visuelle de Tosho a été pensée pour refléter l’esprit de l’association scolaire. à la fois ludique, conviviale et accessible.
 L’objectif est de proposer une interface simple à comprendre, agréable à utiliser, et adaptée aux parents bénévoles.
