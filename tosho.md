@@ -30,7 +30,7 @@
    - [3.3 Contraintes](#33-contraintes)
    - [3.4 Arborescence](#34-arborescence)
 
-4. [Conception visuelle](#4-conception-visuelle)
+4. [Conception UI/UX](#4-conception-uiux)
    - [4.1 Charte graphique](#41-charte-graphique)
    - [4.2 Wireframes](#42-wireframes)
    - [4.3 Maquettes](#43-maquettes)
@@ -53,6 +53,7 @@
    - [8.2 Configuration de Docker](#82-configuration-de-docker)
    - [8.3 Mise en production](#83-mise-en-production)
    - [8.4 Documentation et prise en main](#84-documentation-et-prise-en-main)
+   - [8.5 Suivi post-MEP](#85-suivi-post-mep)
 
 9. [Difficultés rencontrées](#9-difficultés-rencontrées)
 
@@ -60,7 +61,7 @@
 
 11. [Documentation en anglais](#11-documentation-en-anglais)
       - [11.1 Contexte](#111-contexte)
-      - [11.2 Early Return vs. Classic If-Else: A Universal  attern for Writing Cleaner Code](#112-early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code)
+      - [11.2 Early Return vs. Classic If-Else: A Universal pattern for Writing Cleaner Code](#112-early-return-vs-classic-if-else-a-universal-pattern-for-writing-cleaner-code)
       - [11.3 Retour anticipé contre l'If-Else classique : Un modèle universel pour écrire du code plus propre](#113-retour-anticipé-contre-lif-else-classique--un-modèle-universel-pour-écrire-du-code-plus-propre)
 
 12. [Conclusion](#12-conclusion)
@@ -76,11 +77,11 @@
 
 **Tosho** est une application web conçue pour faciliter la gestion des prêts de livres au sein d’une école japonaise. En japonais, **Tosho** signifie *« bibliothèque »* ou *« livre »*.
 
-Ce projet vient de mon expérience personnelle. Ma fille apprend le japonais dans une école associative pour les enfants d’origine japonaise. Cette école est entièrement gérée par des parents bénévoles, dont je fais partie. Nous avons une petite bibliothèque et nous prêtons régulièrement des livres aux familles afin que les enfants se familiarisent avec la lecture en japonais.
+Ce projet vient de mon expérience personnelle. Ma fille apprend le japonais dans une école associative pour les enfants bilangue franco-japonaise. Cette école est entièrement gérée par des parents bénévoles, dont je fais partie. Nous avons une petite bibliothèque et nous prêtons régulièrement des livres aux familles afin que les enfants se familiarisent avec la lecture en japonais.
 
 L’application actuellement utilisée pour les prêts de livres manque d’ergonomie et de fonctionnalités essentielles. L’interface administrateur n’est accessible que par le développeur initial, un ancien parent bénévole, et bien qu’elle reste fonctionnelle, elle présente une interface brute sans mise en forme CSS.
 
-Tosho a pour objectif de simplifier la gestion des prêts de livres au quotidien, tout en offrant une expérience utilisateur plus fluide et moderne. Cette solution permet aux parents bénévoles de disposer d’un outil clair et autonome pour centraliser et gérer efficacement la bibliothèque.
+Tosho a pour objectif de simplifier la gestion des prêts de livres au quotidien, tout en offrant une expérience utilisateur plus fluide et moderne. Cette solution permet aux parents bénévoles de disposer d’un outil simple d'utilisatoin et autonome pour centraliser et gérer efficacement la bibliothèque.
 
 Ce projet m’a permis de mettre en pratique les compétences acquises au cours de ma formation de Développeur Web et Web Mobile, de la conception au déploiement. J’ai pu expérimenter l’ensemble du processus de développement : analyse des besoins, architecture logicielle, gestion de la base de données, développement front-end et back-end, ainsi que la sécurisation des accès et la mise en place d’une interface responsive. 
 
@@ -139,7 +140,7 @@ Les contrôleurs interagissent avec les entités pour récupérer ou modifier le
 ### Documentner le déploiement d’une application dynamique web ou web mobile
 
 Pour le déploiement, j’ai utilisé **Docker**, ce qui permet de standardiser l’environnement de développement et de production. J’ai rédigé un ``dockerfile`` qui décrit toutes les étapes nécessaires pour construire l’image de l’application : installation des dépendances, configuration, copie des fichiers, etc.
-Toutes les commandes nécessaires à l’exécution du projet avec Docker sont documentées dans le fichier ``README.md``. Cela permet à n’importe quel utilisateur de cloner le dépôt et de lancer l’application en quelques lignes de commande, sans avoir à configurer manuellement l’environnement.
+Toutes les commandes nécessaires à l’exécution du projet avec Docker sont documentées dans le fichier ``README.md``. Cela permet à n’importe quel développeur de cloner le dépôt et de lancer l’application en quelques lignes de commande, sans avoir à configurer manuellement l’environnement. L’initialisation d’une BDD fictive est aussi incluse dans le dépôt git de demarrage.
 
 <div style="page-break-after: always;"></div>
 
@@ -149,14 +150,14 @@ Toutes les commandes nécessaires à l’exécution du projet avec Docker sont d
 # 3. Cahier des charges
 ## 3.1 Contexte et objectifs
 ### Contexte
-Le projet **Tosho** est inspiré d’une application web actuellement utilisée au sein d’une école japonaise associative qui propose des cours de japonais aux enfants d’origine japonaise. L’école est entièrement gérée par des parents bénévoles, dont je fais partie, et met à disposition une petite bibliothèque afin d’encourager la lecture en japonais auprès des enfants.
+Le projet **Tosho** est inspiré d’une application web actuellement utilisée au sein d’une école japonaise associative qui propose des cours de japonais aux enfants bilingue franco-japonais. L’école est entièrement gérée par des parents bénévoles, dont je fais partie, et met à disposition une petite bibliothèque afin d’encourager la lecture en japonais auprès des enfants.
 
 Chaque semaine, les familles adhérentes peuvent emprunter des livres pour leurs enfants. Jusqu’à présent, ces prêts sont gérés via une application web existante, développée il y a plusieurs années par un ancien parent bénévole.
 Le fonctionnement actuel est le suivant :
 
 1. La famille choisit les livres à emprunter.
 
-2. Chaque livre possède une étiquette avec un code unique (différent de l’ISBN) généré par l’association.
+2. **Chaque livre possède une étiquette avec un code unique** (différent de l’ISBN) généré par l’association.
 
 3. Le parent bibliothécaire saisit le nom de famille de l’emprunteur.
 
@@ -183,9 +184,9 @@ Ces contraintes rendent la gestion quotidienne de la bibliothèque peu flexible 
 
 C’est dans ce contexte qu’a été conçu Tosho, une nouvelle application web de gestion des prêts de livres, pensée pour offrir une utilisation simple, fluide et autonome, sans dépendance à un intervenant technique extérieur.
 
-### Objectifs
+### Objectifs 
 
-Le projet Tosho a pour objectif principal de faciliter et moderniser la gestion de la bibliothéque, tout en offrant aux parents bénévoles un outil simple, efficace et autonome.
+Le projet Tosho a pour **objectif principal de faciliter et moderniser la gestion de la bibliothéque**, tout en offrant aux parents bénévoles un outil simple, efficace et **autonome**.
 
 Plus précisément, le projet vise à :
 
@@ -198,6 +199,12 @@ Plus précisément, le projet vise à :
 - Offrir une solution évolutive, qui pourra être enrichie ultérieurement de fonctionnalités supplémentaires (réservations, rappels automatiques, multilingue, etc.).
 
 Ainsi, Tosho se positionne comme une solution moderne et complète, permettant aux bénévoles de gérer la bibliothèque de manière autonome et efficace, tout en garantissant un suivi fiable des prêts et retours de livres.
+
+### MVP de Tosho
+
+- Fonctionnalité **prêter et rendre des livres**
+
+- **Interface Admin** pour gérer la gestion complete
 
 ## 3.2 User stories
 
@@ -284,6 +291,8 @@ Ainsi, Tosho se positionne comme une solution moderne et complète, permettant a
 | Bibliothécaire     | Initialiser mon mot de passe        | En cas de perte de mot de passe                   | 0        |
 
 
+
+
 ## 3.3 Contraintes
 
 - L’interface doit être **simple** et **intuitive**, adaptée à des utilisateurs non techniques. Les bibliothécaires et **les administrateurs sont des bénévoles**.
@@ -364,7 +373,7 @@ Ainsi, Tosho se positionne comme une solution moderne et complète, permettant a
 
 ---
 
-# 4. Conception visuelle
+# 4. Conception UI/UX
 
 L’identité visuelle de **Tosho** a été pensée pour refléter l’esprit d’une association scolaire : à la fois **ludique**, **conviviale** et **accessible**.
 L’objectif est de proposer une interface simple à comprendre, agréable à utiliser et adaptée aux parents bénévoles.
@@ -447,6 +456,8 @@ Pour assurer la meilleure expérience utilisateur (**UX**) sur mobile comme sur 
 - Les onglets et sections restent bien visibles et accessibles pour une navigation intuitive.
 
 <img src="/img/ui/maquette-desk.PNG" style="width:60%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+---
 
 # 5. Conception technique
 ## 5.1 Technologies utilisées
@@ -685,7 +696,12 @@ L’accès à certaines pages ou fonctionnalités est restreint selon le rôle d
 
 Dans le code, la méthode `isGranted()` est utilisée pour limiter les actions selon le rôle.
 
-Dans les vues Twig, `{% if is_granted('ROLE_ADMIN') %}` permet d’afficher certains éléments uniquement aux administrateucd cs.
+<img src="/img/isgranted.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Dans les vues Twig, la condition ``{% if is_granted('ROLE_ADMIN') %}`` permet d’afficher certains éléments uniquement aux administrateurs.
+Par exemple, le bouton permettant de basculer entre l’interface Admin et celle de bibliothécaire n’apparaît que si l’utilisateur connecté possède le rôle ``ROLE_ADMIN``.
+<img src="/img/isgranted2.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
 
 Ce contrôle garantit que chaque utilisateur n’a accès qu’aux informations et fonctionnalités qui le concernent.
 
@@ -730,6 +746,8 @@ Côté **contrôleur**, le paramètre **``tab``** est récupéré dans la requê
 <img src="/img/code/tab.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 Cela permet d’afficher dynamiquement le bon onglet après une recherche ou un rafraîchissement de page.
+
+<img src="/img/tabs.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 
 ### Interaction front-end : saisie automatique via ISBN
@@ -865,6 +883,9 @@ Depuis la page **Prêts & Retours**, le bibliothécaire peut rechercher des prê
 
 ## Prêter depuis l’onglet “Par famille”
 Dans l’onglet Recherche par famille, une fois la famille sélectionnée, **la liste des prêts en cours** s’affiche.
+<img src="img/loan1.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+
 Lorsqu’un bibliothécaire souhaite prêter un nouveau livre à la famille acuelle, il saisit le code du livre dans le champ prévu, puis clique sur **“Prêter”**.
 
 **Au niveau de la base de données :**
@@ -878,6 +899,8 @@ Lorsqu’un bibliothécaire souhaite prêter un nouveau livre à la famille acue
 - **la date de retour prévu est enregistrée automatiquement**.
 
 **Si le code saisi correspond à un livre déjà prêté** à une autre famille, un **message d’erreur** est affiché.
+
+<img src="img/loan2.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 **Au niveau de l’affichage :**
 
@@ -906,6 +929,9 @@ Dans cet onglet, le bibliothécaire peut rechercher un livre par code ou mot-cl�
 Une fois le livre trouvé, sa fiche d'information s’affiche avec son statut actuel.
 
 **Si le livre est disponible**, un bouton **“Prêter ce livre”** apparaît.
+
+<img src="img/loan.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
 Le bibliothécaire choisit alors la famille à qui le livre sera prêté.
 Une fois la famille sélectionnée, le prêt est enregistré et l’utilisateur est redirigé automatiquement vers la page de la famille, où **la liste des prêts est mise à jour**.
 
@@ -914,13 +940,17 @@ Une fois la famille sélectionnée, le prêt est enregistré et l’utilisateur 
 **Si le livre est actuellement prêté**, un bouton **“Rendre”** est visible dans l’en-tête de la fiche du livre.
 En cliquant dessus, le bibliothécaire enregistre le retour du livre et l’utilisateur est automatiquement redirigé vers la page de la famille concernée avec **la liste des prêts mise à jour**.
 
+<img src="img/loan3.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+---
+
 # 8. Déploiement
 ## 8.1 Choix de l’environnement et mise en place de Docker
 
 La majeure partie du développement de mon projet s’est déroulée dans un environnement **Windows** avec **XAMPP** comme serveur local. Cependant, au fil de l’avancement, j’ai constaté que cette configuration manquait de performance : le chargement des pages était particulièrement **lent** et XAMPP **manquait de stabilité**.
 
 Durant mon stage, j’ai travaillé dans un environnement **Linux**, et j’ai eu l’occasion d’assister à la mise en production d’un projet avec **Docker**.
-Cette expérience m’a motivé à faire évoluer mon propre projet vers un environnement **Ubuntu**, en utilisant **Docker** pour exécuter mon application dans des conteneurs.
+Cette expérience m’a motivé à faire évoluer mon propre projet vers un environnement **WSL Ubuntu**, en utilisant **Docker** pour exécuter mon application dans des conteneurs.
 
 Cette nouvelle configuration s’est révélée beaucoup plus rapide, stable et proche d’un environnement de production réel.
 
@@ -931,7 +961,7 @@ Cette nouvelle configuration s’est révélée beaucoup plus rapide, stable et 
 - **Facilité de déploiement et de maintenance**.
 
 
-Le passage de **Windows + XAMPP** à **Ubuntu + Docker** a permis d’obtenir un environnement de développement plus fiable, performant et plus proche d’une configuration de production.
+Le passage de **Windows + XAMPP** à **WSL Ubuntu + Docker** a permis d’obtenir un environnement de développement plus fiable, performant et plus proche d’une configuration de production.
 
 ## 8.2 Configuration de Docker
 
@@ -939,7 +969,7 @@ Pour **Docker**, j’ai configuré :
 
 **``docker-compose.yml``** : définit les services et conteneurs (PHP, MySQL, Nginx…), ainsi que le réseau pour qu’ils puissent communiquer entre eux. Chaque conteneur est réutilisable et peut être reconstruit facilement avec ```docker compose up --build```
 
-**``Dockerfile``** : script exécuté lors de la création du conteneur. Il installe les dépendances, Composer, Symfony CLI, définit le répertoire de travail, copie les fichiers du projet et expose le port.
+**``Dockerfile``** : script exécuté lors de la création du conteneur. Comme **Symfony ne propose pas d’image officielle Docker**, j’ai dû installer manuellement plusieurs dépendances, dont la **Symfony CLI**. Il installe également les dépendances, Composer, définit le répertoire de travail, copie les fichiers du projet et expose le port. 
 
 Cette configuration permet de lancer l’application sur n’importe quelle machine avec Docker.
 ## 8.3 Mise en production
@@ -949,9 +979,10 @@ J’ai installé **Nginx** comme serveur web pour :
 
 - **Recevoir les requêtes HTTP et HTTPS**
 
-- **Rediriger les requêtes vers les conteneurs Docker qui exécutent l’application Symfony**
+- **Rediriger les requêtes vers les conteneurs Docker qui exécutent l’application PHP**
 
 - Gérer le **HTTPS avec certificat SSL et redirection automatique vers HTTPS**
+
 
 Les variables d’environnement sont configurées dans un fichier **``.env``**, ce qui permet de stocker les informations sensibles (identifiants de base de données, clés API…) hors du code source. Ce fichier est **exclu du dépôt Git** via **``.gitignore``** pour garantir la sécurité.
 ## 8.4 Documentation et prise en main
@@ -966,7 +997,20 @@ Pour faciliter la prise en main du projet, j’ai rédigé un **``README.md``** 
 
 - **Commandes utiles**
 
+<img src="img/doc.PNG" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+*Extrait de README.md*
+
 Pour simplifier l’utilisation de Docker, j’ai ajouté un **``Makefile``**, qui permet de transformer des commandes longues et répétitives en **commandes simples à exécuter**.
+
+<img src="img/make.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+## 8.5 Suivi post MEP
+
+Après la mise en production, un suivi régulier est nécessaire pour garantir le bon fonctionnement de l’application. Cela inclut la **sauvegarde régulière de la base de données**, **le renouvellement des certificats HTTPS**.
+
+**Mise à jours du code** 
+Une fois les changements commités et validés sur la branche ``main`` de mon projet, il suffit d’exécuter un ``git pull`` sur le serveur pour récupérer la dernière version du code.
 
 ---
 
@@ -1016,14 +1060,14 @@ Lorsque l’inventaire est récupéré via le **ParamConverter**, les informatio
 
 <img src="img/code/lazy.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
-Par défaut, Doctrine utilise le lazy loading, ce qui signifie que les relations ne sont chargées que lorsqu’elles sont explicitement utilisées. Ainsi, si l’on accède aux inventoryItems dans Twig sans les avoir préchargés, leur collection reste vide. Ici,
+Par défaut, Doctrine utilise le **lazy loading**, ce qui signifie que les **relations ne sont chargées que lorsqu’elles sont explicitement utilisées**. Ainsi, si l’on accède aux inventoryItems sans les avoir préchargés, leur collection reste vide. Ici,
 en faisant ``dd($inventory);``, le résultat montre que inventoryItems est vide : 
 
 <img src="img/code/lazylazy.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 **Solution**
 
-Pour résoudre ce problème, j’ai créé une requête personnalisée dans le InventoryRepository afin de récupérer l’inventaire avec tous ses items et les livres associés en une seule requête :
+Pour résoudre ce problème, j’ai créé une requête personnalisée dans le InventoryRepository afin de récupérer l’inventaire avec tous ses items et les livres associés en une seule requête (**Eager loading**) :
 
 <img src="img/code/findWithItems.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
@@ -1031,6 +1075,7 @@ Après cette modification, inventoryItems contient bien tous les éléments et l
 
 <img src="img/code/lazi.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
+---
 
 # 10. Veille technologique
 Tout au long de ma formation, je me suis documenté et informé pour progresser, résoudre des problèmes techniques et me tenir à jour sur les évolutions dans le domaine du développement web.
@@ -1053,7 +1098,7 @@ Ces ressources m’ont également permis de m’habituer à lire et comprendre *
 # 11. Documentation en anglais
 ## 11.1 Contexte
 
-Lors de ma période de stage, j'ai eu l'occasion de observer des **revues de code via GitLab**. Cela m'a permis de comprendre l'importance d'écrire un **code propre et lisible** (clean code).  
+Lors de ma période de stage, j'ai eu l'occasion d'observer des **revues de code via GitLab**. Cela m'a permis de comprendre l'importance d'écrire un **code propre et lisible** (clean code).  
 
 J'ai reçu des retours sur mon projet Tosho, et mon tuteur m'a parlé de la pratique de **“Early Return”**. Dans mon code initial, j'avais imbriqué plusieurs conditions `if` et `else`, ce qui rendait le code difficile à lire.  
 
@@ -1189,7 +1234,17 @@ Après cette formation, j’envisage de poursuivre mes études en alternance.
 Je souhaite approfondir mes compétences en langages de programmation, en frameworks modernes et découvrir davantage le domaine du DevOps.
 La recherche d’une entreprise d’accueil est actuellement en cours.
 
-Au sein de l’association, une refonte du site vitrine est prévue. Le site actuel a été développé avec Vue.js. Une fois que j'aurai repris le poste de responsable IT, je prévois de réaliser ce projet en autonomie.
+Au sein de l’association japonaise, une refonte du site vitrine est prévue. Le site actuel a été développé avec Vue.js. Une fois que j'aurai repris le poste de responsable IT, je prévois de réaliser ce projet en collaboration avec un designer.
 
+
+<div style="page-break-after: always;"></div>
+
+---
+
+### Remerciements
+
+Je remercie sincèrement la **CCI**, **mes formateurs**, **France Travail** et **l’équipe IT de CyberCité**, l’entreprise d’accueil de mon stage, pour leur accompagnement et leurs conseils tout au long de cette formation.
+Merci également à **mes collègues** de formation pour leur soutien et tous les échanges enrichissants partagés.
+Enfin, un grand merci à **mon cher mari** et à **ma fille**, pour leur aide, leur patience et leurs encouragements quotidiens.
 
 
