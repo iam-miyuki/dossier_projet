@@ -50,10 +50,11 @@
 
 8. [Déploiement](#8-déploiement)
    - [8.1 Choix de l’environnement et mise en place de Docker](#81-choix-de-lenvironnement-et-mise-en-place-de-docker)
-   - [8.2 Configuration de Docker](#82-configuration-de-docker)
-   - [8.3 Mise en production](#83-mise-en-production)
-   - [8.4 Documentation et prise en main](#84-documentation-et-prise-en-main)
-   - [8.5 Suivi post-MEP](#85-suivi-post-mep)
+   - [8.2 Configuration de Docker](#8-configuration-de-docker)
+   - [8.3 Utilisation des clés SSH](#83-utilisation-des-clés-ssh)
+   - [8.4 Mise en production](#84-mise-en-production)
+   - [8.5 Documentation et prise en main](#85-documentation-et-prise-en-main)
+   - [8.6 Suivi post-MEP](#86-suivi-post-mep)
 
 9. [Difficultés rencontrées](#9-difficultés-rencontrées)
 
@@ -530,6 +531,8 @@ J’ai organisé le développement avec plusieurs branches :
 
 Cette organisation permet de séparer clairement le travail de développement local des configurations et fichiers liés au déploiement.
 
+
+
 ## 5.3 Architecture MVC
 
 L’application suit le modèle **MVC (Model – View – Controller)** propre à Symfony, qui sépare clairement les responsabilités :  
@@ -969,10 +972,32 @@ Pour **Docker**, j’ai configuré :
 
 **``docker-compose.yml``** : définit les services et conteneurs (PHP, MySQL, Nginx…), ainsi que le réseau pour qu’ils puissent communiquer entre eux. Chaque conteneur est réutilisable et peut être reconstruit facilement avec ```docker compose up --build```
 
-**``Dockerfile``** : script exécuté lors de la création du conteneur. Comme **Symfony ne propose pas d’image officielle Docker**, j’ai dû installer manuellement plusieurs dépendances, dont la **Symfony CLI**. Il installe également les dépendances, Composer, définit le répertoire de travail, copie les fichiers du projet et expose le port. 
+**``Dockerfile``** : script exécuté lors de la création du conteneur. Comme **Symfony ne propose pas d’image officielle Docker**, l'installation des dépendances pour Symfony est nécessaire. 
 
-Cette configuration permet de lancer l’application sur n’importe quelle machine avec Docker.
-## 8.3 Mise en production
+<img src="img/docker.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+
+## 8.3 Utilisation des clés SSH
+
+Pour cloner le dépôt Git de mon projet sur le serveur et pour faciliter le versionnement du code, j’ai configuré une **clé SSH** sur ma machine de développement.
+Cela me permet de pousser et de récupérer du code depuis GitHub sans avoir à saisir un identifiant ou un mot de passe à chaque commande Git.
+
+**Génération de la clé SSH**
+
+J’ai généré une paire de clés SSH à l’aide de la commande suivante :
+
+<img src="img/ssh.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+
+Cette opération crée :
+
+- une **clé privée** (stockée localement),
+
+- une **clé publique** (ajoutée à GitHub dans les paramètres SSH Keys).
+
+J’ai ensuite copié la clé affichée et je l’ai ajoutée dans mon compte GitHub.
+
+## 8.4 Mise en production
 Une fois l’environnement Dockerisé testé localement, j’ai déployé l’application sur un **VPS Ubuntu** loué chez RackNerd et associé à un nom de domaine.
 
 J’ai installé **Nginx** comme serveur web pour :
@@ -985,7 +1010,8 @@ J’ai installé **Nginx** comme serveur web pour :
 
 
 Les variables d’environnement sont configurées dans un fichier **``.env``**, ce qui permet de stocker les informations sensibles (identifiants de base de données, clés API…) hors du code source. Ce fichier est **exclu du dépôt Git** via **``.gitignore``** pour garantir la sécurité.
-## 8.4 Documentation et prise en main
+
+## 8.5 Documentation et prise en main
 
 Pour faciliter la prise en main du projet, j’ai rédigé un **``README.md``** qui contient :
 
@@ -1005,7 +1031,7 @@ Pour simplifier l’utilisation de Docker, j’ai ajouté un **``Makefile``**, q
 
 <img src="img/make.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
-## 8.5 Suivi post MEP
+## 8.6 Suivi post MEP
 
 Après la mise en production, un suivi régulier est nécessaire pour garantir le bon fonctionnement de l’application. Cela inclut la **sauvegarde régulière de la base de données**, **le renouvellement des certificats HTTPS**.
 
@@ -1243,7 +1269,7 @@ Au sein de l’association japonaise, une refonte du site vitrine est prévue. L
 
 ### Remerciements
 
-Je remercie sincèrement la **CCI**, **mes formateurs**, **France Travail** et **l’équipe IT de CyberCité**, l’entreprise d’accueil de mon stage, pour leur accompagnement et leurs conseils tout au long de cette formation.
+Je remercie sincèrement la **CCI**, **mes formateurs**, **France Travail** et **l’équipe IT de CyberCité**, pour leur accompagnement et leurs conseils tout au long de cette formation.
 Merci également à **mes collègues** de formation pour leur soutien et tous les échanges enrichissants partagés.
 Enfin, un grand merci à **mon cher mari** et à **ma fille**, pour leur aide, leur patience et leurs encouragements quotidiens.
 
