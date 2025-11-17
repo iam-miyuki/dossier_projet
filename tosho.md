@@ -37,7 +37,7 @@
 
 5. [Conception technique](#5-conception-technique)
    - [5.1 Technologies utilisées](#51-technologies-utilisées)
-   - [5.2 Versionning](#52-versionning)
+   - [5.2 Configuration des clés SSH et versionning](#52-configuration-des-clés-ssh-et-versionning)
    - [5.3 Architecture MVC](#53-architecture-mvc)
    - [5.4 Base de données](#54-base-de-données)
    - [5.5 Sécurité](#55-sécurité)
