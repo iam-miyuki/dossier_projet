@@ -50,11 +50,10 @@
 
 8. [Déploiement](#8-déploiement)
    - [8.1 Choix de l’environnement et mise en place de Docker](#81-choix-de-lenvironnement-et-mise-en-place-de-docker)
-   - [8.2 Configuration de Docker](#8-configuration-de-docker)
-   - [8.3 Utilisation des clés SSH](#83-utilisation-des-clés-ssh)
-   - [8.4 Mise en production](#84-mise-en-production)
-   - [8.5 Documentation et prise en main](#85-documentation-et-prise-en-main)
-   - [8.6 Suivi post-MEP](#86-suivi-post-mep)
+   - [8.2 Configuration de Docker](#82-configuration-de-docker)
+   - [8.3 Mise en production](#83-mise-en-production)
+   - [8.4 Documentation et prise en main](#84-documentation-et-prise-en-main)
+   - [8.5 Suivi post-MEP](#85-suivi-post-mep)
 
 9. [Difficultés rencontrées](#9-difficultés-rencontrées)
 
@@ -520,10 +519,31 @@ Exemples :
 
   - **SymfonyCastsResetPasswordBundle** : facilite la mise en place de la fonctionnalité de réinitialisation de mot de passe des utilisateurs.
 
-## 5.2 Versionning
+## 5.2 Configuration des clés SSH et versionning
 
 La sauvegarde et le suivi du code sont assurés par **Git**, avec un dépôt distant sur **GitHub**.  
 
+**Utilisation des clés SSH**
+
+Au début de la formation, j’ai configuré une clé **SSH** sur ma machine de développement.
+Ce système d’authentification me permet de pousser et de récupérer du code depuis **GitHub** sans saisir d’identifiant ou de mot de passe à chaque commande **Git**.
+La même configuration a été **appliquée sur mon environnement WSL Ubuntu**.
+
+**Génération de la clé SSH**
+
+J’ai généré une paire de clés SSH à l’aide de la commande suivante :
+
+<img src="img/ssh.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
+
+Cette opération crée :
+
+- une **clé privée** (stockée localement),
+
+- une **clé publique** (ajoutée à GitHub dans les paramètres SSH Keys).
+
+J’ai ensuite copié la clé affichée et je l’ai ajoutée dans mon compte GitHub.
+
+**Oraganisation des différentes branches**
 J’ai organisé le développement avec plusieurs branches :  
 - `dev` : utilisée pour le développement  
 - `cybercite` : utilisée pendant la période de stage depuis l'ordinateur fourni par l'entreprise
@@ -977,27 +997,7 @@ Pour **Docker**, j’ai configuré :
 <img src="img/docker.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
 
-## 8.3 Utilisation des clés SSH
-
-Pour cloner le dépôt Git de mon projet sur le serveur et pour faciliter le versionnement du code, j’ai configuré une **clé SSH** sur ma machine de développement.
-Cela me permet de pousser et de récupérer du code depuis GitHub sans avoir à saisir un identifiant ou un mot de passe à chaque commande Git.
-
-**Génération de la clé SSH**
-
-J’ai généré une paire de clés SSH à l’aide de la commande suivante :
-
-<img src="img/ssh.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
-
-
-Cette opération crée :
-
-- une **clé privée** (stockée localement),
-
-- une **clé publique** (ajoutée à GitHub dans les paramètres SSH Keys).
-
-J’ai ensuite copié la clé affichée et je l’ai ajoutée dans mon compte GitHub.
-
-## 8.4 Mise en production
+## 8.3 Mise en production
 Une fois l’environnement Dockerisé testé localement, j’ai déployé l’application sur un **VPS Ubuntu** loué chez RackNerd et associé à un nom de domaine.
 
 J’ai installé **Nginx** comme serveur web pour :
@@ -1011,7 +1011,7 @@ J’ai installé **Nginx** comme serveur web pour :
 
 Les variables d’environnement sont configurées dans un fichier **``.env``**, ce qui permet de stocker les informations sensibles (identifiants de base de données, clés API…) hors du code source. Ce fichier est **exclu du dépôt Git** via **``.gitignore``** pour garantir la sécurité.
 
-## 8.5 Documentation et prise en main
+## 8.4 Documentation et prise en main
 
 Pour faciliter la prise en main du projet, j’ai rédigé un **``README.md``** qui contient :
 
@@ -1031,7 +1031,7 @@ Pour simplifier l’utilisation de Docker, j’ai ajouté un **``Makefile``**, q
 
 <img src="img/make.svg" style="width:80%; margin-left:auto; margin-right:auto; margin-top: 1rem; margin-bottom:1rem;">
 
-## 8.6 Suivi post MEP
+## 8.5 Suivi post MEP
 
 Après la mise en production, un suivi régulier est nécessaire pour garantir le bon fonctionnement de l’application. Cela inclut la **sauvegarde régulière de la base de données**, **le renouvellement des certificats HTTPS**.
 
