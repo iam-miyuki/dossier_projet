@@ -1,174 +1,189 @@
 1. Introduction (30 sec)
 
 Bonjour, je m’appelle Miyuki CHERBAL.
-Avant cette formation, j’étais femme au foyer.
-Au Japon, j’étais photographe scolaire et j’ai fait des études en histoire de l’art.
-J’ai choisi cette formation parce que je voulais comprendre comment fonctionne le web et apprendre à développer un site internet.
-Aujourd’hui, je vais vous présenter mon projet : Tosho.
+Je viens de Japon, et ça fait 10 ans que je vis en France. J'ai fait mes études en histoire de l'art et j'ai travaillé comme photographe scolaire au japon. Depuis que je suis maman je suis famme au foyer.
+Pour quoi j'ai choisi cette formation, parce que je suis entouré des développeurs dans mon entrourage et ca m'a motivée à apprendre ce métier pour un jour comprendre de quoi il parle !
+
+Dans le cadre de ma formation, j'ai réalisé un stage dans une entreprise spécialisée en SEO. Et j'ai participé à un projet en React et en laravel. Cette expérience m’a beaucoup apporté et elle m'a permit d’appliquer des bons pratiques à mon projet personnel, que je vous présente aujourd’hui, Tosho.
 
 2. Présentation du projet (1 min)
 
-“Tosho” signifie “bibliothèque” ou “livre” en japonais.
-C’est une application web que j’ai créée pour une association japonaise dont je fais partie. Cette association, dirigée par des parents bénévoles, propose des cours de japonais pour les enfants expatriés et ceux d’origine japonaise. Elle possède une petite bibliothèque et les parents gères les prêts des livres et la gestion de collection.
-Actuellement, nous utilisons une application de gestion de bibliothéque développée il y a plusieurs années par un ancien parent bénévole. Elle fonctionne, mais elle a plusieurs limites. Par exemple, pour ajouter un nouveau livre, il faut contacter le développeur initial car il n’y a pas d’accès administrateur. L’interface est très simple, pas de css, et peu intuitive.
+Tosho signifie “bibliothèque” ou “livre” en japonais.
+C’est une application web de gestion de bibliothéque pour une association dont je fais partie. L'assosiatin propose des cours du japonais aux enfants bilangues franco-japonais. J’ai choisi ce projet parce que je souhaite que ces enfants puissent accéder aux livres en japonais et se familiariser avec leur langue maternelle.
 
-Dans l'association, je suis parent bibliothécaire, j’ai eu l’idée de refaire l’application pour faciliter la gestion, la rendre plus moderne et permettre aux bénévoles de travailler de manière autonome.
+Acutellement, les prêts des livres sont géré par une application web qui a été développé il y longtemps par un ancien parent bénévole. Cette application est fonctionnelle, mais il y a plusieurs limites. Par example, il n’y a pas d’interface admin, ce qui complique la gestion du catalogue, et l’interface n’est pas très intuitive pour les utilisateurs.
 
-3. Conception du projet (10 min)
+3. Objectif et MVP
 
-L’objectif principal de Tosho est de permettre aux bibliothécaires de gérer facilement les prêts et les retours de livres, et d’avoir une interface administrateur.
+Donc l'objectif de mon projet est de refaire une application web user-friendly qui facilite la gestion de la bibliothéque.
 
-Le MVP se concentre sur les fonctionnalités essentielles : enregistrer un prêt et un retour, et rechercher les prêts par livre ou par famille.
+Pour le MVP, il est nécessaire d’avoir la fonctionnalité de gesion des prêts de livres, et inclure une interface admin.
 
-Il y a deux types d’utilisateurs :
+4. Types et fonctionnalité
 
-Administrateurs : gèrent les familles, les livres, les sessions d’inventaire et les bibliothécaires. Ils sont les seuls à pouvoir créer des comptes.
+Qui sont des utilisateurs de mon application ? Ce sont des parents bénévols de l'association, et il y a deux types de bénévoles. Premimèrement, ce sont des bibliothécaires, qui s’occupent des prêts et des retours de livres, et participent également à la session d’inventaire organisée une fois par an.
 
-Bibliothécaires : enregistrent les prêts et les retours, participent à l’inventaire annuel.
+Deuxiemement ce sont des admin. En plus des fonctionnalités des bibliothécaires, ils supervisent toute la gestion de la bibliothèque : ils peuvent gérer le catalogue des livres, les comptes des familles emprunteuses, organiser les sessions d’inventaire et gérer les comptes des bibliothécaires. À noter que les comptes des familles emprunteuses sont uniquement créés pour pouvoir assigner chaque prêt à une famille ; ces familles n’ont pas la possibilité de se connecter à l’application.
 
-Chaque rôle a accès à des fonctionnalités spécifiques, ce qui garantit la sécurité et le bon fonctionnement de la bibliothèque.
+5. Contrantes
 
-Fonctionnalités principales
+Comme ce sont des parents bénévoles qui utilisent cette application, l’interface doit être intuitive et facile à utiliser.
+Il faudra également gérer les droits d’accès selon le rôle des utilisateurs.
+Enfin, pour garantir une bonne gestion des prêts de livres, les données doivent être mises à jour en temps réel.
 
-Pour les bibliothécaires :
+6. Gestion de projet
 
-Gestion des prêts et retours : chaque livre a un code unique, on peut chercher un livre par code ou par mot-clé, et une famille par son nom.
+Dans un premier temps, j’ai commencé par lister toutes les fonctionnalités à développer et j'ai rédigé des userstories en markdown. Comme je suis seule à travailler sur ce projet, j'ai adapté la méthode agile par un simple système de check-liste en markdown pour suivre l'avancement de mon projet.
 
-Gestion de l’inventaire : les livres sont répartis dans plusieurs lieux. Lors de l’inventaire annuel, les bibliothécaires vérifient la présence des livres et signalent les problèmes (livres abîmés, mal rangés, etc.).
+7. Arborescece
 
-Pour les administrateurs :
+Une fois que j’ai clarifié les besoins, j’ai conçu la structure de mon application.
+Après connexion, l’utilisateur arrive sur la page d’accueil correspondant à son rôle.
 
-Gestion des livres et des familles : ajouter, modifier, supprimer.
+8. Arborescence admin 1
 
-Gestion des inventaires : créer une session, suivre son avancement, mettre à jour les problèmes signalés.
+Les administrateurs ont accès aux pages de gestion des livres et des comptes des familles.
+Ils peuvent effectuer ici toutes les opérations CRUD.
 
-Gestion des bibliothécaires : créer un compte et envoyer un mail automatique avec un mot de passe provisoire.
 
-Supervision : possibilité de basculer sur l’interface bibliothécaire pour tester ou suivre les opérations.
+9. Arborescence admin 2
+Toujours depuis l’interface administrateur, ils ont également accès aux pages de gestion des sessions d’inventaire et des comptes des bibliothécaires qui permet les opération CRUD.
 
-Contraintes
+10. Arborescence biblithécaire 1
 
-Interface simple et intuitive pour des bénévoles non techniques.
+Ensuite, ici l'interface bibliothécaire. Ils peuvent gérer les prêts de livres en effectuant des recherches  soit par livre, soit par famille emprunteuse, soit par les prêts en retard.
 
-Accès aux fonctionnalités limité selon le rôle.
+11.  Arborescence biblithécaire 2
 
-Données fiables et mises à jour en temps réel pour éviter les erreurs.
+Les bibliothécaires peuvent consulter les sessions d’inventaire en cours et y contribuer en ajoutant les livres qu’ils ont vérifiés physiquement. 
+Lorsqu’une session d’inventaire est ouverte par un administrateur, les bibliothécaires vérifient la présence de tous les livres de la bibliothèque, et signalent en cas d'absence de livre etc.
 
-Organisation
+12. Wireframes
 
-J’ai commencé par lister toutes les fonctionnalités et rédiger un cahier des charges avec des user stories.
-Ensuite, j’ai créé les wireframes et maquettes sur Figma pour visualiser le parcours utilisateur.
-- **Objectif** : clarifier les besoins avant le développement
+Ensuite, pour visualiser la structure de mon application, j’ai créé des wireframes sur Figma.
+Les wireframes permettent de vérifier la navigation du site et de valider l’organisation des écrans sur mobile et sur desktop.
 
-L’identité visuelle de Tosho a été pensée pour refléter l’esprit de l’association scolaire. à la fois ludique, conviviale et accessible.
-L’objectif est de proposer une interface simple à comprendre, agréable à utiliser, et adaptée aux parents bénévoles.
+13. Maquettes
+
+Et pour avoir le rendu final de mon site, j’ai créé des maquettes, toujours sur Figma.
+Cette étape permet de faire des choix visuels, notamment pour les couleurs et l’identité graphique.
+Il est important d’avoir des maquettes avant l’étape d’intégration en HTML et CSS pour pouvoir se concentrer à coder.
+
+14. Charte graphique
 
 J’ai choisi trois couleurs principales :
-
 Le bleu foncé pour le texte, les bordures et les icônes.
+Le violet clair pour l’interface bibliothécaires.
+Le bleu clair pour l’interface admin.
 
-Le violet clair pour l’interface des bibliothécaires.
+Ensuite, j’ai vérifié la bonne lisibilité du texte sur chaque couleur de fond.
 
-Le bleu clair pour l’interface des administrateurs.
+15. Charte graphique 2
 
-Ces couleurs ont été vérifiées pour garantir une bonne visibilité et un contraste suffisant, afin que tout soit facile à lire et agréable pour les utilisateurs.
+J’ai conçu le logo de Tosho sur Figma. Ensuite, j’ai choisi d’utiliser des icônes au style pixel art, également disponibles sur Figma, que j’ai exportées au format SVG pour leur scalabilité sur tous les écrans. J’ai choisi les polices pour qu’elles soient en accord avec le logo et les icônes.
+J’ai adopté ce style pour que mon application soit ludique, conviviale et accessible, à l’image de l’association
 
-L’interface est responsive, avec des icônes style pixel art pour garder un aspect ludique et familier.
+16. Stack technique
 
-Arborescence
+Ensuite, la conception technique.
+Côté front-end, j’ai utilisé du HTML, CSS, Twig, et JavaScript. Et côté back-end, du PHP avec framework Symfony et Mysql comme SGBD.
 
-L’arborescence du site a été pensée pour être simple et logique.
+J'ai utilisé VSCode comme l'IDE, Git pour le versionning et gitHub pour le dépot distant. J'avais commencé mon projet sous l'environnement windows avec xampp comme serveur web, mais au fur et à mesure, j'ai appercu que xampp était parfois unstable, donc j'ai ensuite changé mon environnement de travail vers WSL ubuntu avec Docker.
 
-Depuis la page d’accueil, on accède à la connexion et aux pages statiques, comme les mentions légales ou la politique de cookies.
+17. MVC
 
-Après la connexion, l’utilisateur est redirigé vers son espace selon son rôle.
+Symfony utilise l’architecture MVC, ce qui permet de bien séparer les rôles dans l’application.
+Par exemple, lorsqu’un utilisateur veut afficher les informations d’un livre, il envoie une requête au contrôleur.
+Le contrôleur demande alors au Modèle de communiquer avec la base de données.
+Le Modèle renvoie les données du livre au contrôleur, qui les transmet ensuite à la Vue.
+La Vue génère le rendu avec les infos du livre, et le contrôleur renvoie la page à l’utilisateur.
+Dans mon application, le Repository joue le rôle de Modèle et Twig celui de la Vue.
 
-Côté bibliothécaire, on retrouve les pages pour les prêts et retours, l’inventaire et le compte personnel. Sur la page d’accueil, une notification signale les retours en retard.
+18. Modéle de donnés
 
-Côté administrateur, on a un accès complet à la gestion des livres, des familles, des bibliothécaires et des sessions d’inventaire.
-Seul l’administrateur peut créer les comptes bibliothécaires.
-L'admin a aussi l'accès au espace bibliothécaire.
+Pour la base de données, j’ai d’abord conçu le modèle sur papier et je l’ai validé avec mon formateur, pour m’assurer que les tables et leurs relations soient cohérentes avec la logique de mon application. Ensuite, j’ai traduit ces tables en entités en créant des classes PHP, et Doctrine, l’ORM de Symfony, s’est chargé de mapper automatiquement mes entités avec la base de données.
 
-Stack technique
-
-Pour la partie technique, j’ai utilisé plusieurs technologies.
-
-Côté front-end, j’ai utilisé du HTML avec des balises sémantique pour structurer les pages proprement, et du CSS organisé par composants, avec des variables pour les couleurs et les polices.
-Les media queries permettent à l’application de s’adapter aux différentes tailles d’écran.
-
-J’ai utilisé Twig, le moteur de templates de Symfony, pour séparer le code PHP de la partie visuelle, et réutiliser facilement les éléments communs comme le header ou le footer.
-
-En JavaScript, j’ai ajouté des interactions dynamiques, par exemple la preremplissage automatique d’un formulaire d'ajoute de livre à partir de son ISBN, grâce à Stimulus.
-
-Et enfin, côté back-end, l’application tourne avec PHP 8.2, Symfony 6.4 et MySQL.
-Symfony gère la base de données, les formulaires, la sécurité et les rôles utilisateurs, ce qui facilite beaucoup le développement et la maintenance.
+Les relations sont gérées grâce aux clés primaires et aux clés étrangères. Par exemple, ma table loan — qui représente un prêt — est reliée à la table family grâce à une clé étrangère qui vient de la table family. Un prêt est associé à une seule famille, mais une famille peut avoir plusieurs prêts. La cardinalité ici est donc one-to-many
 
 
-L’application suit le modèle MVC (Model – View – Controller)propre à Symfony, qui sépare clairement les responsabilités :  
-- **Controller (Contrôleur)** : reçoit les requêtes de l’utilisateur, exécute la logique métier et envoie les données vers la vue correspondante.  
-- **Model (Modèle)** : gère les entités et communique avec la base de données via **Doctrine ORM**, puis renvoie les données au contrôleur.  
-- **View (Vue)** : reçoit les données du contrôleur et génère l’affichage des pages avec **Twig**.
+19. Sécurité gestion d'accès
 
-MCD
-Pour la conception de la base de données, j’ai d’abord tout dessiné sur papier, pour bien visualiser les tables et leurs relations. 
+Pour garantir un accès sécurisé à mon application, j’ai configuré ici pour gérer la redirection après la connexion, selon le rôle de l’utilisateur.
+Et pour les comptes bibliothécaires, j’ai ajouté une vérification supplémentaire du statut du compte 'activé' ou 'désactivé', grâce à un UserChecker que j’ai configuré.
 
-MPD
-Une fois le schéma et la cardinalité validés par mon formateur, je l’ai ensuite traduit en entités Symfony, donc en classes PHP gérées par Doctrine.
+20. Sécurité d'accès
 
-Chaque entité correspond à une table de la base de données, avec ses propriétés pour les champs et ses relations avec les autres entités.
+L’accès aux différentes routes de mes contrôleurs est également sécurisé grâce à isGranted de Symfony.
+Côté front, certains éléments d’interface réservés aux admins sont aussi protégés avec isGranted. Par exemple, le bouton qui permet de basculer entre l’interface admin et l’interface bibliothécaire n’est affiché que pour les admins.
 
-Cette étape m’a permis d’obtenir une structure claire, cohérente et facile à maintenir pour la suite du développement.
+En résumé, chaque utilisateur voit et peut faire uniquement ce qui correspond à son rôle
 
-Sécurité
+21. Sécurité des données
 
-Pour protéger l’application, j’ai mis en place une gestion des accès basée sur les rôles et autorisations.
+Symfony utilise l’ORM Doctrine, qui fait le lien entre la base de données et les entités PHP. Et toutes les requêtes vers la base passent par Doctrine.
+Avec le QueryBuilder et setParameter, Doctrine sépare les données saisies par l’utilisateur de la requête SQL. Ça signifie que les données des utilisateurs ne sont jamais insérées directement dans le SQL, la requête les traite comme de simples valeurs et non comme des instructions, ce qui protège la base de données contre les injections SQL.
 
-Il y a deux rôles principaux :
+Les formulaires sont protégés par des tokens CSRF. À chaque envoi, Symfony crée un jeton unique pour s’assurer que seul un utilisateur authentifié peut soumettre le formulaire.
 
-ROLE_ADMIN qui a un accès complet à toutes les fonctionnalités,
 
-et ROLE_LIBRARIAN qui a un accès restreint, limité aux prêts, retours et inventaire.
 
-Selon le rôle, l’utilisateur est redirigé automatiquement vers son espace grâce à l’AuthenticationSuccessHandler.
-Avant chaque connexion, le fichier UserChecker.php vérifie que le compte est bien actif. Si un bibliothécaire a été désactivé, il ne peut plus se connecter.
+22. Front-end 
 
-Ensuite, j’ai mis en place un filtrage des accès pour contrôler ce que chaque utilisateur peut faire.
-Côté back-end, j’utilise la méthode isGranted() pour vérifier les permissions sur certaines actions.
-Côté front-end, dans Twig, je peux afficher ou masquer des éléments selon le rôle avec {% if is_granted('ROLE_ADMIN') %}.
+Maintenant, je voudrais vous présenter quelques fonctionnalités que j’ai développées.
 
-En résumé, chaque utilisateur voit et peut faire uniquement ce qui correspond à son rôle, ce qui sécurise l’application tout en restant simple à utiliser.
+Ici c'est un formulaire d'ajout d'un livre au catalogue. Le formulaire comporte plusieurs champs : le titre, l’auteur, le titre et l’auteur en hiragana — c’est-à-dire en caractères japonais — ainsi qu’un champ pour le lien de la couverture du livre.
+Pour faciliter la saisie de ces informations, j’ai mis en place une fonctionnalité de préremplissage automatique à partir du code ISBN.
 
-Pour sécuriser les données dans Tosho, j’ai utilisé plusieurs mécanismes intégrés à Symfony.
+Alors, comment ai-je fait ? J’ai utilisé des API et Stimulus. Stimulus est un framework JavaScript léger qui permet de rendre uniquement cette partie de l’application en SPA.
+Pour l’utiliser, j’ai installé le bundle Stimulus via Composer, ce qui crée un fichier controller.js que j’ai ensuite lié à mon formulaire
 
-Toutes les requêtes vers la base passent par Doctrine avec des requêtes préparées. Ça signifie que les données des utilisateurs ne sont jamais insérées directement dans le SQL, ce qui protège contre les injections.
+23. Front 
 
-Les formulaires sont aussi protégés par des tokens CSRF : chaque formulaire contient un jeton unique vérifié à l’envoi. Ça permet de s’assurer que seules les actions venant d’utilisateurs authentifiés sont acceptées et empêche les attaques externes.
+Pour récupérer les informations sur le livre, j’ai utilisé deux API : une API japonaise pour obtenir le titre et l’auteur en japonais, et une autre API pour toutes les autres informations.
+Ici, je vous montre un exemple pour l’API japonaise. Avec Postman, j’ai vérifié que l’API renvoie un tableau contenant les informations et j’ai identifié les champs qui m’intéressent.
 
-Comme j’ai utilisé les classes AbstractType et FormType pour créer les formulaires, cette protection est automatique.
+Ensuite, dans mon controller.js, j’ai utilisé async pour accepter la promesse. Cela signifie que même si les informations ne sont pas encore récupérées lors de l’affichage, la page s’affiche quand même sans données, et se met à jour dès que les infos sont disponibles.
 
-En résumé, grâce aux requêtes préparées et aux tokens CSRF, les données restent fiables et sécurisées, et Symfony prend bien en charge cette partie sécurité.
+Ici, preventDefault() sert à empêcher la soumission du formulaire par défaut.
 
-5. Front-end (5 min)
+Ensuite, je récupère l’ISBN saisi par l’utilisateur et je fais une requête fetch() vers une API.
 
-Système d’onglets pour basculer entre les fonctionnalités sans recharger la page.
+J’attends la réponse et, si l’API ne répond pas, une erreur est affichée dans la console.
 
-Formulaires de recherche et d’ajout pour chaque module.
+Une fois les informations récupérées, je les convertis en JSON et je vérifie comment accéder aux données qui m’intéressent.
+Enfin, j’assigne les informations récupérées aux champs du formulaire correspondants.
 
-Saisie automatique via ISBN avec OpenBD et OpenLibrary, gérée par Stimulus.
+24. front
+Pour lier mon controller.js au formulaire, j’ai ajouté data-controller sur la balise du formulaire.
+Ensuite, sur le bouton, j’ai ajouté data-action pour définir quelle méthode doit être déclenchée lorsque l’utilisateur clique dessus.
+Ainsi, le formulaire est automatiquement prérempli grâce à l’API
 
-Interface fluide, intuitive et rapide pour les bénévoles.
 
-6. Back-end (5 min)
+25. Back-end 
 
-Gestion des statuts de livres et prêts avec des Enums pour éviter les erreurs.
+Je vous montre maintenant la partie CRUD de mon applicaiton. 
+Quand un utilisateur veut prêter un livre à une famille, d'abord il faut que ce livre soit "disponible", et que ce livre n'a pas de prêt en cours. J'ai géré les statuts pour les livres et les prêts avec Enum. L'utilisation des enum permet de faciliter les suivi et éviter de faute de frappe dans le code. 
 
-LoanController centralise les recherches et enregistrements de prêts/retours.
+26. back-end
 
-Recherches performantes avec LIKE, en français et japonais.
+Chaque prêt est associé à un livre et à une famille emprunteuse grâce à des clés étrangères.
+Imaginons maintenant qu’une famille apporte un livre à un bibliothécaire. Le bibliothécaire peut rechercher un prêt soit par famille, soit par livre. Chaque livre de la bibliothèque possède un code unique attribué par l’association. Ici, le bibliothécaire choisit de chercher un prêt par code du livre.
 
-ParamConverter pour récupérer directement les entités depuis l’URL.
 
-Historique conservé : pas de suppression des données pour garder une traçabilité complète.
+27. back-end
+Une fois le formulaire de recherche soumis, le contrôleur demande au BookRepository de chercher un livre avec ce code. S’il n’y a pas de livre correspondant, un message d’erreur est affiché. Si le livre est trouvé, on redirige vers la route show-book avec l’ID du livre.
+
+Sur cette route, on vérifie si le livre a un prêt en cours grâce à une requête personnalisée appelée findWithBookAndStatus. Dans le LoanRepository, on cherche un prêt assigné à ce livre et qui a un statut de prêt « en cours » ou « en retard ».
+Si le LoanRepository trouve un résultat, c’est-à-dire que le livre apporté doit être rendu, 
+
+
+28. back-end
+
+on affiche les informations du livre avec un bouton « rendre ».
+Sinon, on affiche un bouton « prêter ce livre ».
+
+
+
 
 7. Deploiement
 
